@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color: #242620;
+    background: #f5f2ea;
+    font-synthesis: none;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply m-0 bg-paper font-sans text-ink antialiased;
+  }
+
+  ::selection {
+    @apply bg-moss text-white;
+  }
+
+  a, button, input, select, textarea {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-moss focus-visible:ring-offset-2 focus-visible:ring-offset-paper;
+  }
+
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer components {
+  .page-shell {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10;
+  }
+
+  .section-space {
+    @apply py-20 sm:py-24 lg:py-32;
+  }
+
+  .eyebrow {
+    @apply mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-moss;
+  }
+
+  .hero-gradient {
+    color: #242620;
+    background-image: linear-gradient(108deg, #242620 0%, #4f4054 42%, #75527f 72%, #916382 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .prose-article {
+    @apply text-[1.0625rem] leading-8 text-ink/75;
+  }
+
+  .prose-article h2 {
+    @apply mb-4 mt-12 font-display text-3xl text-ink;
+  }
+
+  .prose-article p {
+    @apply mb-6;
+  }
+
+  .prose-article ul {
+    @apply mb-6 list-disc space-y-2 pl-6;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

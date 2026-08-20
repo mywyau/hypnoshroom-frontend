@@ -1,0 +1,26 @@
+{
+  "name": "hypnoshroom-frontend",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "typecheck": "nuxt typecheck"
+  },
+  "dependencies": {
+    "@nuxtjs/tailwindcss": "^6.14.0",
+    "nuxt": "^3.17.0",
+    "vue": "^3.5.0",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.0",
+    "vue-tsc": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

@@ -1,0 +1,6 @@
+.nuxt
+.output
+node_modules
+.vercel
+.DS_Store
+npm-debug.log*
