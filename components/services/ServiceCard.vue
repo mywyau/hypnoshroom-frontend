@@ -11,7 +11,7 @@ defineProps<{ service: Service }>()
     </div>
     <h3 class="mt-10 font-display text-3xl leading-tight">{{ service.title }}</h3>
     <p class="mt-4 flex-1 leading-7 text-ink/60">{{ service.shortDescription }}</p>
-    <NuxtLink :to="`/services#${service.id}`" class="mt-8 inline-flex items-center text-sm font-semibold text-moss">
+    <NuxtLink :to="`${service.route}#${service.id}`" class="mt-8 inline-flex items-center text-sm font-semibold text-moss">
       View service <span aria-hidden="true" class="ml-2 transition group-hover:translate-x-1">→</span>
     </NuxtLink>
   </article>

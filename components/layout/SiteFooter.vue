@@ -3,12 +3,13 @@
     <div class="page-shell grid gap-12 py-14 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr]">
       <div>
         <NuxtLink to="/" class="font-display text-2xl font-semibold">Hypnoshroom</NuxtLink>
-        <p class="mt-3 max-w-sm text-sm leading-6 text-ink/60">Independent Scala &amp; JVM engineering consultancy.</p>
+        <p class="mt-3 max-w-sm text-sm leading-6 text-ink/60">Independent backend engineering consultancy, with deep Scala &amp; JVM expertise.</p>
       </div>
       <div>
         <p class="text-xs font-semibold uppercase tracking-[0.18em] text-ink/45">Navigate</p>
         <nav aria-label="Footer navigation" class="mt-4 grid grid-cols-2 gap-3 text-sm">
           <NuxtLink to="/services" class="hover:text-moss">Services</NuxtLink>
+          <NuxtLink to="/expertise" class="hover:text-moss">Expertise</NuxtLink>
           <NuxtLink to="/insights" class="hover:text-moss">Insights</NuxtLink>
           <NuxtLink to="/about" class="hover:text-moss">About</NuxtLink>
           <NuxtLink to="/contact" class="hover:text-moss">Contact</NuxtLink>

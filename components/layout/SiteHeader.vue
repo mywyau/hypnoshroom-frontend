@@ -3,6 +3,7 @@ const route = useRoute()
 const isOpen = ref(false)
 const links = [
   { label: 'Services', to: '/services' },
+  { label: 'Expertise', to: '/expertise' },
   { label: 'Insights', to: '/insights' },
   { label: 'About', to: '/about' },
 ]

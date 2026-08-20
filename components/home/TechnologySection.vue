@@ -1,12 +1,12 @@
 <script setup lang="ts">
 const groups = [
-  { title: 'Languages', items: ['Scala', 'Java', 'TypeScript'] },
+  { title: 'Languages', items: ['Scala', 'Java', 'TypeScript', 'Python'] },
   { title: 'Backend frameworks', items: ['Play Framework', 'Spring Boot'] },
   { title: 'Build tooling', items: ['sbt', 'Maven'] },
   { title: 'APIs & integration', items: ['REST APIs', 'SOAP', 'JMS', 'IBM MQ', 'RabbitMQ'] },
   { title: 'Databases', items: ['PostgreSQL', 'Oracle', 'MySQL', 'Redis'] },
   { title: 'Testing', items: ['ScalaTest', 'JUnit', 'Mockito', 'Cucumber', 'Selenium', 'Integration testing', 'Automated testing'] },
-  { title: 'DevOps & delivery', items: ['Docker', 'Kubernetes', 'Jenkins', 'GitHub Actions', 'CI/CD'] },
+  { title: 'DevOps & delivery', items: ['Vercel', 'Serverless functions', 'Docker', 'Kubernetes', 'Jenkins', 'GitHub Actions', 'CI/CD'] },
   { title: 'Cloud & observability', items: ['AWS', 'Google Cloud', 'CloudWatch', 'Grafana', 'Kibana', 'Splunk'] },
 ]
 </script>

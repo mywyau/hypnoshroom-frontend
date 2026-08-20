@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import type { Service } from '~/data/services'
-defineProps<{ service: Service; reverse?: boolean }>()
+defineProps<{ service: Service; reverse?: boolean; number?: string }>()
 </script>
 
 <template>
   <section :id="service.id" class="scroll-mt-28 border-t border-line py-16 sm:py-20">
     <div class="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20" :class="reverse && 'lg:grid-cols-[1.2fr_0.8fr]'">
       <div :class="reverse && 'lg:order-2'">
-        <span class="font-mono text-xs text-moss">{{ service.number }}</span>
+        <span class="font-mono text-xs text-moss">{{ number || service.number }}</span>
         <h2 class="mt-5 font-display text-4xl leading-tight sm:text-5xl">{{ service.title }}</h2>
         <p class="mt-6 text-lg leading-8 text-ink/65">{{ service.shortDescription }}</p>
         <p class="mt-7 inline-flex rounded-full bg-moss px-4 py-2 text-sm font-semibold text-white">{{ service.price }}</p>

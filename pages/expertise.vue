@@ -1,0 +1,140 @@
+<script setup lang="ts">
+const languages = [
+  {
+    name: 'Scala',
+    label: 'Core specialism',
+    description: 'Scala services, Play Framework applications, sbt builds and the careful work involved in moving long-lived systems forward.',
+    details: ['Scala 2 & Scala 3', 'Play Framework', 'sbt', 'JVM modernisation'],
+    link: '/scala-jvm',
+    topic: 'Scala',
+  },
+  {
+    name: 'Java',
+    label: 'Backend engineering',
+    description: 'Java services that need to be built, upgraded or made easier to own—without turning routine maintenance into a rewrite.',
+    details: ['Spring Boot', 'Maven', 'JDK upgrades', 'REST APIs'],
+    topic: 'Java',
+  },
+  {
+    name: 'TypeScript',
+    label: 'Modern applications',
+    description: 'Server-side TypeScript, APIs and full-stack applications where backend decisions still deserve proper attention.',
+    details: ['Node.js', 'Nuxt', 'API development', 'Automated testing'],
+    topic: 'TypeScript',
+  },
+  {
+    name: 'Python',
+    label: 'Services & automation',
+    description: 'Python backend services, integrations and automation work that needs to fit cleanly into a wider system.',
+    details: ['Backend services', 'APIs', 'Automation', 'Integration work'],
+    topic: 'Python',
+  },
+]
+
+const platforms = [
+  {
+    name: 'Vercel & serverless',
+    description: 'Nuxt deployments, serverless functions and architecture choices that account for runtime limits, cost and operational visibility.',
+    topic: 'Serverless',
+  },
+  {
+    name: 'Cloud & containers',
+    description: 'AWS, Google Cloud, Docker and Kubernetes work around the services being built or modernised.',
+  },
+  {
+    name: 'Delivery & observability',
+    description: 'CI/CD, logs, metrics and deployment practices that make backend changes safer to ship and easier to understand in production.',
+  },
+]
+
+const databases = [
+  {
+    name: 'SQL & relational',
+    technologies: 'PostgreSQL · Oracle · MySQL',
+    description: 'Schema design, query behaviour, migrations and the application code responsible for reading and writing relational data.',
+  },
+  {
+    name: 'NoSQL & key-value',
+    technologies: 'Redis · key-value stores · document data',
+    description: 'Data modelling, caching and integration decisions for workloads that do not fit neatly into a relational model.',
+  },
+  {
+    name: 'Database reliability',
+    technologies: 'Performance · observability · failure handling',
+    description: 'Finding slow or fragile database interactions and making their behaviour easier to see, test and operate.',
+  },
+]
+
+usePageSeo({
+  title: 'Technical Expertise | Hypnoshroom',
+  description: 'Backend expertise across Scala, Java, TypeScript, Python, SQL, NoSQL, Vercel, serverless and cloud delivery.',
+  path: '/expertise',
+})
+</script>
+
+<template>
+  <div>
+    <PageHero eyebrow="Expertise" title="Different languages. The same backend concerns." intro="Language matters, but so do the boundaries, data, tests, deployments and production behaviour around it. Hypnoshroom works across the stack without treating every technology as a separate kind of consultancy." />
+
+    <section class="section-space">
+      <div class="page-shell">
+        <SectionHeading eyebrow="Languages" title="Choose the right tool for the system." intro="Engineering support uses the same starting day rate across languages. The shape and difficulty of the work matter more than the syntax." />
+        <div class="mt-14 grid gap-6 md:grid-cols-2">
+          <article v-for="language in languages" :key="language.name" class="rounded-2xl border border-line bg-white/35 p-7 sm:p-9">
+            <p class="text-xs font-semibold uppercase tracking-[0.16em] text-moss">{{ language.label }}</p>
+            <h2 class="mt-3 font-display text-4xl">{{ language.name }}</h2>
+            <p class="mt-4 leading-7 text-ink/60">{{ language.description }}</p>
+            <ul class="mt-6 flex flex-wrap gap-2">
+              <li v-for="detail in language.details" :key="detail" class="rounded-full border border-line px-3 py-1.5 text-xs text-ink/65">{{ detail }}</li>
+            </ul>
+            <AppButton v-if="language.link" :to="language.link" variant="text" class="mt-6">Explore {{ language.name }} services</AppButton>
+            <AppButton :to="`/insights?topic=${encodeURIComponent(language.topic)}`" variant="text" class="mt-2">Read {{ language.name }} articles</AppButton>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="databases" class="section-space scroll-mt-28 border-t border-line">
+      <div class="page-shell">
+        <SectionHeading eyebrow="Databases" title="SQL, NoSQL and the code in between." intro="Good database work is rarely isolated from the application. Hypnoshroom looks at the model, the queries and the behaviour of the service using them." />
+        <div class="mt-12 grid gap-6 lg:grid-cols-3">
+          <article v-for="database in databases" :key="database.name" class="rounded-2xl border border-line bg-white/35 p-7">
+            <p class="text-xs font-semibold uppercase tracking-[0.16em] text-moss">{{ database.technologies }}</p>
+            <h2 class="mt-4 font-display text-3xl">{{ database.name }}</h2>
+            <p class="mt-4 leading-7 text-ink/60">{{ database.description }}</p>
+          </article>
+        </div>
+        <div class="mt-8 flex flex-wrap gap-x-8 gap-y-2">
+          <AppButton to="/services#database-services" variant="text">View database services</AppButton>
+          <AppButton to="/insights?topic=Databases" variant="text">Read database articles</AppButton>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-space border-y border-line bg-[#ece8de]">
+      <div class="page-shell">
+        <SectionHeading eyebrow="Platforms &amp; delivery" title="The code has to live somewhere." intro="Backend work includes the path to production and what happens after a service gets there." />
+        <div class="mt-12 grid gap-6 lg:grid-cols-3">
+          <article v-for="platform in platforms" :key="platform.name" class="border-t border-ink/20 pt-6">
+            <h2 class="font-display text-3xl">{{ platform.name }}</h2>
+            <p class="mt-4 leading-7 text-ink/60">{{ platform.description }}</p>
+            <AppButton v-if="platform.topic" :to="`/insights?topic=${platform.topic}`" variant="text" class="mt-4">Read related articles</AppButton>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-space">
+      <div class="page-shell rounded-3xl border border-line bg-white/35 p-8 sm:p-12 lg:flex lg:items-end lg:justify-between lg:gap-12">
+        <div class="max-w-2xl">
+          <p class="eyebrow">Engineering support</p>
+          <h2 class="font-display text-4xl sm:text-5xl">One day rate, whatever the language.</h2>
+          <p class="mt-5 text-lg leading-8 text-ink/60">Hands-on backend engineering starts from £600/day. Fixed-scope assessments and delivery sprints are priced around the work rather than the technology.</p>
+        </div>
+        <AppButton to="/contact" class="mt-8 shrink-0 lg:mt-0">Discuss a project</AppButton>
+      </div>
+    </section>
+
+    <ContactCta />
+  </div>
+</template>

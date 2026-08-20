@@ -1,5 +1,7 @@
 export interface Service {
   id: string
+  area: 'scala-jvm' | 'general'
+  route: '/scala-jvm' | '/services'
   number: string
   title: string
   shortDescription: string
@@ -13,19 +15,23 @@ export interface Service {
 
 export const services: Service[] = [
   {
-    id: 'scala-jvm-engineering',
+    id: 'backend-engineering',
+    area: 'general',
+    route: '/services',
     number: '01',
-    title: 'Scala & JVM Engineering',
-    shortDescription: 'Extra engineering capacity for a Scala or Java backend—without bringing in a whole consultancy team.',
+    title: 'Backend Engineering',
+    shortDescription: 'Experienced engineering support across Scala, Java, TypeScript and Python backend systems.',
     price: 'From £600/day',
-    whoFor: 'A team with real work in the backlog and a gap in Scala, Java or backend experience. Hypnoshroom can join an existing team, pick up a defined piece of work, or help unblock a service that has stalled.',
-    problems: ['A critical service is holding up delivery', 'The code is hard to understand or risky to change', 'Integrations fail in ways that are difficult to trace', 'The team needs JVM experience for a particular piece of work'],
-    work: ['Write and improve Scala or Java services', 'Sort out APIs and service boundaries', 'Work directly in Play Framework or Spring Boot', 'Fix awkward database and integration code', 'Track down reliability problems across services'],
+    whoFor: 'A team with real backend work in the backlog and a gap in engineering capacity. Hypnoshroom can join an existing team, pick up a defined piece of work, or help unblock a service that has stalled.',
+    problems: ['A critical service is holding up delivery', 'The code is hard to understand or risky to change', 'Integrations fail in ways that are difficult to trace', 'The team needs experienced backend support for a particular piece of work'],
+    work: ['Build and improve Scala, Java, TypeScript or Python services', 'Sort out APIs and service boundaries', 'Work across JVM, Node.js and serverless runtimes', 'Fix awkward database and integration code', 'Track down reliability problems across services'],
     deliverables: ['Working, reviewed code', 'Tests that protect the changed behaviour', 'Short documentation where it will actually help', 'A handover your team can ask questions about'],
     format: 'Usually day-rate work alongside an existing engineering team, with priorities agreed together and communication kept close to the code.',
   },
   {
     id: 'scala-modernisation',
+    area: 'scala-jvm',
+    route: '/scala-jvm',
     number: '02',
     title: 'Scala Modernisation Assessment',
     shortDescription: 'A close look at an older Scala system, what is holding it back, and what an upgrade would really involve.',
@@ -38,6 +44,8 @@ export const services: Service[] = [
   },
   {
     id: 'backend-health-check',
+    area: 'general',
+    route: '/services',
     number: '03',
     title: 'Backend Health Check',
     shortDescription: 'An independent look at why a service feels slow, fragile or expensive to maintain.',
@@ -50,6 +58,8 @@ export const services: Service[] = [
   },
   {
     id: 'modernisation-sprint',
+    area: 'general',
+    route: '/services',
     number: '04',
     title: 'Modernisation & Delivery Sprint',
     shortDescription: 'A contained block of delivery time for an upgrade or improvement that needs to stop living in the backlog.',
@@ -61,3 +71,6 @@ export const services: Service[] = [
     format: 'The sprint starts with a narrow outcome and a sensible boundary. The work stays visible as it develops; there is no big reveal at the end.',
   },
 ]
+
+export const scalaServices = services.filter(service => service.area === 'scala-jvm')
+export const generalServices = services.filter(service => service.area === 'general')

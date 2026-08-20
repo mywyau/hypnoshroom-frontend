@@ -70,6 +70,26 @@
   .prose-article ul {
     @apply mb-6 list-disc space-y-2 pl-6;
   }
+
+  .article-code {
+    @apply my-8 overflow-hidden rounded-2xl border border-white/10 bg-ink text-paper shadow-soft;
+  }
+
+  .article-code figcaption {
+    @apply flex items-center justify-between border-b border-white/10 px-5 py-3 text-xs text-paper/55;
+  }
+
+  .article-code figcaption span:last-child {
+    @apply font-mono uppercase tracking-wider text-[#c9b5d1];
+  }
+
+  .article-code pre {
+    @apply overflow-x-auto p-5 text-sm leading-7;
+  }
+
+  .article-code code {
+    @apply font-mono text-paper/90;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
