@@ -1,7 +1,7 @@
 <template>
   <svg viewBox="0 0 640 520" role="img" aria-labelledby="network-title network-desc" class="h-auto w-full">
-    <title id="network-title">Interconnected backend services</title>
-    <desc id="network-desc">An abstract network of nodes connected by branching paths.</desc>
+    <title id="network-title">An interconnected software system</title>
+    <desc id="network-desc">An abstract network connecting an application, API, data and cloud infrastructure.</desc>
     <defs>
       <radialGradient id="node-glow">
         <stop offset="0" stop-color="#f5f2ea" />
@@ -23,7 +23,7 @@
       <circle cx="518" cy="281" r="32"/><circle cx="147" cy="457" r="12"/><circle cx="479" cy="158" r="10"/>
     </g>
     <g fill="#315948" font-family="ui-monospace, monospace" font-size="10" font-weight="600" letter-spacing=".7" text-anchor="middle" dominant-baseline="central">
-      <text x="232" y="271">SERVICE</text><text x="387" y="165">API</text><text x="518" y="281">DATA</text><text x="345" y="420">QUEUE</text>
+      <text x="232" y="271">APP</text><text x="387" y="165">API</text><text x="518" y="281">DATA</text><text x="345" y="420">CLOUD</text>
     </g>
   </svg>
 </template>

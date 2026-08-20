@@ -5,10 +5,7 @@ defineProps<{ service: Service }>()
 
 <template>
   <article class="group flex h-full flex-col border-t border-line py-7 transition duration-300 hover:border-moss sm:p-7 sm:hover:-translate-y-1 sm:hover:rounded-2xl sm:hover:border sm:hover:bg-white/45 sm:hover:shadow-soft">
-    <div class="flex items-start justify-between gap-4">
-      <span class="font-mono text-xs text-moss">{{ service.number }}</span>
-      <span class="rounded-full border border-line px-3 py-1 text-xs font-semibold text-ink/70">{{ service.price }}</span>
-    </div>
+    <span class="font-mono text-xs text-moss">{{ service.number }}</span>
     <h3 class="mt-10 font-display text-3xl leading-tight">{{ service.title }}</h3>
     <p class="mt-4 flex-1 leading-7 text-ink/60">{{ service.shortDescription }}</p>
     <NuxtLink :to="`${service.route}#${service.id}`" class="mt-8 inline-flex items-center text-sm font-semibold text-moss">

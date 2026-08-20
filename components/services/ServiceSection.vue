@@ -10,7 +10,6 @@ defineProps<{ service: Service; reverse?: boolean; number?: string }>()
         <span class="font-mono text-xs text-moss">{{ number || service.number }}</span>
         <h2 class="mt-5 font-display text-4xl leading-tight sm:text-5xl">{{ service.title }}</h2>
         <p class="mt-6 text-lg leading-8 text-ink/65">{{ service.shortDescription }}</p>
-        <p class="mt-7 inline-flex rounded-full bg-moss px-4 py-2 text-sm font-semibold text-white">{{ service.price }}</p>
         <p class="mt-6 text-sm leading-6 text-ink/55"><strong class="text-ink">Engagement format:</strong> {{ service.format }}</p>
         <AppButton to="/contact" class="mt-8">Discuss an engagement</AppButton>
       </div>

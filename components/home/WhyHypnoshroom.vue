@@ -1,16 +1,16 @@
 <script setup lang="ts">
 const reasons = [
-  { number: '01', title: 'Small by design', text: 'Every engagement is handled directly by the founder, from the first call through to delivery.' },
-  { number: '02', title: 'JVM specialist', text: 'Scala and Java aren’t a sideline here. They’re the point.' },
-  { number: '03', title: 'Hands-on delivery', text: 'The work does not stop at a report. Findings can be followed through into code and production.' },
-  { number: '04', title: 'Flexible engagements', text: 'Work can take the shape of a short review, a contained sprint or longer engineering support.' },
+  { number: '01', title: 'Direct ownership', text: 'The person who understands the problem is also responsible for the work. Nothing important is lost between sales, account management and delivery.' },
+  { number: '02', title: 'Right-sized from the start', text: 'The engagement is shaped around the outcome. Extra roles, meetings and process are not added unless the work genuinely needs them.' },
+  { number: '03', title: 'Work stays visible', text: 'Decisions, code, tests and progress can be reviewed as the work develops. There is no polished reveal at the end of a quiet month.' },
+  { number: '04', title: 'Built to hand back', text: 'The aim is stronger software and a team able to own it—not a system that depends on permanent consultancy support.' },
 ]
 </script>
 
 <template>
   <section class="section-space">
     <div class="page-shell">
-      <SectionHeading eyebrow="Why Hypnoshroom" title="Specialist attention, without layers." />
+      <SectionHeading eyebrow="Why Hypnoshroom" title="The useful parts of consultancy. Less of the machinery." intro="Large programmes sometimes need large suppliers. Focused engineering work often benefits from a shorter path between the problem, the decision and the code." />
       <div class="mt-14 grid overflow-hidden rounded-2xl border border-line sm:grid-cols-2 lg:grid-cols-4">
         <article v-for="reason in reasons" :key="reason.number" class="min-h-64 border-b border-line p-7 last:border-b-0 sm:[&:nth-child(odd)]:border-r lg:border-b-0 lg:border-r lg:last:border-r-0">
           <span class="font-mono text-xs text-clay">{{ reason.number }}</span>

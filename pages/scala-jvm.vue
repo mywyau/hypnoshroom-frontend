@@ -1,11 +1,27 @@
 <script setup lang="ts">
-import { scalaServices } from '~/data/services'
-
 const areas = [
   ['Languages', 'Scala · Java'],
   ['Frameworks', 'Play Framework · Spring Boot'],
   ['Builds & upgrades', 'sbt · Maven · JDK upgrades · dependency modernisation'],
   ['Backend systems', 'REST APIs · microservices · distributed systems · relational databases'],
+]
+
+const support = [
+  {
+    title: 'Engineering support',
+    text: 'Hands-on Scala and Java delivery for services, APIs, integrations and production problems.',
+    to: '/services#engineering-support',
+  },
+  {
+    title: 'Technical review',
+    text: 'A close look at Scala 3 readiness, Play, sbt, JDK versions, dependencies, tests and architecture.',
+    to: '/services#technical-review',
+  },
+  {
+    title: 'Modernisation',
+    text: 'Carry an upgrade or improvement through in controlled, reviewable stages without defaulting to a rewrite.',
+    to: '/services#modernisation',
+  },
 ]
 
 usePageSeo({
@@ -28,18 +44,18 @@ usePageSeo({
       </div>
     </section>
 
-    <div class="page-shell">
-      <section class="border-t border-line py-12 sm:flex sm:items-center sm:justify-between sm:gap-10">
-        <div class="max-w-2xl">
-          <p class="eyebrow">Hands-on engineering</p>
-          <h2 class="font-display text-3xl sm:text-4xl">Need Scala or Java delivery support?</h2>
-          <p class="mt-4 leading-7 text-ink/60">Scala and JVM work is available through the general backend engineering service, using the same starting rate of £600/day.</p>
+    <section class="section-space">
+      <div class="page-shell">
+        <SectionHeading eyebrow="Ways to work together" title="The same three services, with JVM depth." intro="Scala and Java expertise can be applied to delivery, diagnosis or modernisation depending on what the system needs." />
+        <div class="mt-12 grid gap-6 lg:grid-cols-3">
+          <article v-for="item in support" :key="item.title" class="rounded-2xl border border-line bg-white/35 p-7 sm:p-9">
+            <h2 class="font-display text-3xl">{{ item.title }}</h2>
+            <p class="mt-4 leading-7 text-ink/60">{{ item.text }}</p>
+            <AppButton :to="item.to" variant="text" class="mt-6">View service</AppButton>
+          </article>
         </div>
-        <AppButton to="/services#backend-engineering" variant="secondary" class="mt-6 shrink-0 sm:mt-0">View engineering support</AppButton>
-      </section>
-      <ServiceSection v-for="(service, index) in scalaServices" :key="service.id" :service="service" :number="String(index + 1).padStart(2, '0')" :reverse="index % 2 === 1" />
-      <p class="border-t border-line py-8 text-sm text-ink/55"><strong class="text-ink">About the prices:</strong> They’re a useful starting point, not a quote. The final cost depends on the system and how much ground the work needs to cover.</p>
-    </div>
+      </div>
+    </section>
 
     <section class="section-space border-t border-line">
       <div class="page-shell grid gap-10 lg:grid-cols-[1fr_0.8fr] lg:items-end">

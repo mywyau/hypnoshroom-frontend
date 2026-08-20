@@ -10,6 +10,12 @@ interface EnquiryFormData {
 const form = reactive<EnquiryFormData>({
   name: '', company: '', email: '', project: '', engagementType: '',
 })
+const limits = {
+  name: 100,
+  company: 150,
+  email: 254,
+  project: 2000,
+} as const
 const status = ref<'idle' | 'submitted'>('idle')
 
 const submitEnquiry = () => {
@@ -25,30 +31,30 @@ const submitEnquiry = () => {
     <div class="grid gap-6 sm:grid-cols-2">
       <div>
         <label for="name" class="mb-2 block text-sm font-semibold">Name</label>
-        <input id="name" v-model="form.name" name="name" type="text" autocomplete="name" required class="min-h-12 w-full rounded-xl border border-line bg-paper px-4 text-base transition hover:border-ink/30 focus:border-moss" />
+        <input id="name" v-model="form.name" name="name" type="text" autocomplete="name" required :maxlength="limits.name" class="min-h-12 w-full rounded-xl border border-line bg-paper px-4 text-base transition hover:border-ink/30 focus:border-moss" />
       </div>
       <div>
         <label for="company" class="mb-2 block text-sm font-semibold">Company</label>
-        <input id="company" v-model="form.company" name="company" type="text" autocomplete="organization" class="min-h-12 w-full rounded-xl border border-line bg-paper px-4 text-base transition hover:border-ink/30 focus:border-moss" />
+        <input id="company" v-model="form.company" name="company" type="text" autocomplete="organization" :maxlength="limits.company" class="min-h-12 w-full rounded-xl border border-line bg-paper px-4 text-base transition hover:border-ink/30 focus:border-moss" />
       </div>
       <div class="sm:col-span-2">
         <label for="email" class="mb-2 block text-sm font-semibold">Email</label>
-        <input id="email" v-model="form.email" name="email" type="email" autocomplete="email" required class="min-h-12 w-full rounded-xl border border-line bg-paper px-4 text-base transition hover:border-ink/30 focus:border-moss" />
+        <input id="email" v-model="form.email" name="email" type="email" autocomplete="email" required :maxlength="limits.email" class="min-h-12 w-full rounded-xl border border-line bg-paper px-4 text-base transition hover:border-ink/30 focus:border-moss" />
       </div>
       <div class="sm:col-span-2">
         <label for="engagement-type" class="mb-2 block text-sm font-semibold">Engagement type</label>
         <select id="engagement-type" v-model="form.engagementType" name="engagementType" required class="min-h-12 w-full rounded-xl border border-line bg-paper px-4 text-base transition hover:border-ink/30 focus:border-moss">
           <option disabled value="">Select an engagement</option>
-          <option>Scala / JVM engineering</option>
-          <option>Scala modernisation</option>
-          <option>Backend health check</option>
-          <option>Modernisation sprint</option>
+          <option>Engineering support</option>
+          <option>Technical review</option>
+          <option>Modernisation</option>
           <option>Other</option>
         </select>
       </div>
       <div class="sm:col-span-2">
         <label for="project" class="mb-2 block text-sm font-semibold">What are you working on?</label>
-        <textarea id="project" v-model="form.project" name="project" rows="6" required class="w-full resize-y rounded-xl border border-line bg-paper px-4 py-3 text-base transition hover:border-ink/30 focus:border-moss" placeholder="What’s the system, what’s making life difficult, and when are you hoping to start?" />
+        <textarea id="project" v-model="form.project" name="project" rows="6" required :maxlength="limits.project" aria-describedby="project-limit" class="w-full resize-y rounded-xl border border-line bg-paper px-4 py-3 text-base transition hover:border-ink/30 focus:border-moss" placeholder="What’s the system, what’s making life difficult, and when are you hoping to start?" />
+        <p id="project-limit" class="mt-2 text-right text-xs text-ink/45" aria-live="polite">{{ form.project.length.toLocaleString() }} / {{ limits.project.toLocaleString() }} characters</p>
       </div>
     </div>
     <div class="mt-7 flex flex-col items-start gap-4 sm:flex-row sm:items-center">

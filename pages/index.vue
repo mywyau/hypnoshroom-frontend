@@ -1,7 +1,7 @@
 <script setup lang="ts">
 usePageSeo({
-  title: 'Hypnoshroom | Backend Software Consultancy',
-  description: 'Backend software consultancy for Scala, Java, TypeScript, Python, databases, modernisation and serverless delivery.',
+  title: 'Hypnoshroom | Software Engineering Consultancy',
+  description: 'Outcome-led software engineering consultancy for full-stack TypeScript, backend systems, databases, cloud delivery and modernisation.',
 })
 </script>
 
@@ -10,6 +10,7 @@ usePageSeo({
     <HeroSection />
     <ServicesPreview />
     <TechnologySection />
+    <QualitySection />
     <WhyHypnoshroom />
     <EngagementProcess />
     <AboutPreview />

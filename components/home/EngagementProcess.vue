@@ -1,8 +1,8 @@
 <script setup lang="ts">
 const stages = [
   { number: '01', title: 'Understand', text: 'First comes a proper conversation about what the system does, where it hurts and what a useful outcome would look like.' },
-  { number: '02', title: 'Investigate', text: 'The work then moves into the code, architecture, dependencies and delivery setup—where the real constraints tend to hide.' },
-  { number: '03', title: 'Deliver', text: 'From there, Hypnoshroom implements the agreed changes or gives the team a clear, ordered plan it can use.' },
+  { number: '02', title: 'Investigate', text: 'The work then moves into the code, architecture, tests, dependencies and delivery setup—where the real constraints tend to hide.' },
+  { number: '03', title: 'Deliver', text: 'From there, Hypnoshroom implements and tests the agreed changes or gives the team a clear, ordered plan it can use.' },
 ]
 </script>
 

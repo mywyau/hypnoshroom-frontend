@@ -79,7 +79,7 @@ usePageSeo({
       <div class="page-shell grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:gap-24">
         <p class="eyebrow">Areas of work</p>
         <div>
-          <h2 class="font-display text-4xl leading-tight sm:text-5xl">Backend systems, from code to production.</h2>
+          <h2 class="font-display text-4xl leading-tight sm:text-5xl">Software, from interface to production.</h2>
           <p class="mt-6 text-lg leading-8 text-ink/65">The work spans Scala, Java, TypeScript and Python; SQL and NoSQL databases; serverless and cloud platforms; integrations, testing, delivery and observability. The common thread is software that needs sound engineering rather than another layer of process.</p>
           <div class="mt-8 flex flex-wrap gap-3">
             <AppButton to="/expertise" variant="secondary">Explore expertise</AppButton>

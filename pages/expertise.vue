@@ -65,6 +65,24 @@ const databases = [
   },
 ]
 
+const testingAreas = [
+  {
+    name: 'Unit & component testing',
+    tools: 'ScalaTest · JUnit · Mockito · frontend component tests',
+    description: 'Fast tests that explain behaviour clearly and make ordinary changes safer to ship.',
+  },
+  {
+    name: 'Integration & contract testing',
+    tools: 'APIs · databases · queues · third-party boundaries',
+    description: 'Tests around the joins where otherwise-correct components tend to disagree in production.',
+  },
+  {
+    name: 'End-to-end confidence',
+    tools: 'Cucumber · Selenium · CI/CD checks',
+    description: 'A small number of valuable journeys, backed by reliable test data and a delivery pipeline that makes failures useful.',
+  },
+]
+
 usePageSeo({
   title: 'Technical Expertise | Hypnoshroom',
   description: 'Backend expertise across Scala, Java, TypeScript, Python, SQL, NoSQL, Vercel, serverless and cloud delivery.',
@@ -78,7 +96,7 @@ usePageSeo({
 
     <section class="section-space">
       <div class="page-shell">
-        <SectionHeading eyebrow="Languages" title="Choose the right tool for the system." intro="Engineering support uses the same starting day rate across languages. The shape and difficulty of the work matter more than the syntax." />
+        <SectionHeading eyebrow="Languages" title="Choose the right tool for the system." intro="The shape and difficulty of the work matter more than the syntax. Engagements are built around the outcome rather than the chosen language." />
         <div class="mt-14 grid gap-6 md:grid-cols-2">
           <article v-for="language in languages" :key="language.name" class="rounded-2xl border border-line bg-white/35 p-7 sm:p-9">
             <p class="text-xs font-semibold uppercase tracking-[0.16em] text-moss">{{ language.label }}</p>
@@ -105,8 +123,21 @@ usePageSeo({
           </article>
         </div>
         <div class="mt-8 flex flex-wrap gap-x-8 gap-y-2">
-          <AppButton to="/services#database-services" variant="text">View database services</AppButton>
+          <AppButton to="/services#engineering-support" variant="text">View engineering support</AppButton>
           <AppButton to="/insights?topic=Databases" variant="text">Read database articles</AppButton>
+        </div>
+      </div>
+    </section>
+
+    <section id="testing" class="section-space scroll-mt-28 border-t border-line bg-[#eee9f0]">
+      <div class="page-shell">
+        <SectionHeading eyebrow="Testing &amp; quality" title="Confidence at every useful level." intro="A healthy test strategy is not a race for coverage. It gives quick feedback close to the code and stronger evidence at the boundaries that matter." />
+        <div class="mt-12 grid gap-6 lg:grid-cols-3">
+          <article v-for="area in testingAreas" :key="area.name" class="border-t border-plum/25 pt-6">
+            <p class="text-xs font-semibold uppercase tracking-[0.14em] text-plum">{{ area.tools }}</p>
+            <h2 class="mt-4 font-display text-3xl">{{ area.name }}</h2>
+            <p class="mt-4 leading-7 text-ink/60">{{ area.description }}</p>
+          </article>
         </div>
       </div>
     </section>
@@ -128,8 +159,8 @@ usePageSeo({
       <div class="page-shell rounded-3xl border border-line bg-white/35 p-8 sm:p-12 lg:flex lg:items-end lg:justify-between lg:gap-12">
         <div class="max-w-2xl">
           <p class="eyebrow">Engineering support</p>
-          <h2 class="font-display text-4xl sm:text-5xl">One day rate, whatever the language.</h2>
-          <p class="mt-5 text-lg leading-8 text-ink/60">Hands-on backend engineering starts from £600/day. Fixed-scope assessments and delivery sprints are priced around the work rather than the technology.</p>
+          <h2 class="font-display text-4xl sm:text-5xl">Engagements shaped around the work.</h2>
+          <p class="mt-5 text-lg leading-8 text-ink/60">Hands-on engineering, assessments and delivery sprints can each be structured to suit the system, the team and the outcome being pursued.</p>
         </div>
         <AppButton to="/contact" class="mt-8 shrink-0 lg:mt-0">Discuss a project</AppButton>
       </div>
