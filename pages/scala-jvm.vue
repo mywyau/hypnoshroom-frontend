@@ -8,9 +8,14 @@ const areas = [
 
 const support = [
   {
-    title: 'Engineering support',
-    text: 'Hands-on Scala and Java delivery for services, APIs, integrations and production problems.',
+    title: 'Engineering delivery',
+    text: 'Take a defined Scala or Java service, API, integration or production problem through to delivery.',
     to: '/services#engineering-support',
+  },
+  {
+    title: 'Embedded engineering',
+    text: 'Add Scala or Java experience directly to an existing team for a defined period or delivery need.',
+    to: '/services#embedded-engineering',
   },
   {
     title: 'Technical review',
@@ -46,8 +51,8 @@ usePageSeo({
 
     <section class="section-space">
       <div class="page-shell">
-        <SectionHeading eyebrow="Ways to work together" title="The same three services, with JVM depth." intro="Scala and Java expertise can be applied to delivery, diagnosis or modernisation depending on what the system needs." />
-        <div class="mt-12 grid gap-6 lg:grid-cols-3">
+        <SectionHeading eyebrow="Ways to work together" title="The same services, with JVM depth." intro="Scala and Java expertise can be applied to delivery, added team capacity, diagnosis or modernisation depending on what the system needs." />
+        <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           <article v-for="item in support" :key="item.title" class="rounded-2xl border border-line bg-white/35 p-7 sm:p-9">
             <h2 class="font-display text-3xl">{{ item.title }}</h2>
             <p class="mt-4 leading-7 text-ink/60">{{ item.text }}</p>

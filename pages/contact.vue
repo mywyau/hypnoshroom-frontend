@@ -16,7 +16,7 @@ usePageSeo({
           <p class="mt-5 leading-7 text-ink/60">Share what’s known so far—even if that’s simply “this service needs upgrading and the risk isn’t clear yet.” The gaps can be worked through in the first conversation.</p>
           <dl class="mt-9 space-y-6 border-t border-line pt-7 text-sm">
             <div><dt class="font-semibold text-ink">Usually a good fit</dt><dd class="mt-1 leading-6 text-ink/55">Full-stack and backend engineering, testing, technical reviews and modernisation.</dd></div>
-            <div><dt class="font-semibold text-ink">Ways to work together</dt><dd class="mt-1 leading-6 text-ink/55">Engineering support, a technical review or backend modernisation.</dd></div>
+            <div><dt class="font-semibold text-ink">Ways to work together</dt><dd class="mt-1 leading-6 text-ink/55">Scoped engineering, embedded team support, a technical review or modernisation.</dd></div>
             <div><dt class="font-semibold text-ink">Working style</dt><dd class="mt-1 leading-6 text-ink/55">Direct, hands-on and low on ceremony.</dd></div>
           </dl>
         </div>

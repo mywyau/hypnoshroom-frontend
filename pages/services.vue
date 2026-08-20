@@ -10,7 +10,7 @@ usePageSeo({
 
 <template>
   <div>
-    <PageHero eyebrow="Services" title="Three ways to move software forward." intro="Build or fix something, understand what is going wrong, or modernise what is already there. The engagement starts with the outcome and stays as simple as the work allows." />
+    <PageHero eyebrow="Services" title="Practical ways to move software forward." intro="Own a piece of delivery, add engineering capacity, understand what is going wrong or modernise what is already there. The engagement starts with the outcome and stays as simple as the work allows." />
     <div class="page-shell">
       <ServiceSection v-for="(service, index) in services" :key="service.id" :service="service" :number="String(index + 1).padStart(2, '0')" :reverse="index % 2 === 1" />
 

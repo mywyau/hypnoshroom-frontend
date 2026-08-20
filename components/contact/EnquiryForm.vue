@@ -45,7 +45,8 @@ const submitEnquiry = () => {
         <label for="engagement-type" class="mb-2 block text-sm font-semibold">Engagement type</label>
         <select id="engagement-type" v-model="form.engagementType" name="engagementType" required class="min-h-12 w-full rounded-xl border border-line bg-paper px-4 text-base transition hover:border-ink/30 focus:border-moss">
           <option disabled value="">Select an engagement</option>
-          <option>Engineering support</option>
+          <option>Engineering delivery</option>
+          <option>Embedded engineering support</option>
           <option>Technical review</option>
           <option>Modernisation</option>
           <option>Other</option>
