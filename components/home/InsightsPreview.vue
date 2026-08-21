@@ -12,7 +12,7 @@ const featuredArticles = [
   <section class="section-space border-t border-line">
     <div class="page-shell">
       <div class="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
-        <SectionHeading eyebrow="Insights" title="Knowledge and insights." intro="Code-led writing about languages, databases, architecture, delivery and the trade-offs behind working software." />
+        <SectionHeading eyebrow="Insights" title="Knowledge and insights." intro="Our thoughts on languages, databases, architecture, delivery and the trade-offs behind working software." />
         <AppButton to="/insights" variant="text">Browse all insights</AppButton>
       </div>
       <div class="mt-14 grid gap-x-10 lg:grid-cols-3">

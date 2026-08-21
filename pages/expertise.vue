@@ -77,7 +77,7 @@ const testingAreas = [
   },
   {
     name: 'End-to-end confidence',
-    tools: 'Cucumber · Selenium · CI/CD checks',
+    tools: 'Cucumber · Selenium · Playwright',
     description: 'A small number of valuable journeys, backed by reliable test data and a delivery pipeline that makes failures useful.',
   },
 ]

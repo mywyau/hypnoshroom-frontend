@@ -20,7 +20,7 @@ const practices = [
     <div class="page-shell grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
       <div>
         <p class="eyebrow">Testing &amp; quality</p>
-        <h2 class="font-display text-4xl leading-tight sm:text-5xl">Testing belongs in the work, not at the end.</h2>
+        <h2 class="font-display text-4xl leading-tight sm:text-5xl">Testing throughout.</h2>
         <p class="mt-6 text-lg leading-8 text-ink/65">Hypnoshroom treats testing as part of engineering: a way to understand existing behaviour, make changes with confidence and keep software maintainable after delivery.</p>
         <AppButton to="/expertise#testing" variant="text" class="mt-6">Explore testing expertise</AppButton>
       </div>
