@@ -30,7 +30,7 @@ usePageSeo({
             <p class="mt-7 max-w-2xl text-xl leading-8 text-ink/60">{{ service.shortDescription }}</p>
           </div>
           <aside class="rounded-3xl border border-moss bg-white/40 p-7 shadow-soft">
-            <p class="text-xs font-semibold uppercase tracking-[0.16em] text-moss">How it is bought</p>
+            <p class="text-xs font-semibold uppercase tracking-[0.16em] text-moss">Pricing</p>
             <p class="mt-4 font-display text-4xl">{{ service.commercialModel }}</p>
             <p class="mt-3 text-sm leading-6 text-ink/60">{{ service.commercialDetail }}</p>
             <p class="mt-5 border-t border-line pt-5 text-sm font-semibold text-ink">{{ service.timeline }}</p>
@@ -44,7 +44,7 @@ usePageSeo({
       <div class="page-shell grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
         <div>
           <p class="eyebrow">Package fit</p>
-          <h2 class="font-display text-4xl leading-tight sm:text-5xl">A defined answer to a recognisable problem.</h2>
+          <h2 class="font-display text-4xl leading-tight sm:text-5xl">A independant review and health check for your sanity.</h2>
           <p class="mt-6 text-lg leading-8 text-ink/60">{{ service.whoFor }}</p>
         </div>
         <div class="grid gap-6 sm:grid-cols-2">

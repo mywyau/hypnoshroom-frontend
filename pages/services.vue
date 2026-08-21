@@ -16,7 +16,7 @@ usePageSeo({
 
 <template>
   <div>
-    <PageHero eyebrow="Service packages" title="Choose a clear way to buy the work." intro="Four bounded engagement packages, each with an explicit purchase unit, working format and endpoint. Most start with a one-month commitment; modernisation is scoped around each phase." />
+    <PageHero eyebrow="Service packages" title="What we offer." intro="Four bounded engagement packages with an explicit purchase unit, working format and endpoint. Start with the package that matches what is known today not a vague promise to transform everything." />
 
     <section class="border-b border-line bg-[#ece8de] py-10">
       <div class="page-shell grid gap-6 md:grid-cols-3">
