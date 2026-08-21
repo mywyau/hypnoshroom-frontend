@@ -9,10 +9,10 @@ withDefaults(defineProps<{
   <NuxtLink
     v-if="to"
     :to="to"
-    class="inline-flex min-h-12 items-center justify-center rounded-full px-6 py-3 text-sm font-semibold transition duration-200"
+    class="inline-flex min-h-12 items-center justify-center rounded-full py-3 text-sm font-semibold transition duration-200"
     :class="{
-      'bg-ink text-white hover:-translate-y-0.5 hover:bg-moss': variant === 'primary',
-      'border border-ink/20 bg-white/40 text-ink hover:border-moss hover:text-moss': variant === 'secondary',
+      'bg-ink px-6 text-white hover:-translate-y-0.5 hover:bg-moss': variant === 'primary',
+      'border border-ink/20 bg-white/40 px-6 text-ink hover:border-moss hover:text-moss': variant === 'secondary',
       'px-0 text-moss underline decoration-moss/30 underline-offset-4 hover:decoration-moss': variant === 'text',
     }"
   >

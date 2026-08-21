@@ -4,7 +4,8 @@ const languages = [
     name: 'Scala',
     label: 'Core specialism',
     description: 'Scala services, Play Framework applications, sbt builds and the careful work involved in moving long-lived systems forward.',
-    details: ['Scala 2 & Scala 3', 'Play Framework', 'sbt', 'JVM modernisation'],
+    details: ['Scala 2 & Scala 3', 'Functional Programming', 'Play Framework', 'sbt', 'Unit testing', 'Integration testing'],
+    logo: '/languages/scala.svg',
     link: '/scala-jvm',
     topic: 'Scala',
   },
@@ -12,21 +13,24 @@ const languages = [
     name: 'Java',
     label: 'Backend engineering',
     description: 'Java services that need to be built, upgraded or made easier to own—without turning routine maintenance into a rewrite.',
-    details: ['Spring Boot', 'Maven', 'JDK upgrades', 'REST APIs'],
+    details: ['Spring Boot', 'Maven', 'JDK upgrades', 'REST APIs', 'Unit testing', 'Integration testing'],
+    logo: '/languages/java.svg',
     topic: 'Java',
   },
   {
     name: 'TypeScript',
     label: 'Modern applications',
     description: 'Server-side TypeScript, APIs and full-stack applications where backend decisions still deserve proper attention.',
-    details: ['Node.js', 'Nuxt', 'API development', 'Automated testing'],
+    details: ['Node.js', 'Nuxt', 'Fullstack development', 'Playwright Automated testing', 'Unit testing', 'Integration testing'],
+    logo: '/languages/typescript.svg',
     topic: 'TypeScript',
   },
   {
     name: 'Python',
     label: 'Services & automation',
-    description: 'Python backend services, integrations and automation work that needs to fit cleanly into a wider system.',
-    details: ['Backend services', 'APIs', 'Automation', 'Integration work'],
+    description: 'Python backend services, modern AI API integrations, integrations and automation work that needs to fit cleanly into a wider system.',
+    details: ['APIs', 'Automation', 'AI', 'Unit testing', 'Integration testing'],
+    logo: '/languages/python.svg',
     topic: 'Python',
   },
 ]
@@ -50,19 +54,14 @@ const platforms = [
 const databases = [
   {
     name: 'SQL & relational',
-    technologies: 'PostgreSQL · Oracle · MySQL',
+    technologies: 'PostgreSQL',
     description: 'Schema design, query behaviour, migrations and the application code responsible for reading and writing relational data.',
   },
   {
     name: 'NoSQL & key-value',
     technologies: 'Redis · key-value stores · document data',
     description: 'Data modelling, caching and integration decisions for workloads that do not fit neatly into a relational model.',
-  },
-  {
-    name: 'Database reliability',
-    technologies: 'Performance · observability · failure handling',
-    description: 'Finding slow or fragile database interactions and making their behaviour easier to see, test and operate.',
-  },
+  }
 ]
 
 const testingAreas = [
@@ -92,21 +91,24 @@ usePageSeo({
 
 <template>
   <div>
-    <PageHero eyebrow="Expertise" title="Different languages. The same backend concerns." intro="Language matters, but so do the boundaries, data, tests, deployments and production behaviour around it. Hypnoshroom works across the stack without treating every technology as a separate kind of consultancy." />
+    <PageHero eyebrow="Expertise" title="Different languages. Same concerns." intro="Languages matters, but so do the boundaries, data, tests, deployments and production behaviour around it. Hypnoshroom works across the stack without treating every technology as a separate kind of consultancy." />
 
     <section class="section-space">
       <div class="page-shell">
-        <SectionHeading eyebrow="Languages" title="Choose the right tool for the system." intro="The shape and difficulty of the work matter more than the syntax. Engagements are built around the outcome rather than the chosen language." />
+        <SectionHeading eyebrow="Languages" title="Choose the right tool for the job." intro="The shape and difficulty of the work matter more than the syntax. Engagements are built around the outcome rather than the chosen language." />
         <div class="mt-14 grid gap-6 md:grid-cols-2">
-          <article v-for="language in languages" :key="language.name" class="rounded-2xl border border-line bg-white/35 p-7 sm:p-9">
-            <p class="text-xs font-semibold uppercase tracking-[0.16em] text-moss">{{ language.label }}</p>
+          <article v-for="language in languages" :key="language.name" class="relative rounded-2xl border border-line bg-white/35 p-7 sm:p-9">
+            <div class="absolute right-7 top-7 flex h-14 w-14 items-center justify-center rounded-xl border border-line bg-white/60 p-2.5 sm:right-9 sm:top-9" aria-hidden="true">
+              <img :src="language.logo" alt="" width="40" height="40" class="h-full w-full object-contain">
+            </div>
+            <p class="pr-16 text-xs font-semibold uppercase tracking-[0.16em] text-moss">{{ language.label }}</p>
             <h2 class="mt-3 font-display text-4xl">{{ language.name }}</h2>
             <p class="mt-4 leading-7 text-ink/60">{{ language.description }}</p>
             <ul class="mt-6 flex flex-wrap gap-2">
               <li v-for="detail in language.details" :key="detail" class="rounded-full border border-line px-3 py-1.5 text-xs text-ink/65">{{ detail }}</li>
             </ul>
             <AppButton v-if="language.link" :to="language.link" variant="text" class="mt-6">Explore {{ language.name }} services</AppButton>
-            <AppButton :to="`/insights?topic=${encodeURIComponent(language.topic)}`" variant="text" class="mt-2">Read {{ language.name }} articles</AppButton>
+            <AppButton v-else :to="`/insights?topic=${encodeURIComponent(language.topic)}`" variant="text" class="mt-2">Read {{ language.name }} articles</AppButton>
           </article>
         </div>
       </div>
@@ -123,7 +125,7 @@ usePageSeo({
           </article>
         </div>
         <div class="mt-8 flex flex-wrap gap-x-8 gap-y-2">
-          <AppButton to="/services#engineering-support" variant="text">View engineering support</AppButton>
+          <AppButton to="/services/engineering-delivery" variant="text">View engineering delivery</AppButton>
           <AppButton to="/insights?topic=Databases" variant="text">Read database articles</AppButton>
         </div>
       </div>
@@ -131,7 +133,7 @@ usePageSeo({
 
     <section id="testing" class="section-space scroll-mt-28 border-t border-line bg-[#eee9f0]">
       <div class="page-shell">
-        <SectionHeading eyebrow="Testing &amp; quality" title="Confidence at every useful level." intro="A healthy test strategy is not a race for coverage. It gives quick feedback close to the code and stronger evidence at the boundaries that matter." />
+        <SectionHeading eyebrow="Testing &amp; quality" title="Confidence at every level." intro="A healthy test strategy is not a race for coverage. It should give quick feedback close to the code and stronger evidence at the boundaries that matter." />
         <div class="mt-12 grid gap-6 lg:grid-cols-3">
           <article v-for="area in testingAreas" :key="area.name" class="border-t border-plum/25 pt-6">
             <p class="text-xs font-semibold uppercase tracking-[0.14em] text-plum">{{ area.tools }}</p>
@@ -144,7 +146,7 @@ usePageSeo({
 
     <section class="section-space border-y border-line bg-[#ece8de]">
       <div class="page-shell">
-        <SectionHeading eyebrow="Platforms &amp; delivery" title="The code has to live somewhere." intro="Backend work includes the path to production and what happens after a service gets there." />
+        <SectionHeading eyebrow="Platforms &amp; delivery" title="Where the code lives." intro="Backend work includes the path to production and what happens after a service gets there." />
         <div class="mt-12 grid gap-6 lg:grid-cols-3">
           <article v-for="platform in platforms" :key="platform.name" class="border-t border-ink/20 pt-6">
             <h2 class="font-display text-3xl">{{ platform.name }}</h2>

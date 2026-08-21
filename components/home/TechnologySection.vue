@@ -5,7 +5,7 @@ const groups = [
   { title: 'Backend frameworks', items: ['Play Framework', 'Spring Boot', 'Node.js', 'Serverless functions'] },
   { title: 'Build tooling', items: ['npm', 'Vite', 'sbt', 'Maven'] },
   { title: 'APIs & integration', items: ['REST APIs', 'SOAP', 'JMS', 'IBM MQ', 'RabbitMQ'] },
-  { title: 'Databases', items: ['PostgreSQL', 'Oracle', 'MySQL', 'Redis'] },
+  { title: 'Databases', items: ['PostgreSQL', 'Oracle', 'Redis'] },
   { title: 'Testing', items: ['ScalaTest', 'JUnit', 'Mockito', 'Cucumber', 'Selenium', 'Integration testing', 'Automated testing'] },
   { title: 'DevOps & delivery', items: ['Docker', 'Kubernetes', 'Jenkins', 'GitHub Actions', 'CI/CD'] },
   { title: 'Cloud & observability', items: ['AWS', 'Google Cloud', 'CloudWatch', 'Grafana', 'Kibana', 'Splunk'] },

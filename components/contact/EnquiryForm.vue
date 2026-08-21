@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { services } from '~/data/services'
+
 interface EnquiryFormData {
   name: string
   company: string
@@ -7,8 +9,12 @@ interface EnquiryFormData {
   engagementType: string
 }
 
+const route = useRoute()
+const requestedService = Array.isArray(route.query.service) ? route.query.service[0] : route.query.service
+const selectedService = services.find(service => service.slug === requestedService)
+
 const form = reactive<EnquiryFormData>({
-  name: '', company: '', email: '', project: '', engagementType: '',
+  name: '', company: '', email: '', project: '', engagementType: selectedService?.title || '',
 })
 const limits = {
   name: 100,
@@ -45,10 +51,8 @@ const submitEnquiry = () => {
         <label for="engagement-type" class="mb-2 block text-sm font-semibold">Engagement type</label>
         <select id="engagement-type" v-model="form.engagementType" name="engagementType" required class="min-h-12 w-full rounded-xl border border-line bg-paper px-4 text-base transition hover:border-ink/30 focus:border-moss">
           <option disabled value="">Select an engagement</option>
-          <option>Engineering delivery</option>
-          <option>Embedded engineering support</option>
-          <option>Technical review</option>
-          <option>Modernisation</option>
+          <option v-for="service in services" :key="service.id" :value="service.title">{{ service.title }}</option>
+          <option>Scala/JVM work package</option>
           <option>Other</option>
         </select>
       </div>
