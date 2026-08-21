@@ -31,7 +31,7 @@ usePageSeo({
 
 <template>
   <div>
-    <PageHero eyebrow="About Hypnoshroom" title="Built around the outcome." intro="Hypnoshroom is an independent software consultancy led by engineering, quality and a genuine passion for doing the work well." />
+    <PageHero eyebrow="About Hypnoshroom" title="Built around the outcome." intro="Hypnoshroom is an independent software consultancy led by engineering, quality and a genuine passion for doing the work well." gradient="sage" />
     <section class="section-space">
       <div class="page-shell grid gap-14 lg:grid-cols-[1fr_0.85fr] lg:gap-24">
         <div>

@@ -20,7 +20,7 @@ usePageSeo({
 
 <template>
   <div>
-    <PageHero eyebrow="Insights" title="Knowledge and insights." intro="Technical articles on languages, databases, serverless platforms and the awkward realities of keeping backend systems moving." />
+    <PageHero eyebrow="Insights" title="Knowledge and insights." intro="Technical articles on languages, databases, serverless platforms and the awkward realities of keeping backend systems moving." gradient="violet" />
     <section class="section-space">
       <div class="page-shell">
         <nav aria-label="Filter insights by topic" class="flex flex-wrap gap-2 border-b border-line pb-8">

@@ -15,6 +15,7 @@ const languages = [
     description: 'Java services that need to be built, upgraded or made easier to own—without turning routine maintenance into a rewrite.',
     details: ['Spring Boot', 'Maven', 'JDK upgrades', 'REST APIs', 'Unit testing', 'Integration testing'],
     logo: '/languages/java.svg',
+    link: '/java',
     topic: 'Java',
   },
   {
@@ -23,6 +24,7 @@ const languages = [
     description: 'Server-side TypeScript, APIs and full-stack applications where backend decisions still deserve proper attention.',
     details: ['Node.js', 'Nuxt', 'Fullstack development', 'Playwright Automated testing', 'Unit testing', 'Integration testing'],
     logo: '/languages/typescript.svg',
+    link: '/typescript',
     topic: 'TypeScript',
   },
   {
@@ -31,6 +33,7 @@ const languages = [
     description: 'Python backend services, modern AI API integrations, integrations and automation work that needs to fit cleanly into a wider system.',
     details: ['APIs', 'Automation', 'AI', 'Unit testing', 'Integration testing'],
     logo: '/languages/python.svg',
+    link: '/python',
     topic: 'Python',
   },
 ]
@@ -91,7 +94,7 @@ usePageSeo({
 
 <template>
   <div>
-    <PageHero eyebrow="Expertise" title="Different languages. Same concerns." intro="Languages matters, but so do the boundaries, data, tests, deployments and production behaviour around it. Hypnoshroom works across the stack without treating every technology as a separate kind of consultancy." />
+    <PageHero eyebrow="Expertise" title="Different languages. Same concerns." intro="Languages matters, but so do the boundaries, data, tests, deployments and production behaviour around it. Hypnoshroom works across the stack without treating every technology as a separate kind of consultancy." gradient="forest" />
 
     <section class="section-space">
       <div class="page-shell">

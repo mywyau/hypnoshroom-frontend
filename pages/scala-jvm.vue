@@ -55,7 +55,7 @@ usePageSeo({
 
 <template>
   <div>
-    <PageHero eyebrow="Scala & JVM" title="Defined help for difficult Scala systems." intro="Start with one service and one technical problem. Each package has a clear boundary, useful outputs and a decision point before any larger commitment." />
+    <PageHero eyebrow="Scala & JVM" title="Need help with a Scala system?" intro="Start small, one service or one technical problem. Let us learn your system and help contribute to the problems it maybe facing." gradient="scala" />
 
     <section class="border-b border-line bg-[#ece8de] py-12">
       <div class="page-shell grid gap-6 sm:grid-cols-2 lg:grid-cols-4">

@@ -55,6 +55,50 @@
     -webkit-text-fill-color: transparent;
   }
 
+  .hero-gradient--plum {
+    background-image: linear-gradient(108deg, #302633 0%, #58435f 38%, #75527f 70%, #916382 100%);
+  }
+
+  .hero-gradient--forest {
+    background-image: linear-gradient(108deg, #242620 0%, #315948 48%, #789080 100%);
+  }
+
+  .hero-gradient--violet {
+    background-image: linear-gradient(108deg, #403148 0%, #65506d 38%, #87678d 70%, #416b58 100%);
+  }
+
+  .hero-gradient--sage {
+    background-image: linear-gradient(108deg, #29483b 0%, #466b59 38%, #6f846f 70%, #765d7c 100%);
+  }
+
+  .hero-gradient--moss {
+    background-image: linear-gradient(108deg, #242620 0%, #2f5b47 45%, #51745f 73%, #5c4e66 100%);
+  }
+
+  .hero-gradient--heather {
+    background-image: linear-gradient(108deg, #242620 0%, #4f4657 42%, #77647e 72%, #4d6b5e 100%);
+  }
+
+  .hero-gradient--mulberry {
+    background-image: linear-gradient(108deg, #242620 0%, #504051 40%, #744f6c 72%, #38614f 100%);
+  }
+
+  .hero-gradient--scala {
+    background-image: linear-gradient(108deg, #242620 0%, #66231e 52%, #de3423 100%);
+  }
+
+  .hero-gradient--java {
+    background-image: linear-gradient(108deg, #0074bd 0%, #0074bd 38%, #ea2d2e 72%, #ea2d2e 100%);
+  }
+
+  .hero-gradient--typescript {
+    background-image: linear-gradient(108deg, #242620 0%, #245b85 48%, #007acc 100%);
+  }
+
+  .hero-gradient--python {
+    background-image: linear-gradient(108deg, #306998 0%, #306998 42%, #ffd43b 76%, #ffd43b 100%);
+  }
+
   .prose-article {
     @apply text-[1.0625rem] leading-8 text-ink/75;
   }
