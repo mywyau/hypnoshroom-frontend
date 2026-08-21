@@ -37,15 +37,18 @@ const submitEnquiry = () => {
     <div class="grid gap-6 sm:grid-cols-2">
       <div>
         <label for="name" class="mb-2 block text-sm font-semibold">Name</label>
-        <input id="name" v-model="form.name" name="name" type="text" autocomplete="name" required :maxlength="limits.name" class="min-h-12 w-full rounded-xl border border-line bg-paper px-4 text-base transition hover:border-ink/30 focus:border-moss" />
+        <input id="name" v-model="form.name" name="name" type="text" autocomplete="name" required :maxlength="limits.name" aria-describedby="name-limit" class="min-h-12 w-full rounded-xl border border-line bg-paper px-4 text-base transition hover:border-ink/30 focus:border-moss" />
+        <p id="name-limit" class="mt-2 text-right text-xs text-ink/45">{{ form.name.length }} / {{ limits.name }} characters</p>
       </div>
       <div>
         <label for="company" class="mb-2 block text-sm font-semibold">Company</label>
-        <input id="company" v-model="form.company" name="company" type="text" autocomplete="organization" :maxlength="limits.company" class="min-h-12 w-full rounded-xl border border-line bg-paper px-4 text-base transition hover:border-ink/30 focus:border-moss" />
+        <input id="company" v-model="form.company" name="company" type="text" autocomplete="organization" :maxlength="limits.company" aria-describedby="company-limit" class="min-h-12 w-full rounded-xl border border-line bg-paper px-4 text-base transition hover:border-ink/30 focus:border-moss" />
+        <p id="company-limit" class="mt-2 text-right text-xs text-ink/45">{{ form.company.length }} / {{ limits.company }} characters</p>
       </div>
       <div class="sm:col-span-2">
         <label for="email" class="mb-2 block text-sm font-semibold">Email</label>
-        <input id="email" v-model="form.email" name="email" type="email" autocomplete="email" required :maxlength="limits.email" class="min-h-12 w-full rounded-xl border border-line bg-paper px-4 text-base transition hover:border-ink/30 focus:border-moss" />
+        <input id="email" v-model="form.email" name="email" type="email" autocomplete="email" required :maxlength="limits.email" aria-describedby="email-limit" class="min-h-12 w-full rounded-xl border border-line bg-paper px-4 text-base transition hover:border-ink/30 focus:border-moss" />
+        <p id="email-limit" class="mt-2 text-right text-xs text-ink/45">{{ form.email.length }} / {{ limits.email }} characters</p>
       </div>
       <div class="sm:col-span-2">
         <label for="engagement-type" class="mb-2 block text-sm font-semibold">Engagement type</label>

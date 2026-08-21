@@ -48,7 +48,7 @@ usePageSeo({
                   <p class="text-xs font-semibold uppercase tracking-[0.16em] text-moss">{{ service.packageType }}</p>
                   <h2 class="mt-3 font-display text-4xl leading-tight">{{ service.title }}</h2>
                 </div>
-                <span class="shrink-0 font-mono text-xs text-clay">{{ service.number }}</span>
+                <ServicePackageIcon :slug="service.slug" />
               </div>
 
               <p class="mt-5 max-w-xl leading-7 text-ink/60">{{ service.shortDescription }}</p>
@@ -97,9 +97,9 @@ usePageSeo({
       <div class="page-shell">
         <SectionHeading eyebrow="Buying process" title="A small commitment before a larger one." intro="The package structure prevents an unclear conversation from quietly becoming an open-ended software project." />
         <div class="mt-12 grid gap-8 md:grid-cols-3">
-          <article class="border-t border-ink/20 pt-5"><span class="font-mono text-xs text-clay">01</span><h2 class="mt-8 font-display text-3xl">Choose a starting package</h2><p class="mt-4 text-sm leading-6 text-ink/60">Select the closest fit. A short qualification call confirms whether the package is appropriate.</p></article>
-          <article class="border-t border-ink/20 pt-5"><span class="font-mono text-xs text-clay">02</span><h2 class="mt-8 font-display text-3xl">Confirm the boundary</h2><p class="mt-4 text-sm leading-6 text-ink/60">Agree the repository, technical question, access, client responsibilities, outputs and commercial terms.</p></article>
-          <article class="border-t border-ink/20 pt-5"><span class="font-mono text-xs text-clay">03</span><h2 class="mt-8 font-display text-3xl">Buy only that commitment</h2><p class="mt-4 text-sm leading-6 text-ink/60">Complete the package, review its evidence and make a separate decision about any follow-on work.</p></article>
+          <article class="border-t border-ink/20 pt-5"><ServiceProcessIcon icon="choose" /><h2 class="mt-8 font-display text-3xl">Choose a starting package</h2><p class="mt-4 text-sm leading-6 text-ink/60">Select the closest fit. A short qualification call confirms whether the package is appropriate.</p></article>
+          <article class="border-t border-ink/20 pt-5"><ServiceProcessIcon icon="boundary" /><h2 class="mt-8 font-display text-3xl">Confirm the boundary</h2><p class="mt-4 text-sm leading-6 text-ink/60">Agree the repository, technical question, access, client responsibilities, outputs and commercial terms.</p></article>
+          <article class="border-t border-ink/20 pt-5"><ServiceProcessIcon icon="commit" /><h2 class="mt-8 font-display text-3xl">Buy only that commitment</h2><p class="mt-4 text-sm leading-6 text-ink/60">Complete the package, review its evidence and make a separate decision about any follow-on work.</p></article>
         </div>
       </div>
     </section>

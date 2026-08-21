@@ -8,7 +8,7 @@ usePageSeo({
 
 <template>
   <div>
-    <PageHero eyebrow="Contact" title="What needs moving forward?" intro="A rough outline is enough. What does the product or system do, where is the team stuck, and what needs to change?" />
+    <PageHero eyebrow="Contact" title="Need someone to talk to?" intro="Give us a rough outline. What does the product or system do, where is the team stuck, and what needs to change?" />
     <section class="section-space">
       <div class="page-shell grid gap-14 lg:grid-cols-[0.65fr_1.35fr] lg:gap-20">
         <div>
