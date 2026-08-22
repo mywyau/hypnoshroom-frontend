@@ -17,9 +17,24 @@ const fitTitle = service.slug === 'embedded-engineering-support'
     : 'A focused review of one system or technical question.'
 
 usePageSeo({
-  title: `${service.title} Package | Hypnoshroom`,
-  description: `${service.shortDescription} ${service.commercialDetail}`,
+  title: `${service.title} | Hypnoshroom`,
+  description: service.seoDescription,
   path: `/services/${service.slug}`,
+  breadcrumbs: [
+    { name: 'Home', path: '/' },
+    { name: 'Services', path: '/services' },
+    { name: service.title, path: `/services/${service.slug}` },
+  ],
+  schema: {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: service.title,
+    description: service.shortDescription,
+    url: `https://hypnoshroom.com/services/${service.slug}`,
+    serviceType: service.packageType,
+    areaServed: { '@type': 'Country', name: 'United Kingdom' },
+    provider: { '@id': 'https://hypnoshroom.com/#organization' },
+  },
 })
 </script>
 

@@ -32,7 +32,7 @@ const workPackages = [
     price: 'From £3,500',
     duration: null,
     intro: 'Review the unit and integration testing approach around one Scala service and identify where the suite helps, misleads or slows the team down.',
-    goodFor: ['Tests pass but releases still feel risky', 'The suite is slow, brittle or expensive to maintain', 'Unit and integration responsibilities are unclear', 'Mocks, fixtures or test setup obscure the behaviour being protected'],
+    goodFor: ['Tests pass but releases still feel risky', 'The suite is slow, brittle or expensive to maintain', 'Unit or integration tests are flaky', 'Unit and integration responsibilities are unclear', 'Mocks, fixtures or test setup obscure the behaviour being protected'],
     work: ['Review representative ScalaTest unit and integration tests', 'Assess test boundaries, naming, structure, fixtures and test doubles', 'Look for brittle assertions, excessive mocking, hidden coupling and missing integration evidence', 'Review feedback speed, repeatability and how failures are diagnosed'],
     outputs: ['Written assessment of the current testing approach', 'Examples of testing smells found in the suite', 'Prioritised recommendations by risk and value', 'Suggested unit and integration testing boundaries', 'Technical walkthrough with the team'],
     boundary: 'The standard package covers the unit and integration test suites for one primary repository or service. It assesses the existing approach and recommends changes; it does not include writing, rewriting or repairing production code or tests.',
@@ -58,13 +58,23 @@ const workPackages = [
 const engagementSteps = [
   { icon: 'choose', title: 'Choose the engagement', text: 'Use a technical review when the problem is unclear, a testing review when the suite needs scrutiny, or embedded engineering when work is ready to deliver.' },
   { icon: 'boundary', title: 'Agree the boundary', text: 'Confirm the repository, access, review question and outputs, or the embedded responsibilities and first three-month increment.' },
-  { icon: 'commit', title: 'Start with that commitment', text: 'Complete the review or current three-month increment, then make a separate decision about any follow-on work.' },
+  { icon: 'commit', title: 'Work commences', text: 'Complete the review or current three-month increment, then make a separate decision about any follow-on work.' },
 ] as const
 
 usePageSeo({
   title: 'Scala & JVM Engineering | Hypnoshroom',
   description: 'Scala technical reviews, testing suite assessments and embedded engineering for Scala services, Play applications, sbt builds, APIs and MongoDB.',
   path: '/scala',
+  breadcrumbs: [{ name: 'Home', path: '/' }, { name: 'Scala engineering', path: '/scala' }],
+  schema: {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Scala and JVM engineering',
+    description: 'Technical reviews, testing suite assessments and embedded engineering for Scala and JVM systems.',
+    url: 'https://hypnoshroom.com/scala',
+    areaServed: { '@type': 'Country', name: 'United Kingdom' },
+    provider: { '@id': 'https://hypnoshroom.com/#organization' },
+  },
 })
 </script>
 
@@ -83,8 +93,7 @@ usePageSeo({
 
     <section class="section-space">
       <div class="page-shell">
-        <SectionHeading eyebrow="Ways to work together" title="Three clear Scala engagements." intro="Use a Technical Review when a system question needs evidence, a Testing Suite Review when confidence in the tests is the problem, or Embedded Scala Engineering when the team has work ready to deliver." />
-        <div class="mt-14">
+        <div>
           <article v-for="item in workPackages" :id="`package-${item.slug}`" :key="item.slug" class="scroll-mt-28 border-t border-line py-12 first:border-t-0 first:pt-0 lg:py-16">
             <div class="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:gap-16">
               <div>
@@ -133,7 +142,7 @@ usePageSeo({
 
     <section class="section-space border-y border-line bg-[#ece8de]">
       <div class="page-shell">
-        <SectionHeading eyebrow="Process" title="Choose the working model before work starts." intro="Review scope and embedded capacity are agreed differently. Both begin with explicit responsibilities, access and commercial terms." />
+        <SectionHeading eyebrow="Process" title="Speak to us about a working arrangement." intro="Review scope and embedded capacity are agreed differently. Both begin with explicit responsibilities, access and commercial terms." />
         <div class="mt-12 grid gap-8 md:grid-cols-3">
           <article v-for="step in engagementSteps" :key="step.icon" class="border-t border-ink/20 pt-5">
             <ServiceProcessIcon :icon="step.icon" />
@@ -148,7 +157,7 @@ usePageSeo({
       <div class="page-shell grid gap-10 lg:grid-cols-[1fr_0.72fr] lg:items-end">
         <div>
           <p class="eyebrow">Client involvement</p>
-          <h2 class="font-display text-4xl leading-tight sm:text-5xl">What access the work requires.</h2>
+          <h2 class="font-display text-4xl leading-tight sm:text-5xl">Access Requirements.</h2>
           <p class="mt-5 max-w-2xl text-lg leading-8 text-ink/60">The client provides repository access, build and deployment instructions, relevant logs or environments, and someone who can confirm required behaviour. A review owns the agreed investigation. Embedded engineering works through the client’s priorities and delivery process. Product decisions and acceptance remain with the client.</p>
         </div>
         <div class="rounded-2xl border border-line bg-white/35 p-7 sm:p-9">

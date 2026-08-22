@@ -5,11 +5,11 @@ const groups = [
   { title: 'Backend', items: ['Play Framework', 'Spring Boot', 'Node.js', 'Serverless functions'] },
   { title: 'Build tooling', items: ['npm', 'Vite', 'sbt', 'Maven'] },
   { title: 'APIs & integration', items: ['REST APIs'] },
-  { title: 'Databases', items: ['PostgreSQL', 'Redis'] },
+  { title: 'Databases', items: ['PostgreSQL', 'MongoDB', 'Supabase'] },
   { title: 'Testing', items: ['ScalaTest', 'JUnit', 'Mockito', 'Cucumber', 'Selenium', 'Unit testing', 'Integration testing', 'Automated testing'] },
-  { title: 'DevOps & delivery', items: ['Docker', 'Kubernetes', 'Jenkins', 'GitHub Actions', 'CI/CD'] },
-  { title: 'Cloud & observability', items: ['AWS', 'Google Cloud', 'CloudWatch', 'Grafana', 'Kibana', 'Splunk'] },
-  { title: 'Serverless', items: ['Vercel', 'Supabase', 'Upstash'] },
+  { title: 'DevOps & delivery', items: ['Docker', 'Jenkins', 'GitHub Actions', 'CI/CD'] },
+  { title: 'Cloud & observability', items: ['AWS-backed environments', 'CloudWatch', 'Grafana', 'Kibana', 'Splunk'] },
+  { title: 'Serverless', items: ['Vercel', 'Supabase'] },
 ]
 </script>
 

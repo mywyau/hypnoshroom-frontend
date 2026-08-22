@@ -29,7 +29,7 @@ const languageFor = (label: string) => {
   if (language.includes('java')) return 'java'
   if (language.includes('sql')) return 'sql'
   if (language.includes('xml')) return 'xml'
-  if (language.includes('shell') || language.includes('bash') || language.includes('redis')) return 'bash'
+  if (language.includes('shell') || language.includes('bash')) return 'bash'
 
   return 'plaintext'
 }

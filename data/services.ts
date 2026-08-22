@@ -4,6 +4,7 @@ export interface Service {
   number: string
   title: string
   shortDescription: string
+  seoDescription: string
   packageType: string
   commercialModel: string
   commercialDetail: string
@@ -48,6 +49,7 @@ export const services: Service[] = [
     number: '02',
     title: 'Technical Review & Discovery',
     shortDescription: 'An independent review of one system or technical question, with evidence, prioritised findings and practical recommendations.',
+    seoDescription: 'A fixed-scope technical review of one repository, service or technical question, with evidence-backed findings, recommendations and a team walkthrough.',
     packageType: 'Fixed-scope package',
     commercialModel: 'From £3,500 fixed fee',
     commercialDetail: 'The repository or service, primary technical question, access, evidence and outputs are agreed before the review starts.',
@@ -72,6 +74,7 @@ export const services: Service[] = [
     number: '03',
     title: 'Testing Suite Review',
     shortDescription: 'An independent assessment of how well one unit and integration test suite supports safe, maintainable delivery.',
+    seoDescription: 'Review one unit and integration test suite for brittle tests, excessive mocking, weak boundaries and gaps that undermine release confidence.',
     packageType: 'Fixed-scope package',
     commercialModel: 'From £3,500 fixed fee',
     commercialDetail: 'The repository or service, relevant test suites, access and outputs are agreed before the review starts.',
@@ -95,6 +98,7 @@ export const services: Service[] = [
     number: '02',
     title: 'Embedded Engineering Support',
     shortDescription: 'Add experienced engineering capacity directly to an existing delivery team.',
+    seoDescription: 'Embedded engineering support for established teams, available in three-month increments across Scala, Java, TypeScript and Python systems.',
     packageType: 'Embedded engagement',
     commercialModel: 'Indicative £500/day',
     commercialDetail: 'Engineering support is agreed in renewable three-month increments, up to a maximum engagement of 12 months. The final day rate and working pattern are confirmed before the engagement starts.',

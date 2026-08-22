@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const stages = [
-  { number: '01', title: 'Understand', text: 'First comes a proper conversation about what the system does, where it hurts and what a useful outcome would look like.' },
+  { number: '01', title: 'Understand', text: 'First a proper conversation about the system, where it hurts and what a useful outcome would look like.' },
   { number: '02', title: 'Investigate', text: 'The work then moves into the code, architecture, tests, dependencies and delivery setup—where the real constraints tend to hide.' },
   { number: '03', title: 'Deliver', text: 'From there, Hypnoshroom implements and tests the agreed changes or gives the team a clear, ordered plan it can use.' },
 ]
@@ -9,7 +9,7 @@ const stages = [
 <template>
   <section class="section-space border-y border-line bg-ink text-paper">
     <div class="page-shell">
-      <SectionHeading eyebrow="How it works" title="No theatre. Just a clear way forward." intro="Every system is different, but the shape of the work is usually straightforward." theme="dark" />
+      <SectionHeading eyebrow="How it works" title="No theatre. Just a clear way forward." intro="Untangle the problem. Make the next move obvious." theme="dark" />
       <div class="relative mt-16">
         <div class="absolute left-[16%] right-[16%] top-4 hidden border-t border-dashed border-paper/25 lg:block" aria-hidden="true" />
         <ol class="relative grid gap-10 lg:grid-cols-3 lg:gap-16">

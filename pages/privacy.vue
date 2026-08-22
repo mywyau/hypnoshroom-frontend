@@ -3,6 +3,7 @@ usePageSeo({
   title: 'Privacy | Hypnoshroom',
   description: 'Privacy information for the Hypnoshroom website.',
   path: '/privacy',
+  robots: 'noindex, follow',
 })
 </script>
 

@@ -2,21 +2,21 @@
 import { services } from '~/data/services'
 
 const packagePrinciples = [
-  ['A clear purchase unit', 'Choose a fixed-scope technical review or a time-bound embedded engagement.'],
+  ['A clear purchase unit', 'Choose a fixed-scope technical or testing review, or a time-bound embedded engagement.'],
   ['Direct engineering delivery', 'Technical responsibility remains clear from initial scope through to handover.'],
   ['A defined endpoint', 'Every package ends with tangible outputs, documented decisions and a clean handover.'],
 ]
 
 usePageSeo({
-  title: 'Service Packages | Hypnoshroom',
-  description: 'Choose a defined engineering delivery, embedded support, technical review or modernisation package from Hypnoshroom.',
+  title: 'Technical Review & Engineering Services | Hypnoshroom',
+  description: 'Choose a fixed-scope technical review, testing suite assessment or embedded engineering engagement across Scala, Java, TypeScript and Python.',
   path: '/services',
 })
 </script>
 
 <template>
   <div>
-    <PageHero eyebrow="Service packages" title="What we offer." intro="Two bounded engagement packages with an explicit purchase unit, working format and endpoint. Start with the package that matches what is known today, not a vague promise to transform everything." gradient="plum" />
+    <PageHero eyebrow="Service packages" title="What we offer." intro="Three bounded engagement packages with an explicit purchase unit, working format and endpoint. Start with the package that matches what is known today." gradient="plum" />
 
     <section class="border-b border-line bg-[#ece8de] py-10">
       <div class="page-shell grid gap-6 md:grid-cols-3">

@@ -12,8 +12,8 @@ const filteredArticles = computed(() => selectedTopic.value === 'All'
   : articles.filter(article => article.topic === selectedTopic.value))
 
 usePageSeo({
-  title: 'Insights | Hypnoshroom',
-  description: 'Notes about Scala, Java, JVM upgrades, technical debt and keeping backend systems workable.',
+  title: 'Software Engineering Articles | Hypnoshroom',
+  description: 'Technical articles about Scala, Java, TypeScript, Python, testing, APIs, JVM upgrades and maintaining production software.',
   path: '/insights',
 })
 </script>

@@ -19,6 +19,9 @@ export default defineNuxtConfig({
       link: [{ rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
     },
   },
+  routeRules: {
+    '/sitemap.xml': { prerender: true },
+  },
   nitro: { preset: 'vercel' },
   typescript: { strict: true, typeCheck: true },
 })

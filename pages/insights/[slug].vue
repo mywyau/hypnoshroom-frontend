@@ -13,6 +13,24 @@ usePageSeo({
   title: `${article.title} | Hypnoshroom`,
   description: article.summary,
   path: `/insights/${article.slug}`,
+  type: 'article',
+  breadcrumbs: [
+    { name: 'Home', path: '/' },
+    { name: 'Insights', path: '/insights' },
+    { name: article.title, path: `/insights/${article.slug}` },
+  ],
+  schema: {
+    '@context': 'https://schema.org',
+    '@type': 'TechArticle',
+    headline: article.title,
+    description: article.summary,
+    url: `https://hypnoshroom.com/insights/${article.slug}`,
+    mainEntityOfPage: `https://hypnoshroom.com/insights/${article.slug}`,
+    author: { '@id': 'https://hypnoshroom.com/#organization' },
+    publisher: { '@id': 'https://hypnoshroom.com/#organization' },
+    about: article.topic,
+    inLanguage: 'en-GB',
+  },
 })
 </script>
 

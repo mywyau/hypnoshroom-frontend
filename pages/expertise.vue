@@ -12,7 +12,7 @@ const languages = [
   {
     name: 'Java',
     label: 'Backend engineering',
-    description: 'Java services that need to be built, upgraded or made easier to own—without turning routine maintenance into a rewrite.',
+    description: 'Java powers long-lived business platforms, APIs and backend services where stability, JVM performance and strong tooling matter. We help teams keep those systems reliable and easier to change.',
     details: ['Spring Boot', 'Maven', 'JDK upgrades', 'REST APIs', 'Unit testing', 'Integration testing'],
     logo: '/languages/java.svg',
     link: '/java',
@@ -20,8 +20,8 @@ const languages = [
   },
   {
     name: 'TypeScript',
-    label: 'Modern applications',
-    description: 'Server-side TypeScript, APIs and full-stack applications where backend decisions still deserve proper attention.',
+    label: 'Frontend and Modern applications',
+    description: 'SSR, Client side rendering, APIs and full-stack applications. TypeScript is a great choice for modern frontends and Saas.',
     details: ['Node.js', 'Nuxt', 'Fullstack development', 'Playwright Automated testing', 'Unit testing', 'Integration testing'],
     logo: '/languages/typescript.svg',
     link: '/typescript',
@@ -45,8 +45,8 @@ const platforms = [
     topic: 'Serverless',
   },
   {
-    name: 'Cloud & containers',
-    description: 'AWS, Google Cloud, Docker and Kubernetes work around the services being built or modernised.',
+    name: 'Containers & cloud environments',
+    description: 'Docker delivery and production support for applications operating in AWS-backed environments.',
   },
   {
     name: 'Delivery & observability',
@@ -56,15 +56,20 @@ const platforms = [
 
 const databases = [
   {
-    name: 'SQL & relational',
+    name: 'Relational data',
     technologies: 'PostgreSQL',
-    description: 'Schema design, query behaviour, migrations and the application code responsible for reading and writing relational data.',
+    description: 'Schemas, normalisation, indexes, queries and migrations—alongside the persistence code responsible for keeping relational constraints clear.',
   },
   {
-    name: 'NoSQL & key-value',
-    technologies: 'Redis · key-value stores · document data',
-    description: 'Data modelling, caching and integration decisions for workloads that do not fit neatly into a relational model.',
-  }
+    name: 'Document data',
+    technologies: 'MongoDB',
+    description: 'Document shapes, indexes and query patterns designed around how the service reads, changes and owns its data.',
+  },
+  {
+    name: 'Persistence boundaries',
+    technologies: 'Repositories · integration tests',
+    description: 'Clear interfaces, validation, failure handling and tests at the point where application behaviour meets stored data.',
+  },
 ]
 
 const testingAreas = [
@@ -79,26 +84,26 @@ const testingAreas = [
     description: 'Tests around the joins where otherwise-correct components tend to disagree in production.',
   },
   {
-    name: 'End-to-end confidence',
+    name: 'End-to-end testing',
     tools: 'Cucumber · Selenium · Playwright',
     description: 'A small number of valuable journeys, backed by reliable test data and a delivery pipeline that makes failures useful.',
   },
 ]
 
 usePageSeo({
-  title: 'Technical Expertise | Hypnoshroom',
-  description: 'Backend expertise across Scala, Java, TypeScript, Python, SQL, NoSQL, Vercel, serverless and cloud delivery.',
+  title: 'Software Engineering Expertise | Hypnoshroom',
+  description: 'Explore Hypnoshroom’s expertise in Scala, Java, TypeScript, Python, APIs, databases, automated testing and pragmatic production delivery.',
   path: '/expertise',
 })
 </script>
 
 <template>
   <div>
-    <PageHero eyebrow="Expertise" title="Different languages. Same concerns." intro="Languages matters, but so do the boundaries, data, tests, deployments and production behaviour around it. Hypnoshroom works across the stack without treating every technology as a separate kind of consultancy." gradient="forest" />
+    <PageHero eyebrow="Expertise" title="Our Expertise." intro="Language matters, but so do boundaries, data, tests, deployments and production behaviour. See where Hypnoshroom can help across the stack." gradient="forest" />
 
     <section class="section-space">
       <div class="page-shell">
-        <SectionHeading eyebrow="Languages" title="Choose the right tool for the job." intro="The shape and difficulty of the work matter more than the syntax. Engagements are built around the outcome rather than the chosen language." />
+        <SectionHeading eyebrow="Languages" title="What we can help with." intro="The language sets the context. The real work is making the system safer to change, easier to operate and clearer for the team to own." />
         <div class="mt-14 grid gap-6 md:grid-cols-2">
           <article v-for="language in languages" :key="language.name" class="relative rounded-2xl border border-line bg-white/35 p-7 sm:p-9">
             <div class="absolute right-7 top-7 flex h-14 w-14 items-center justify-center rounded-xl border border-line bg-white/60 p-2.5 sm:right-9 sm:top-9" aria-hidden="true">
@@ -119,7 +124,7 @@ usePageSeo({
 
     <section id="databases" class="section-space scroll-mt-28 border-t border-line">
       <div class="page-shell">
-        <SectionHeading eyebrow="Databases" title="SQL, NoSQL and the code in between." intro="Good database work is rarely isolated from the application. Hypnoshroom looks at the model, the queries and the behaviour of the service using them." />
+        <SectionHeading eyebrow="Databases" title="Data models that fit the application." intro="Database design and application design belong together. Schemas, documents, queries, indexes and persistence code are considered as one working boundary." />
         <div class="mt-12 grid gap-6 lg:grid-cols-3">
           <article v-for="database in databases" :key="database.name" class="rounded-2xl border border-line bg-white/35 p-7">
             <p class="text-xs font-semibold uppercase tracking-[0.16em] text-moss">{{ database.technologies }}</p>
