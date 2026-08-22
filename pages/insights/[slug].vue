@@ -34,13 +34,7 @@ usePageSeo({
           <ul v-if="section.bullets">
             <li v-for="bullet in section.bullets" :key="bullet">{{ bullet }}</li>
           </ul>
-          <figure v-if="section.code" class="article-code">
-            <figcaption>
-              <span>{{ section.code.label }}</span>
-              <span>{{ section.code.language }}</span>
-            </figcaption>
-            <pre><code>{{ section.code.source }}</code></pre>
-          </figure>
+          <ArticleCodeBlock v-if="section.code" :code="section.code" />
         </section>
       </div>
       <aside class="border-t border-line pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">

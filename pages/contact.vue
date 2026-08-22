@@ -12,12 +12,12 @@ usePageSeo({
     <section class="section-space">
       <div class="page-shell grid gap-14 lg:grid-cols-[0.65fr_1.35fr] lg:gap-20">
         <div>
-          <h2 class="font-display text-3xl">No polished brief needed.</h2>
-          <p class="mt-5 leading-7 text-ink/60">Share what’s known so far—even if that’s simply “this service needs upgrading and the risk isn’t clear yet.” The gaps can be worked through in the first conversation.</p>
+          <h2 class="font-display text-3xl">Tell us your problems.</h2>
+          <p class="mt-5 leading-7 text-ink/60">Tell us what is frustrating the team right now. It might be an awkward Scala upgrade, a service nobody feels safe changing or a product problem that needs an experienced pair of hands. A few honest details are enough to start.</p>
           <dl class="mt-9 space-y-6 border-t border-line pt-7 text-sm">
-            <div><dt class="font-semibold text-ink">Usually a good fit</dt><dd class="mt-1 leading-6 text-ink/55">Full-stack and backend engineering, testing, technical reviews and modernisation.</dd></div>
-            <div><dt class="font-semibold text-ink">Ways to work together</dt><dd class="mt-1 leading-6 text-ink/55">Scoped engineering, embedded team support, a technical review or modernisation.</dd></div>
-            <div><dt class="font-semibold text-ink">Working style</dt><dd class="mt-1 leading-6 text-ink/55">Direct, hands-on and low on ceremony.</dd></div>
+            <div><dt class="font-semibold text-ink">Useful starting points</dt><dd class="mt-1 leading-6 text-ink/55">A Scala or Play service needs attention, an upgrade feels risky or a focused backend or product problem needs moving forward.</dd></div>
+            <div><dt class="font-semibold text-ink">The first conversation</dt><dd class="mt-1 leading-6 text-ink/55">We’ll talk through the system, what you have tried and what useful progress would look like. If it is not a good fit, we’ll say so.</dd></div>
+            <div><dt class="font-semibold text-ink">Delivery and communication</dt><dd class="mt-1 leading-6 text-ink/55">The engineer responsible for the work stays involved in the technical decisions and progress updates. There is no hand-off to an account team.</dd></div>
           </dl>
         </div>
         <EnquiryForm />

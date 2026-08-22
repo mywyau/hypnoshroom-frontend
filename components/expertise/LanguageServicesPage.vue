@@ -2,6 +2,12 @@
 import type { LanguageServicesPage } from '~/data/languageServices'
 
 defineProps<{ page: LanguageServicesPage }>()
+
+const engagementSteps = [
+  { icon: 'choose', title: 'Choose the engagement', text: 'Use a technical review when the problem is unclear, a testing review when the suite needs scrutiny, or embedded engineering when work is ready to deliver.' },
+  { icon: 'boundary', title: 'Agree the boundary', text: 'Confirm the repository, access, review question and outputs, or the embedded responsibilities and first three-month increment.' },
+  { icon: 'commit', title: 'Start with that commitment', text: 'Complete the review or current three-month increment, then make a separate decision about any follow-on work.' },
+] as const
 </script>
 
 <template>
@@ -19,58 +25,62 @@ defineProps<{ page: LanguageServicesPage }>()
 
     <section class="section-space">
       <div class="page-shell">
-        <SectionHeading eyebrow="Work packages" title="Choose one bounded technical outcome." :intro="page.packagesIntro" />
-
-        <div class="mt-14 grid items-start gap-6 lg:grid-cols-3">
-          <details v-for="item in page.packages" :key="item.title" class="group rounded-3xl border border-line bg-white/35">
-            <summary class="flex min-h-[22rem] cursor-pointer list-none flex-col rounded-3xl p-7 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-moss [&::-webkit-details-marker]:hidden sm:p-8">
-              <p class="text-xs font-semibold uppercase tracking-[0.16em] text-moss">{{ item.type }}</p>
-              <h2 class="mt-4 font-display text-3xl leading-tight">{{ item.title }}</h2>
-              <p class="mt-5 leading-7 text-ink/60">{{ item.intro }}</p>
-              <p class="mt-6 inline-flex self-start rounded-full border border-line bg-paper px-3 py-1.5 text-xs font-semibold text-ink/65">{{ item.duration }}</p>
-              <div class="mt-auto flex items-center justify-between gap-4 pt-7 text-sm font-semibold text-moss">
-                <span class="group-open:hidden">Show package details</span>
-                <span class="hidden group-open:inline">Hide package details</span>
-                <span aria-hidden="true" class="flex size-9 shrink-0 items-center justify-center rounded-full border border-moss/30 transition-transform duration-200 group-open:rotate-45">
-                  <svg viewBox="0 0 16 16" class="size-4" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
-                </span>
-              </div>
-            </summary>
-
-            <div class="space-y-7 border-t border-line px-7 pb-8 pt-7 sm:px-8">
+        <SectionHeading eyebrow="Ways to work together" :title="`Three clear ${page.language} engagements.`" :intro="page.packagesIntro" />
+        <div class="mt-14">
+          <article v-for="item in page.packages" :id="`package-${item.slug}`" :key="item.slug" class="scroll-mt-28 border-t border-line py-12 first:border-t-0 first:pt-0 lg:py-16">
+            <div class="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:gap-16">
               <div>
-                <h3 class="text-xs font-semibold uppercase tracking-[0.14em] text-moss">Useful when</h3>
-                <ul class="mt-4 space-y-3 text-sm leading-6 text-ink/65">
-                  <li v-for="point in item.goodFor" :key="point" class="flex gap-3"><span aria-hidden="true" class="text-clay">—</span><span>{{ point }}</span></li>
-                </ul>
+                <div class="flex items-start justify-between gap-5">
+                  <span class="text-xs font-semibold uppercase tracking-[0.16em] text-moss">{{ item.commercial }}</span>
+                  <ServicePackageIcon :slug="item.slug" />
+                </div>
+                <h2 class="mt-5 font-display text-4xl leading-tight sm:text-5xl">{{ item.title }}</h2>
+                <p class="mt-5 max-w-xl text-lg leading-8 text-ink/60">{{ item.intro }}</p>
+                <div class="mt-5 flex flex-wrap gap-2">
+                  <p class="inline-flex rounded-full border border-line bg-paper px-3 py-1.5 text-xs font-semibold text-ink/65">{{ item.price }}</p>
+                  <p v-if="item.duration" class="inline-flex rounded-full border border-line bg-paper px-3 py-1.5 text-xs font-semibold text-ink/65">{{ item.duration }}</p>
+                </div>
+                <div class="mt-6 flex flex-wrap gap-3">
+                  <AppButton :to="`/services/${item.slug}`" variant="secondary">View engagement details</AppButton>
+                  <AppButton :to="`/contact?service=${item.slug}&language=${page.slug}`" variant="text">Discuss this engagement</AppButton>
+                </div>
               </div>
-              <div>
-                <h3 class="text-xs font-semibold uppercase tracking-[0.14em] text-moss">Work included</h3>
-                <ul class="mt-4 space-y-3 text-sm leading-6 text-ink/65">
-                  <li v-for="point in item.work" :key="point" class="flex gap-3"><span aria-hidden="true" class="text-clay">—</span><span>{{ point }}</span></li>
-                </ul>
+
+              <div class="grid gap-8 sm:grid-cols-2">
+                <div>
+                  <h3 class="text-xs font-semibold uppercase tracking-[0.16em] text-moss">Useful when</h3>
+                  <ul class="mt-4 space-y-3 text-sm leading-6 text-ink/65">
+                    <li v-for="point in item.goodFor" :key="point" class="border-t border-line pt-3">{{ point }}</li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 class="text-xs font-semibold uppercase tracking-[0.16em] text-moss">Work included</h3>
+                  <ul class="mt-4 space-y-3 text-sm leading-6 text-ink/65">
+                    <li v-for="point in item.work" :key="point" class="border-t border-line pt-3">{{ point }}</li>
+                  </ul>
+                </div>
+                <div class="rounded-2xl border border-line bg-white/35 p-6 sm:col-span-2 sm:p-8">
+                  <h3 class="text-xs font-semibold uppercase tracking-[0.16em] text-moss">You receive</h3>
+                  <ul class="mt-5 grid gap-x-8 gap-y-3 text-sm leading-6 text-ink/65 sm:grid-cols-2">
+                    <li v-for="point in item.outputs" :key="point" class="border-t border-line pt-3">{{ point }}</li>
+                  </ul>
+                  <p class="mt-6 border-t border-line pt-5 text-sm leading-6 text-ink/55"><strong class="text-ink">Package boundary:</strong> {{ item.boundary }}</p>
+                </div>
               </div>
-              <div class="rounded-2xl bg-[#ece8de] p-5">
-                <h3 class="text-xs font-semibold uppercase tracking-[0.14em] text-moss">You receive</h3>
-                <ul class="mt-4 space-y-2 text-sm leading-6 text-ink/65">
-                  <li v-for="point in item.outputs" :key="point" class="flex gap-3"><span aria-hidden="true" class="text-moss">✓</span><span>{{ point }}</span></li>
-                </ul>
-              </div>
-              <p class="border-t border-line pt-5 text-sm leading-6 text-ink/55"><strong class="text-ink">Package boundary:</strong> {{ item.boundary }}</p>
-              <AppButton to="/contact" variant="text">Discuss this package</AppButton>
             </div>
-          </details>
+          </article>
         </div>
       </div>
     </section>
 
     <section class="section-space border-y border-line bg-[#ece8de]">
       <div class="page-shell">
-        <SectionHeading eyebrow="Technical focus" title="The language is only part of the system." intro="The package accounts for the runtime, delivery path and production boundaries around the code—not syntax in isolation." />
+        <SectionHeading eyebrow="Process" title="Choose the working model before work starts." intro="Review scope and embedded capacity are agreed differently. Each begins with explicit responsibilities, access and commercial terms." />
         <div class="mt-12 grid gap-8 md:grid-cols-3">
-          <article v-for="item in page.focus" :key="item.title" class="border-t border-ink/20 pt-6">
-            <h2 class="font-display text-3xl">{{ item.title }}</h2>
-            <p class="mt-4 leading-7 text-ink/60">{{ item.description }}</p>
+          <article v-for="step in engagementSteps" :key="step.icon" class="border-t border-ink/20 pt-5">
+            <ServiceProcessIcon :icon="step.icon" />
+            <h2 class="mt-8 font-display text-3xl">{{ step.title }}</h2>
+            <p class="mt-4 text-sm leading-6 text-ink/60">{{ step.text }}</p>
           </article>
         </div>
       </div>
@@ -79,14 +89,14 @@ defineProps<{ page: LanguageServicesPage }>()
     <section class="section-space">
       <div class="page-shell grid gap-10 lg:grid-cols-[1fr_0.72fr] lg:items-end">
         <div>
-          <p class="eyebrow">Start with one system</p>
-          <h2 class="font-display text-4xl leading-tight sm:text-5xl">Enough context to define a responsible first step.</h2>
-          <p class="mt-5 max-w-2xl text-lg leading-8 text-ink/60">{{ page.clientPrompt }}</p>
+          <p class="eyebrow">Client involvement</p>
+          <h2 class="font-display text-4xl leading-tight sm:text-5xl">What access the work requires.</h2>
+          <p class="mt-5 max-w-2xl text-lg leading-8 text-ink/60">The client provides repository access, build and deployment instructions, relevant logs or environments, and someone who can confirm required behaviour. A review owns the agreed investigation. Embedded engineering works through the client’s priorities and delivery process. Product decisions and acceptance remain with the client.</p>
         </div>
         <div class="rounded-2xl border border-line bg-white/35 p-7 sm:p-9">
-          <p class="text-xs font-semibold uppercase tracking-[0.16em] text-moss">No polished brief needed</p>
-          <p class="mt-4 leading-7 text-ink/60">A repository, a problem and the decision or outcome you need are enough to start a useful conversation.</p>
-          <AppButton to="/contact" class="mt-7">{{ page.contactLabel }}</AppButton>
+          <p class="text-xs font-semibold uppercase tracking-[0.16em] text-moss">What to share</p>
+          <p class="mt-4 leading-7 text-ink/60">{{ page.clientPrompt }}</p>
+          <AppButton :to="`/contact?language=${page.slug}`" class="mt-7">{{ page.contactLabel }}</AppButton>
         </div>
       </div>
     </section>

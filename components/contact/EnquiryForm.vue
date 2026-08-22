@@ -55,7 +55,7 @@ const submitEnquiry = () => {
         <select id="engagement-type" v-model="form.engagementType" name="engagementType" required class="min-h-12 w-full rounded-xl border border-line bg-paper px-4 text-base transition hover:border-ink/30 focus:border-moss">
           <option disabled value="">Select an engagement</option>
           <option v-for="service in services" :key="service.id" :value="service.title">{{ service.title }}</option>
-          <option>Scala/JVM work package</option>
+          <option>Scala work package</option>
           <option>Other</option>
         </select>
       </div>

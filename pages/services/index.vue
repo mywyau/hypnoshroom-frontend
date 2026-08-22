@@ -2,8 +2,8 @@
 import { services } from '~/data/services'
 
 const packagePrinciples = [
-  ['A clear purchase unit', 'Know whether you are buying a review, a milestone, reserved capacity or one modernisation stage.'],
-  ['Founder-led delivery', 'No sub contracted juniors.'],
+  ['A clear purchase unit', 'Choose a fixed-scope technical review or a time-bound embedded engagement.'],
+  ['Direct engineering delivery', 'Technical responsibility remains clear from initial scope through to handover.'],
   ['A defined endpoint', 'Every package ends with tangible outputs, documented decisions and a clean handover.'],
 ]
 
@@ -16,7 +16,7 @@ usePageSeo({
 
 <template>
   <div>
-    <PageHero eyebrow="Service packages" title="What we offer." intro="Four bounded engagement packages with an explicit purchase unit, working format and endpoint. Start with the package that matches what is known today not a vague promise to transform everything." gradient="plum" />
+    <PageHero eyebrow="Service packages" title="What we offer." intro="Two bounded engagement packages with an explicit purchase unit, working format and endpoint. Start with the package that matches what is known today, not a vague promise to transform everything." gradient="plum" />
 
     <section class="border-b border-line bg-[#ece8de] py-10">
       <div class="page-shell grid gap-6 md:grid-cols-3">
@@ -30,7 +30,7 @@ usePageSeo({
     <section class="section-space">
       <div class="page-shell">
         <div class="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
-          <SectionHeading eyebrow="Packages" title="Pick the shape of commitment." intro="Engineering Delivery, Embedded Support and Technical Review have a minimum one-month commitment. Modernisation remains flexible because its duration depends on the scope and risk of each phase." />
+          <SectionHeading eyebrow="Packages" title="Our services." intro="Start with a coversation and a technical review, once we get a better understanding we can properly advise on your next steps. The could result in delivery, clean up and maintainence or possible modernisation work." />
           <p class="max-w-sm text-sm leading-6 text-ink/50">Not sure where to start? The fixed-scope Technical Review is designed to turn an unclear system problem into an informed next decision.</p>
         </div>
 
@@ -95,7 +95,7 @@ usePageSeo({
 
     <section class="section-space border-y border-line bg-[#ece8de]">
       <div class="page-shell">
-        <SectionHeading eyebrow="Buying process" title="A small commitment before a larger one." intro="The package structure prevents an unclear conversation from quietly becoming an open-ended software project." />
+        <SectionHeading eyebrow="Purchasing process" title="Scope and terms are agreed before work starts." intro="Each package defines the system or question in scope, client responsibilities, expected outputs and commercial terms. Follow-on work is scoped and approved separately." />
         <div class="mt-12 grid gap-8 md:grid-cols-3">
           <article class="border-t border-ink/20 pt-5"><ServiceProcessIcon icon="choose" /><h2 class="mt-8 font-display text-3xl">Choose a starting package</h2><p class="mt-4 text-sm leading-6 text-ink/60">Select the closest fit. A short qualification call confirms whether the package is appropriate.</p></article>
           <article class="border-t border-ink/20 pt-5"><ServiceProcessIcon icon="boundary" /><h2 class="mt-8 font-display text-3xl">Confirm the boundary</h2><p class="mt-4 text-sm leading-6 text-ink/60">Agree the repository, technical question, access, client responsibilities, outputs and commercial terms.</p></article>
@@ -111,7 +111,7 @@ usePageSeo({
           <h2 class="font-display text-4xl sm:text-5xl">Looking for a Scala-specific package?</h2>
           <p class="mt-5 text-lg leading-8 text-ink/60">System assessment, upgrade feasibility and scoped modernisation are available as specialist Scala/JVM work packages.</p>
         </div>
-        <AppButton to="/scala-jvm" variant="secondary" class="mt-8 shrink-0 lg:mt-0">Explore Scala packages</AppButton>
+        <AppButton to="/scala" variant="secondary" class="mt-8 shrink-0 lg:mt-0">Explore Scala packages</AppButton>
       </div>
     </section> -->
 

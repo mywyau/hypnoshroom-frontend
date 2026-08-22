@@ -25,6 +25,12 @@ defineProps<{ slug: string }>()
         <path d="m12.2 8.5 1.7 2-1.7 2" />
       </g>
 
+      <g v-else-if="slug === 'testing-suite-review'">
+        <path d="M9 11.5 11 13.5 15.5 8.5" />
+        <path d="M7 3.5h10a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-13a2 2 0 0 1 2-2Z" />
+        <path d="M9 3.5V2h6v1.5" />
+      </g>
+
       <g v-else>
         <path d="M19 8a7.5 7.5 0 0 0-12.5-2L4 8.5" />
         <path d="M4 4v4.5h4.5" />

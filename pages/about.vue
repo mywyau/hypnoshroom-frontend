@@ -31,7 +31,7 @@ usePageSeo({
 
 <template>
   <div>
-    <PageHero eyebrow="About Hypnoshroom" title="Built around the outcome." intro="Hypnoshroom is an independent software consultancy led by engineering, quality and a genuine passion for doing the work well." gradient="sage" />
+    <PageHero eyebrow="About Hypnoshroom" title="Built around outcomes." intro="Hypnoshroom is an independent software consultancy who focus on engineering quality and passion for great work." gradient="sage" />
     <section class="section-space">
       <div class="page-shell grid gap-14 lg:grid-cols-[1fr_0.85fr] lg:gap-24">
         <div>
@@ -40,24 +40,28 @@ usePageSeo({
             <p>Hypnoshroom starts with the outcome: what needs to be safer, faster, clearer or easier to change when the work is done. The engineering serves that result—not the other way around.</p>
             <p>That means careful, useful work without extra ceremony, an impressive deck for its own sake or a rewrite recommended before the existing system is understood.</p>
             <p>Each engagement starts with the system as it really is: its constraints, its history and the people responsible for it. The aim is software that works better today and is easier for the team to own tomorrow.</p>
-            <p>The company is founder-led and small by design. Clients have direct access to the engineer responsible for the work, keeping decisions close to the code and important details out of hand-off documents.</p>
+            <p>Hypnoshroom uses a focused delivery model. Clients work directly with the engineer responsible for the work, keeping decisions close to the code and important details out of hand-off documents.</p>
           </div>
           <AppButton to="/contact" class="mt-9">Discuss a project</AppButton>
         </div>
         <aside class="rounded-3xl border border-line bg-[#ece8de] p-7 sm:p-9">
-          <div class="grid aspect-[4/3] place-items-center rounded-2xl border border-dashed border-ink/25 bg-paper text-center text-sm text-ink/45">
+          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-moss">Technical focus</p>
+          <h2 class="mt-3 font-display text-3xl leading-tight">Scala systems and modern software products.</h2>
+          <p class="mt-5 leading-7 text-ink/60">The work combines specialist Scala engineering with hands-on product development and the testing, delivery and production support needed to keep software maintainable.</p>
+          <dl class="mt-8 space-y-6 border-t border-ink/15 pt-7 text-sm">
             <div>
-              <svg viewBox="0 0 48 48" class="mx-auto mb-3 size-10" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="24" cy="17" r="8"/><path d="M8 42c2-10 8-15 16-15s14 5 16 15"/></svg>
-              Founder profile image placeholder
+              <dt class="font-semibold text-ink">Scala engineering</dt>
+              <dd class="mt-1 leading-6 text-ink/55">Scala 2.13, Play Framework, functional programming, sbt, APIs and MongoDB.</dd>
             </div>
-          </div>
-          <p class="mt-7 text-xs font-semibold uppercase tracking-[0.18em] text-moss">Founder</p>
-          <h2 class="mt-2 font-display text-3xl">Founder name</h2>
-          <p class="mt-4 leading-7 text-ink/60">Founder introduction goes here. Add a few plain-spoken lines about the systems you’ve worked on, the problems you enjoy solving and how you like to work.</p>
-          <div class="mt-6 flex gap-5 text-sm font-semibold">
-            <a href="#" aria-label="Founder LinkedIn profile placeholder" class="text-moss underline decoration-moss/30 underline-offset-4">LinkedIn placeholder</a>
-            <a href="#" aria-label="Founder GitHub profile placeholder" class="text-moss underline decoration-moss/30 underline-offset-4">GitHub placeholder</a>
-          </div>
+            <div>
+              <dt class="font-semibold text-ink">Product development</dt>
+              <dd class="mt-1 leading-6 text-ink/55">TypeScript, Nuxt 3, Vue, Auth0, Supabase and PostgreSQL.</dd>
+            </div>
+            <div>
+              <dt class="font-semibold text-ink">Software delivery</dt>
+              <dd class="mt-1 leading-6 text-ink/55">Pragmatic testing, CI/CD, Docker, observability and production support.</dd>
+            </div>
+          </dl>
         </aside>
       </div>
     </section>

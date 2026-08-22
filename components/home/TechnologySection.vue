@@ -1,14 +1,15 @@
 <script setup lang="ts">
 const groups = [
   { title: 'Languages', items: ['Scala', 'Java', 'TypeScript', 'Python'] },
-  { title: 'Full-stack & frontend', items: ['Vue', 'Nuxt', 'Tailwind CSS', 'Vercel'] },
-  { title: 'Backend frameworks', items: ['Play Framework', 'Spring Boot', 'Node.js', 'Serverless functions'] },
+  { title: 'Frontend', items: ['Vue', 'Nuxt', 'Tailwind CSS'] },
+  { title: 'Backend', items: ['Play Framework', 'Spring Boot', 'Node.js', 'Serverless functions'] },
   { title: 'Build tooling', items: ['npm', 'Vite', 'sbt', 'Maven'] },
-  { title: 'APIs & integration', items: ['REST APIs', 'SOAP', 'JMS', 'IBM MQ', 'RabbitMQ'] },
-  { title: 'Databases', items: ['PostgreSQL', 'Oracle', 'Redis'] },
-  { title: 'Testing', items: ['ScalaTest', 'JUnit', 'Mockito', 'Cucumber', 'Selenium', 'Integration testing', 'Automated testing'] },
+  { title: 'APIs & integration', items: ['REST APIs'] },
+  { title: 'Databases', items: ['PostgreSQL', 'Redis'] },
+  { title: 'Testing', items: ['ScalaTest', 'JUnit', 'Mockito', 'Cucumber', 'Selenium', 'Unit testing', 'Integration testing', 'Automated testing'] },
   { title: 'DevOps & delivery', items: ['Docker', 'Kubernetes', 'Jenkins', 'GitHub Actions', 'CI/CD'] },
   { title: 'Cloud & observability', items: ['AWS', 'Google Cloud', 'CloudWatch', 'Grafana', 'Kibana', 'Splunk'] },
+  { title: 'Serverless', items: ['Vercel', 'Supabase', 'Upstash'] },
 ]
 </script>
 

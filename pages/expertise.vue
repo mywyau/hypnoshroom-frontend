@@ -6,7 +6,7 @@ const languages = [
     description: 'Scala services, Play Framework applications, sbt builds and the careful work involved in moving long-lived systems forward.',
     details: ['Scala 2 & Scala 3', 'Functional Programming', 'Play Framework', 'sbt', 'Unit testing', 'Integration testing'],
     logo: '/languages/scala.svg',
-    link: '/scala-jvm',
+    link: '/scala',
     topic: 'Scala',
   },
   {
@@ -128,7 +128,7 @@ usePageSeo({
           </article>
         </div>
         <div class="mt-8 flex flex-wrap gap-x-8 gap-y-2">
-          <AppButton to="/services/engineering-delivery" variant="text">View engineering delivery</AppButton>
+          <AppButton to="/services/embedded-engineering-support" variant="text">View embedded engineering</AppButton>
           <AppButton to="/insights?topic=Databases" variant="text">Read database articles</AppButton>
         </div>
       </div>

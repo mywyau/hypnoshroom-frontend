@@ -1,7 +1,9 @@
 export interface LanguageWorkPackage {
-  type: string
+  slug: 'technical-review' | 'testing-suite-review' | 'embedded-engineering-support'
+  commercial: string
   title: string
-  duration: string
+  price: string
+  duration?: string
   intro: string
   goodFor: string[]
   work: string[]
@@ -11,6 +13,7 @@ export interface LanguageWorkPackage {
 
 export interface LanguageServicesPage {
   slug: string
+  language: string
   eyebrow: string
   title: string
   intro: string
@@ -20,175 +23,127 @@ export interface LanguageServicesPage {
   areas: Array<[string, string]>
   packagesIntro: string
   packages: LanguageWorkPackage[]
-  focus: Array<{ title: string; description: string }>
   clientPrompt: string
   contactLabel: string
 }
 
+const reviewBoundary = 'The standard package covers one primary repository or deployable service and one technical question. It does not include implementation, an estate-wide audit, an exhaustive security assessment or a guaranteed delivery estimate. Broader reviews are scoped and quoted separately.'
+const testingBoundary = 'The standard package covers the unit and integration test suites for one primary repository or service. It assesses the existing approach and recommends changes; it does not include writing, rewriting or repairing production code or tests.'
+const embeddedBoundary = 'The working pattern and responsibilities are agreed for each three-month increment, with a maximum total engagement of 12 months. The client owns product priorities, domain decisions and acceptance. This is not unlimited availability, team management or permanent on-call support.'
+
+const testingPackage = (language: string, details: { examples: string; tools: string }): LanguageWorkPackage => ({
+  slug: 'testing-suite-review',
+  commercial: 'Fixed scope · fixed fee',
+  title: `${language} Testing Suite Review`,
+  price: 'From £3,500',
+  intro: `Review the unit and integration testing approach around one ${language} service and identify where the suite helps, misleads or slows the team down.`,
+  goodFor: ['Tests pass but releases still feel risky', 'The suite is slow, brittle or expensive to maintain', 'Unit and integration responsibilities are unclear', 'Mocks, fixtures or test setup obscure the behaviour being protected'],
+  work: [`Review representative ${details.examples}`, `Assess test boundaries, naming, structure and use of ${details.tools}`, 'Look for brittle assertions, excessive mocking, hidden coupling and missing integration evidence', 'Review feedback speed, repeatability and how failures are diagnosed'],
+  outputs: ['Written assessment of the current testing approach', 'Examples of testing smells found in the suite', 'Prioritised recommendations by risk and value', 'Suggested unit and integration testing boundaries', 'Technical walkthrough with the team'],
+  boundary: testingBoundary,
+})
+
 export const javaServicesPage: LanguageServicesPage = {
   slug: 'java',
-  eyebrow: 'Java engineering',
+  language: 'Java',
+  eyebrow: 'Java & JVM',
   title: 'Need help with a Java system?',
-  intro: 'Focused support for Java services that need to be understood, upgraded or changed without losing the behaviour that already matters.',
+  intro: 'Technical review, testing assessment and embedded engineering for Java services, Spring Boot applications, Maven builds, REST APIs and database-backed systems.',
   gradient: 'java',
-  seoTitle: 'Java Engineering Services | Hypnoshroom',
-  seoDescription: 'Defined Java engineering packages for service reviews, JDK and Spring upgrades, and bounded backend delivery.',
+  seoTitle: 'Java & JVM Engineering | Hypnoshroom',
+  seoDescription: 'Java technical reviews, testing suite assessments and embedded engineering for Java services, Spring Boot applications, Maven builds, APIs and databases.',
   areas: [
-    ['Language & runtime', 'Java · JDK · JVM'],
-    ['Frameworks', 'Spring Boot · Jakarta APIs'],
-    ['Build & delivery', 'Maven · Gradle · CI/CD'],
-    ['Backend systems', 'REST APIs · messaging · PostgreSQL'],
+    ['Language & runtime', 'Java · JVM · JDK · records · collections'],
+    ['Spring & APIs', 'Spring Boot · REST APIs · JSON · validation'],
+    ['Application design', 'SOLID · interfaces · abstractions · dependency injection'],
+    ['Data & persistence', 'SQL · PostgreSQL · MongoDB · repository patterns'],
+    ['Builds & dependencies', 'Maven · dependency maintenance · build configuration'],
+    ['Testing & quality', 'JUnit · Mockito · unit · integration · acceptance tests'],
+    ['Refactoring & code health', 'Service boundaries · code cleanup · maintainability'],
+    ['Production engineering', 'Live issue diagnosis · logging · monitoring · CI/CD · Docker'],
   ],
-  packagesIntro: 'Start with one service and one outcome. Reviews establish the evidence; upgrade and delivery packages handle a bounded change once the constraints are understood.',
+  packagesIntro: 'Use a Technical Review when a system question needs evidence, a Testing Suite Review when confidence in the tests is the problem, or Embedded Java Engineering when the team has work ready to deliver.',
   packages: [
     {
-      type: 'Fixed-scope review',
-      title: 'Java Service Review',
-      duration: 'Minimum 1 month',
-      intro: 'Find the technical constraints making one Java service risky or expensive to change.',
-      goodFor: ['A service with recurring production or delivery friction', 'An unfamiliar codebase that needs an actionable technical map', 'Unclear test, dependency or data-access risk'],
-      work: ['Run and inspect the build, tests and delivery setup', 'Review service boundaries, persistence and failure handling', 'Map JDK, framework and dependency constraints', 'Order findings by impact and effort'],
-      outputs: ['Current-state technical map', 'Prioritised risks and improvements', 'Recommended first delivery milestone', 'Team walkthrough and written handover'],
-      boundary: 'One primary service or repository and the delivery path directly associated with it. This is not an estate-wide audit.',
+      slug: 'technical-review', commercial: 'Fixed scope · fixed fee', title: 'Java Technical Review & Discovery', price: 'From £3,500',
+      intro: 'Investigate one Java service or technical question and provide evidence the team can use to decide what to do next.',
+      goodFor: ['A Java or Spring Boot service is difficult to change', 'A JDK, framework or dependency decision needs technical evidence', 'The build, tests or production behaviour do not provide enough confidence', 'A recurring problem has no agreed cause or priority'],
+      work: ['Run the service and establish the available build and test baseline', 'Inspect the code, APIs, persistence and dependencies relevant to the question', 'Review relevant testing, delivery and production evidence', 'Discuss missing domain or operational context with the client team'],
+      outputs: ['Concise written review of the current system', 'Ranked findings supported by code or runtime evidence', 'Recommended next steps and realistic options', 'Technical walkthrough with the team'], boundary: reviewBoundary,
     },
+    testingPackage('Java', { examples: 'JUnit unit and integration tests', tools: 'JUnit, Mockito, fixtures and test doubles' }),
     {
-      type: 'Phased modernisation',
-      title: 'JDK & Spring Upgrade',
-      duration: 'Flexible — scoped by phase',
-      intro: 'Move a Java service through one controlled runtime or framework upgrade phase.',
-      goodFor: ['A JDK upgrade blocked by dependencies or build plugins', 'A Spring Boot migration with known compatibility work', 'A service approaching unsupported runtime versions'],
-      work: ['Establish compatible target versions', 'Protect affected behaviour with useful tests', 'Separate runtime, framework and application changes', 'Verify build, deployment and production-facing behaviour'],
-      outputs: ['Reviewable upgrade changes', 'Updated dependencies and build configuration', 'Tests around affected behaviour', 'Remaining risks and next-phase options'],
-      boundary: 'One agreed upgrade phase. Its duration depends on the starting versions, dependency graph, test evidence and deployment constraints.',
-    },
-    {
-      type: 'Defined delivery',
-      title: 'Java Backend Delivery',
-      duration: 'From 4 weeks',
-      intro: 'Deliver one clearly specified backend capability inside an existing Java system.',
-      goodFor: ['A new API or integration with agreed behaviour', 'A difficult persistence or messaging change', 'A bounded reliability improvement that needs ownership'],
-      work: ['Implement the agreed capability in reviewable changes', 'Add unit and integration evidence at useful boundaries', 'Work within the existing architecture and delivery process', 'Document decisions and operational behaviour'],
-      outputs: ['Working reviewed code', 'Automated tests', 'Deployment or configuration changes', 'Technical documentation and handover'],
-      boundary: 'One engineering outcome. Product decisions, broad redesigns and unrelated backlog work remain outside the package.',
+      slug: 'embedded-engineering-support', commercial: 'Day-rate engagement', title: 'Embedded Java Engineering', price: 'From £500 per day', duration: '3-month increments · up to 12 months',
+      intro: 'Add experienced Java engineering capacity to an established team with a backlog, product context and delivery process already in place.',
+      goodFor: ['A team needs additional Java or Spring Boot capacity', 'Features, maintenance or production issues need hands-on engineering', 'Planned JDK, framework or dependency changes need implementing', 'Testing, APIs or database work needs focused attention'],
+      work: ['Join the team’s existing backlog, reviews and delivery rhythm', 'Implement and maintain Java services, Spring Boot applications and REST APIs', 'Improve service boundaries, persistence and automated tests', 'Investigate build, dependency and production problems', 'Document decisions and share system knowledge as the work develops'],
+      outputs: ['Production-ready, reviewed engineering changes', 'Tests and documentation around completed work', 'Visible progress through the client’s existing workflow', 'A clean transfer of unfinished or completed work at the end'], boundary: embeddedBoundary,
     },
   ],
-  focus: [
-    { title: 'Long-lived services', description: 'Work with the architecture and operational history already present instead of treating age as a reason to rewrite.' },
-    { title: 'Safe JVM upgrades', description: 'Treat the JDK, framework, build plugins, dependencies, tests and deployment runtime as one compatibility problem.' },
-    { title: 'Production behaviour', description: 'Keep transactions, failure handling, database access, observability and release confidence in scope alongside the code.' },
-  ],
-  clientPrompt: 'Share the service involved, its current JDK and framework versions, how it is built and deployed, and the outcome the team is struggling to reach.',
-  contactLabel: 'Discuss a Java system',
+  clientPrompt: 'Describe the service, current Java and JDK versions, framework and Maven setup, and whether the team needs a system question investigated, its testing approach reviewed or additional capacity for known work.',
+  contactLabel: 'Discuss a Java service',
 }
 
 export const typeScriptServicesPage: LanguageServicesPage = {
-  slug: 'typescript',
-  eyebrow: 'TypeScript engineering',
-  title: 'Need help with a TypeScript system?',
-  intro: 'Technical delivery for TypeScript backends and full-stack applications where APIs, data, tests and runtime behaviour need as much care as the interface.',
-  gradient: 'typescript',
-  seoTitle: 'TypeScript Engineering Services | Hypnoshroom',
-  seoDescription: 'Defined TypeScript packages for backend reviews, API and full-stack delivery, and runtime modernisation.',
+  slug: 'typescript', language: 'TypeScript', eyebrow: 'TypeScript engineering', title: 'Need help with a TypeScript system?',
+  intro: 'Technical review, testing assessment and embedded engineering for TypeScript applications, Nuxt and Vue products, APIs and serverless delivery.', gradient: 'typescript',
+  seoTitle: 'TypeScript Engineering | Hypnoshroom', seoDescription: 'TypeScript technical reviews, testing suite assessments and embedded engineering for Nuxt, Vue, APIs and serverless applications.',
   areas: [
-    ['Language & runtime', 'TypeScript · Node.js'],
-    ['Applications', 'Nuxt · Vue · server APIs'],
-    ['Testing', 'Vitest · Playwright · integration tests'],
-    ['Delivery', 'Vercel · serverless · CI/CD'],
+    ['Language & runtime', 'TypeScript · JavaScript · Node.js · npm'], ['Applications', 'Nuxt 3 · Vue · responsive web applications'],
+    ['APIs & boundaries', 'REST APIs · JSON · runtime validation · integrations'], ['Authentication', 'Auth0 · account flows · application permissions'],
+    ['Data & persistence', 'Supabase · PostgreSQL · schema and query design'], ['Product engineering', 'Frontend/backend integration · product-oriented delivery'],
+    ['Deployment', 'Vercel · server-side rendering · managed infrastructure'], ['Production engineering', 'Configuration · logging · debugging · CI/CD'],
   ],
-  packagesIntro: 'The package boundary is a backend, application or delivery outcome—not an open-ended promise to handle every part of a product.',
+  packagesIntro: 'Use a Technical Review when an application question needs evidence, a Testing Suite Review when confidence in the tests is the problem, or Embedded TypeScript Engineering when the team has work ready to deliver.',
   packages: [
     {
-      type: 'Fixed-scope review',
-      title: 'TypeScript Backend Review',
-      duration: 'Minimum 1 month',
-      intro: 'Understand where a TypeScript service is losing safety as its codebase and responsibilities grow.',
-      goodFor: ['Runtime failures escaping the type system', 'API and data boundaries that are difficult to change', 'A test suite that does not provide release confidence'],
-      work: ['Inspect runtime validation, error handling and API contracts', 'Review module boundaries and dependency direction', 'Assess database access, tests and observability', 'Trace build and deployment assumptions'],
-      outputs: ['Technical findings ordered by impact', 'Boundary and runtime-risk map', 'Recommended improvements', 'A scoped first delivery package'],
-      boundary: 'One backend or full-stack application and its immediate delivery configuration. It is not a general product or UX review.',
+      slug: 'technical-review', commercial: 'Fixed scope · fixed fee', title: 'TypeScript Technical Review & Discovery', price: 'From £3,500',
+      intro: 'Investigate one TypeScript application or technical question and provide evidence the team can use to decide what to do next.',
+      goodFor: ['An application is difficult to change safely', 'API, authentication or data boundaries are difficult to trace', 'The tests or deployment path do not provide enough confidence', 'A recurring runtime problem has no agreed cause or priority'],
+      work: ['Run the application and establish the available build and test baseline', 'Inspect the types, runtime boundaries, APIs, persistence and dependencies relevant to the question', 'Review relevant testing, deployment and production evidence', 'Discuss missing product or operational context with the client team'],
+      outputs: ['Concise written review of the current application', 'Ranked findings supported by code or runtime evidence', 'Recommended next steps and realistic options', 'Technical walkthrough with the team'], boundary: reviewBoundary,
     },
+    testingPackage('TypeScript', { examples: 'unit, component and integration tests', tools: 'test doubles, fixtures and browser or server test tooling' }),
     {
-      type: 'Defined delivery',
-      title: 'API or Full-stack Delivery',
-      duration: 'From 4 weeks',
-      intro: 'Take one specified application capability through implementation, testing and release.',
-      goodFor: ['A bounded user journey with known acceptance criteria', 'A new API or third-party integration', 'A server-rendered feature spanning UI, server and persistence'],
-      work: ['Implement typed interfaces and runtime validation', 'Build the server, UI and data changes in reviewable slices', 'Add component, integration or end-to-end tests where useful', 'Prepare the change for the existing deployment platform'],
-      outputs: ['Working reviewed feature code', 'Automated tests around critical behaviour', 'Configuration and deployment changes', 'Handover notes for the owning team'],
-      boundary: 'One agreed capability. Product discovery, visual design and unrelated platform work require separate ownership or scope.',
-    },
-    {
-      type: 'Phased modernisation',
-      title: 'Runtime & Dependency Modernisation',
-      duration: 'Flexible — scoped by phase',
-      intro: 'Move one TypeScript application through a controlled Node.js, Nuxt or dependency upgrade.',
-      goodFor: ['An unsupported Node.js runtime', 'A Nuxt or major dependency upgrade with migration risk', 'Build tooling that has become fragile or slow'],
-      work: ['Map runtime, framework and package constraints', 'Protect important behaviour before version changes', 'Keep dependency and behaviour changes independently reviewable', 'Verify build, server rendering and deployment behaviour'],
-      outputs: ['Updated runtime and dependencies', 'Resolved compatibility changes', 'Tests for affected behaviour', 'Documented residual risks'],
-      boundary: 'One agreed modernisation phase. The scope depends on version distance, package compatibility and deployment constraints.',
+      slug: 'embedded-engineering-support', commercial: 'Day-rate engagement', title: 'Embedded TypeScript Engineering', price: 'From £500 per day', duration: '3-month increments · up to 12 months',
+      intro: 'Add experienced TypeScript engineering capacity to an established team with a backlog, product context and delivery process already in place.',
+      goodFor: ['A team needs additional TypeScript, Nuxt or Vue capacity', 'Product features or integrations need hands-on engineering', 'Authentication, API or database work needs focused attention', 'Build, deployment or production problems need resolving'],
+      work: ['Join the team’s existing backlog, reviews and delivery rhythm', 'Implement full-stack features, REST APIs and external integrations', 'Improve runtime validation, application boundaries and automated tests', 'Work with Auth0, Supabase, PostgreSQL and Vercel where relevant', 'Document decisions and share system knowledge as the work develops'],
+      outputs: ['Production-ready, reviewed engineering changes', 'Tests and documentation around completed work', 'Visible progress through the client’s existing workflow', 'A clean transfer of unfinished or completed work at the end'], boundary: embeddedBoundary,
     },
   ],
-  focus: [
-    { title: 'Types at runtime', description: 'Use TypeScript for developer feedback while validating untrusted HTTP, queue, environment and database inputs where static types stop.' },
-    { title: 'Full-stack boundaries', description: 'Keep browser, server, API and persistence responsibilities explicit even when one framework makes them easy to place together.' },
-    { title: 'Operable delivery', description: 'Account for serverless limits, logs, failure modes, deployment previews and production data rather than treating deployment as an afterthought.' },
-  ],
-  clientPrompt: 'Share the application, its Node.js and framework versions, deployment platform, important integrations and the user or engineering outcome that needs to move.',
-  contactLabel: 'Discuss a TypeScript system',
+  clientPrompt: 'Describe the application, current Node and framework versions, deployment platform and important integrations, and whether the team needs a system question investigated, its testing approach reviewed or additional capacity for known work.',
+  contactLabel: 'Discuss a TypeScript application',
 }
 
 export const pythonServicesPage: LanguageServicesPage = {
-  slug: 'python',
-  eyebrow: 'Python engineering',
-  title: 'Need help with a Python system?',
-  intro: 'Focused work on Python services, integrations and automation that need predictable environments, explicit boundaries and production-ready behaviour.',
-  gradient: 'python',
-  seoTitle: 'Python Engineering Services | Hypnoshroom',
-  seoDescription: 'Defined Python packages for service reviews, integration and automation delivery, and production AI API integrations.',
+  slug: 'python', language: 'Python', eyebrow: 'Python engineering', title: 'Need help with a Python system?',
+  intro: 'Technical review, testing assessment and embedded engineering for Python services, integrations and automation that need predictable environments and production-ready behaviour.', gradient: 'python',
+  seoTitle: 'Python Engineering | Hypnoshroom', seoDescription: 'Python technical reviews, testing suite assessments and embedded engineering for services, integrations and production delivery.',
   areas: [
-    ['Language & runtime', 'Python · asyncio'],
-    ['Services', 'APIs · workers · automation'],
-    ['Integrations', 'Data · third-party APIs · AI APIs'],
-    ['Quality', 'pytest · integration tests · observability'],
+    ['Language & runtime', 'Python · asyncio · dependency management'], ['Services & APIs', 'REST APIs · JSON · validation · error handling'],
+    ['Integrations', 'Third-party APIs · automation · external services'], ['Application design', 'Explicit boundaries · typing · maintainable modules'],
+    ['Data & persistence', 'SQL · PostgreSQL · schema and query design'], ['Testing & quality', 'pytest · unit · integration · acceptance tests'],
+    ['Refactoring & code health', 'Dependency cleanup · safer boundaries · maintainability'], ['Production engineering', 'Live issue diagnosis · logging · monitoring · CI/CD · Docker'],
   ],
-  packagesIntro: 'Python can make the first version quick. These packages focus on keeping the resulting service understandable, testable and safe to operate.',
+  packagesIntro: 'Use a Technical Review when a service question needs evidence, a Testing Suite Review when confidence in the tests is the problem, or Embedded Python Engineering when the team has work ready to deliver.',
   packages: [
     {
-      type: 'Fixed-scope review',
-      title: 'Python Service Review',
-      duration: 'Minimum 1 month',
-      intro: 'Identify the environment, boundary and operational risks inside one Python service.',
-      goodFor: ['A service that behaves differently between environments', 'Background work or async code that fails unpredictably', 'A codebase whose dependencies and entry points are unclear'],
-      work: ['Reproduce the environment and run the existing tests', 'Review application boundaries, typing and validation', 'Inspect concurrency, error handling and dependency management', 'Assess logging, deployment and operational behaviour'],
-      outputs: ['Current-state service map', 'Prioritised risks and recommendations', 'Environment and dependency findings', 'A bounded first implementation step'],
-      boundary: 'One service or automation repository and its immediate runtime setup. This is not a security certification or data-science review.',
+      slug: 'technical-review', commercial: 'Fixed scope · fixed fee', title: 'Python Technical Review & Discovery', price: 'From £3,500',
+      intro: 'Investigate one Python service or technical question and provide evidence the team can use to decide what to do next.',
+      goodFor: ['A service behaves differently between environments', 'Application boundaries, dependencies or entry points are difficult to trace', 'The tests or production behaviour do not provide enough confidence', 'A recurring problem has no agreed cause or priority'],
+      work: ['Reproduce the environment and establish the available test baseline', 'Inspect application boundaries, typing, validation and dependencies relevant to the question', 'Review relevant testing, deployment and production evidence', 'Discuss missing domain or operational context with the client team'],
+      outputs: ['Concise written review of the current system', 'Ranked findings supported by code or runtime evidence', 'Recommended next steps and realistic options', 'Technical walkthrough with the team'], boundary: reviewBoundary,
     },
+    testingPackage('Python', { examples: 'unit and integration tests', tools: 'pytest, fixtures, mocks and test doubles' }),
     {
-      type: 'Defined delivery',
-      title: 'Integration & Automation Delivery',
-      duration: 'From 4 weeks',
-      intro: 'Build one reliable Python integration, worker or automation workflow around a defined outcome.',
-      goodFor: ['A third-party API integration', 'A repeatable data or operational workflow', 'A background process needing retries and useful failure handling'],
-      work: ['Implement explicit inputs, outputs and failure behaviour', 'Add retries, idempotency or scheduling where required', 'Test external boundaries with realistic substitutes', 'Document operation and ownership'],
-      outputs: ['Working integration or automation code', 'Automated tests', 'Runtime and deployment configuration', 'Operational documentation and handover'],
-      boundary: 'One named workflow or integration. Unbounded data cleanup, manual operations and changes to third-party systems are excluded.',
-    },
-    {
-      type: 'Defined integration',
-      title: 'Production AI API Integration',
-      duration: 'From 4 weeks',
-      intro: 'Integrate an existing model API into a product workflow with controlled inputs, outputs, cost and failure handling.',
-      goodFor: ['Adding summarisation, extraction or classification to a product', 'Replacing a prototype call with an operable integration', 'A workflow needing evaluation and fallback behaviour'],
-      work: ['Define the model boundary and validated response shape', 'Implement timeouts, retries, rate and cost controls', 'Create representative evaluation cases', 'Add logging without exposing sensitive inputs'],
-      outputs: ['Integrated product workflow', 'Evaluation fixtures and results', 'Operational safeguards', 'Documented limitations and ownership'],
-      boundary: 'Integration of an existing model or API into one workflow. Model training, open-ended research and guarantees about probabilistic output are excluded.',
+      slug: 'embedded-engineering-support', commercial: 'Day-rate engagement', title: 'Embedded Python Engineering', price: 'From £500 per day', duration: '3-month increments · up to 12 months',
+      intro: 'Add Python engineering capacity to an established team with a backlog, product context and delivery process already in place.',
+      goodFor: ['A team needs additional Python service capacity', 'Integrations or automation need hands-on engineering', 'Testing, APIs or database work needs focused attention', 'Environment, dependency or production issues need resolving'],
+      work: ['Join the team’s existing backlog, reviews and delivery rhythm', 'Implement and maintain Python services, APIs and integrations', 'Improve application boundaries, validation and automated tests', 'Investigate environment, dependency and production problems', 'Document decisions and share system knowledge as the work develops'],
+      outputs: ['Production-ready, reviewed engineering changes', 'Tests and documentation around completed work', 'Visible progress through the client’s existing workflow', 'A clean transfer of unfinished or completed work at the end'], boundary: embeddedBoundary,
     },
   ],
-  focus: [
-    { title: 'Predictable environments', description: 'Pin dependencies, state the supported Python runtime and make local, CI and production execution reproducible.' },
-    { title: 'Explicit service boundaries', description: 'Keep request handling, domain behaviour, persistence and background work separate enough to test and operate.' },
-    { title: 'Responsible AI integration', description: 'Treat model calls as unreliable external dependencies with validation, evaluation, cost controls and honest limitations.' },
-  ],
-  clientPrompt: 'Share the service or workflow, supported Python version, dependency setup, deployment environment and the external systems or APIs involved.',
-  contactLabel: 'Discuss a Python system',
+  clientPrompt: 'Describe the service, current Python version, dependency setup and deployment environment, and whether the team needs a system question investigated, its testing approach reviewed or additional capacity for known work.',
+  contactLabel: 'Discuss a Python service',
 }

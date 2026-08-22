@@ -10,6 +10,11 @@ if (!service) {
 }
 
 const relatedServices = services.filter(item => item.slug !== service.slug).slice(0, 3)
+const fitTitle = service.slug === 'embedded-engineering-support'
+  ? 'Experienced engineering support for an existing delivery team.'
+  : service.slug === 'testing-suite-review'
+    ? 'A focused assessment of how the test suite supports delivery.'
+    : 'A focused review of one system or technical question.'
 
 usePageSeo({
   title: `${service.title} Package | Hypnoshroom`,
@@ -44,7 +49,7 @@ usePageSeo({
       <div class="page-shell grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
         <div>
           <p class="eyebrow">Package fit</p>
-          <h2 class="font-display text-4xl leading-tight sm:text-5xl">A independant review and health check for your sanity.</h2>
+          <h2 class="font-display text-4xl leading-tight sm:text-5xl">{{ fitTitle }}</h2>
           <p class="mt-6 text-lg leading-8 text-ink/60">{{ service.whoFor }}</p>
         </div>
         <div class="grid gap-6 sm:grid-cols-2">
@@ -70,7 +75,7 @@ usePageSeo({
 
     <section class="section-space border-y border-line bg-[#ece8de]">
       <div class="page-shell">
-        <SectionHeading eyebrow="Delivery" title="How and what we will deliver." :intro="service.format" />
+        <SectionHeading eyebrow="Delivery" title="How it works." :intro="service.format" />
         <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <article v-for="(step, index) in service.steps" :key="step.title" class="border-t border-ink/20 pt-5">
             <span class="font-mono text-xs text-clay">{{ String(index + 1).padStart(2, '0') }}</span>

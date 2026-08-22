@@ -1,14 +1,19 @@
 <script setup lang="ts">
+import { GitBranch, ShieldCheck, Zap } from '@lucide/vue'
+
 const practices = [
   {
+    icon: Zap,
     title: 'Fast feedback',
     text: 'Unit and component tests should make everyday changes safer without turning the build into a waiting exercise.',
   },
   {
+    icon: GitBranch,
     title: 'Real boundaries',
     text: 'Integration and contract tests protect the places where services, databases, queues and third-party systems meet.',
   },
   {
+    icon: ShieldCheck,
     title: 'Production confidence',
     text: 'Reliable delivery also needs useful CI checks, observable behaviour and a release path the team trusts.',
   },
@@ -25,9 +30,11 @@ const practices = [
         <AppButton to="/expertise#testing" variant="text" class="mt-6">Explore testing expertise</AppButton>
       </div>
       <div class="grid gap-5 sm:grid-cols-3">
-        <article v-for="(practice, index) in practices" :key="practice.title" class="rounded-2xl border border-line bg-white/35 p-6">
-          <span class="font-mono text-xs text-clay">0{{ index + 1 }}</span>
-          <h3 class="mt-10 font-display text-2xl">{{ practice.title }}</h3>
+        <article v-for="practice in practices" :key="practice.title" class="rounded-2xl border border-line bg-white/35 p-6">
+          <span class="flex size-11 items-center justify-center rounded-xl border border-moss/20 bg-paper text-moss shadow-sm" aria-hidden="true">
+            <component :is="practice.icon" class="size-5" :stroke-width="1.7" />
+          </span>
+          <h3 class="mt-8 font-display text-2xl">{{ practice.title }}</h3>
           <p class="mt-3 text-sm leading-6 text-ink/60">{{ practice.text }}</p>
         </article>
       </div>
