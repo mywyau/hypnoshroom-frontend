@@ -3,7 +3,7 @@ const languages = [
   {
     name: 'Scala',
     label: 'Core specialism',
-    description: 'Scala services, Play Framework applications, sbt builds and the careful work involved in moving long-lived systems forward.',
+    description: 'Scala is often chosen for long-lived JVM services where complex domains, concurrency and correctness matter. It is our core specialism across Play Framework, functional Scala, sbt and production backend systems.',
     details: ['Scala 2 & Scala 3', 'Functional Programming', 'Play Framework', 'sbt', 'Unit testing', 'Integration testing'],
     logo: '/languages/scala.svg',
     link: '/scala',
@@ -21,7 +21,7 @@ const languages = [
   {
     name: 'TypeScript',
     label: 'Frontend and Modern applications',
-    description: 'SSR, Client side rendering, APIs and full-stack applications. TypeScript is a great choice for modern frontends and Saas.',
+    description: 'TypeScript brings stronger tooling and compile-time feedback to modern web products. We use it with Nuxt and Vue for SaaS applications, server-side rendering, APIs and full-stack features.',
     details: ['Node.js', 'Nuxt', 'Fullstack development', 'Playwright Automated testing', 'Unit testing', 'Integration testing'],
     logo: '/languages/typescript.svg',
     link: '/typescript',
@@ -30,7 +30,7 @@ const languages = [
   {
     name: 'Python',
     label: 'Services & automation',
-    description: 'Python backend services, modern AI API integrations, integrations and automation work that needs to fit cleanly into a wider system.',
+    description: 'Python’s approachable syntax and broad ecosystem make it a strong fit for scripting, automation, APIs and AI integrations. We help turn those workflows into maintainable software with clear boundaries and reliable tests.',
     details: ['APIs', 'Automation', 'AI', 'Unit testing', 'Integration testing'],
     logo: '/languages/python.svg',
     link: '/python',
@@ -56,19 +56,14 @@ const platforms = [
 
 const databases = [
   {
-    name: 'Relational data',
-    technologies: 'PostgreSQL',
+    name: 'PostgreSQL',
+    technologies: 'Relational data',
     description: 'Schemas, normalisation, indexes, queries and migrations—alongside the persistence code responsible for keeping relational constraints clear.',
   },
   {
-    name: 'Document data',
-    technologies: 'MongoDB',
+    name: 'MongoDB',
+    technologies: 'Document data',
     description: 'Document shapes, indexes and query patterns designed around how the service reads, changes and owns its data.',
-  },
-  {
-    name: 'Persistence boundaries',
-    technologies: 'Repositories · integration tests',
-    description: 'Clear interfaces, validation, failure handling and tests at the point where application behaviour meets stored data.',
   },
 ]
 
@@ -125,7 +120,7 @@ usePageSeo({
     <section id="databases" class="section-space scroll-mt-28 border-t border-line">
       <div class="page-shell">
         <SectionHeading eyebrow="Databases" title="Data models that fit the application." intro="Database design and application design belong together. Schemas, documents, queries, indexes and persistence code are considered as one working boundary." />
-        <div class="mt-12 grid gap-6 lg:grid-cols-3">
+        <div class="mt-12 grid gap-6 md:grid-cols-2">
           <article v-for="database in databases" :key="database.name" class="rounded-2xl border border-line bg-white/35 p-7">
             <p class="text-xs font-semibold uppercase tracking-[0.16em] text-moss">{{ database.technologies }}</p>
             <h2 class="mt-4 font-display text-3xl">{{ database.name }}</h2>
@@ -154,7 +149,7 @@ usePageSeo({
 
     <section class="section-space border-y border-line bg-[#ece8de]">
       <div class="page-shell">
-        <SectionHeading eyebrow="Platforms &amp; delivery" title="Where the code lives." intro="Backend work includes the path to production and what happens after a service gets there." />
+        <SectionHeading eyebrow="DevOps &amp; platform engineering" title="A reliable path to production." intro="Builds, pipelines, deployments and observability should help teams ship with confidence and understand what happens after release." />
         <div class="mt-12 grid gap-6 lg:grid-cols-3">
           <article v-for="platform in platforms" :key="platform.name" class="border-t border-ink/20 pt-6">
             <h2 class="font-display text-3xl">{{ platform.name }}</h2>
@@ -162,17 +157,6 @@ usePageSeo({
             <AppButton v-if="platform.topic" :to="`/insights?topic=${platform.topic}`" variant="text" class="mt-4">Read related articles</AppButton>
           </article>
         </div>
-      </div>
-    </section>
-
-    <section class="section-space">
-      <div class="page-shell rounded-3xl border border-line bg-white/35 p-8 sm:p-12 lg:flex lg:items-end lg:justify-between lg:gap-12">
-        <div class="max-w-2xl">
-          <p class="eyebrow">Engineering support</p>
-          <h2 class="font-display text-4xl sm:text-5xl">Engagements shaped around the work.</h2>
-          <p class="mt-5 text-lg leading-8 text-ink/60">Hands-on engineering, assessments and delivery sprints can each be structured to suit the system, the team and the outcome being pursued.</p>
-        </div>
-        <AppButton to="/contact" class="mt-8 shrink-0 lg:mt-0">Discuss a project</AppButton>
       </div>
     </section>
 

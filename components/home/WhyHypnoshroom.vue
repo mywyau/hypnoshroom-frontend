@@ -3,7 +3,7 @@ import { Eye, PackageCheck, Scale, UserRoundCheck } from '@lucide/vue'
 
 const reasons = [
   { icon: UserRoundCheck, title: 'Ownership', text: 'Technical responsibility stays with the engineer doing the work, reducing hand-offs between scoping, decisions and delivery.' },
-  { icon: Scale, title: 'Right-sized from the start', text: 'The engagement is shaped around the outcome. Extra roles, meetings and process create noise and are only if need be.' },
+  { icon: Scale, title: 'Right-sized from the start', text: 'The engagement is shaped around the outcome. Extra roles, meetings and process are added only when they help the work.' },
   { icon: Eye, title: 'Work stays visible', text: 'Decisions, code, tests and progress can be reviewed as the work develops.' },
   { icon: PackageCheck, title: 'Built to last', text: 'The aim is stronger software and a team able to own it. Not a system that depends on our permanent support.' },
 ]

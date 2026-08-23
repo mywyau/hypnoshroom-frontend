@@ -1,22 +1,16 @@
 <script setup lang="ts">
 const groups = [
-  { title: 'Languages', items: ['Scala', 'Java', 'TypeScript', 'Python'] },
-  { title: 'Frontend', items: ['Vue', 'Nuxt', 'Tailwind CSS'] },
-  { title: 'Backend', items: ['Play Framework', 'Spring Boot', 'Node.js', 'Serverless functions'] },
-  { title: 'Build tooling', items: ['npm', 'Vite', 'sbt', 'Maven'] },
-  { title: 'APIs & integration', items: ['REST APIs'] },
-  { title: 'Databases', items: ['PostgreSQL', 'MongoDB', 'Supabase'] },
-  { title: 'Testing', items: ['ScalaTest', 'JUnit', 'Mockito', 'Cucumber', 'Selenium', 'Unit testing', 'Integration testing', 'Automated testing'] },
-  { title: 'DevOps & delivery', items: ['Docker', 'Jenkins', 'GitHub Actions', 'CI/CD'] },
-  { title: 'Cloud & observability', items: ['AWS-backed environments', 'CloudWatch', 'Grafana', 'Kibana', 'Splunk'] },
-  { title: 'Serverless', items: ['Vercel', 'Supabase'] },
+  { title: 'Specialist Scala engineering', items: ['Scala 2.13', 'Play Framework', 'Cats', 'Cats Effect', 'sbt', 'MongoDB'] },
+  { title: 'Modern product development', items: ['TypeScript', 'Nuxt 3', 'Vue', 'Auth0', 'Supabase', 'PostgreSQL', 'Vercel'] },
+  { title: 'Backend engineering', items: ['Java', 'Spring Boot', 'REST APIs', 'Maven', 'database integration'] },
+  { title: 'Testing & production', items: ['Unit and integration testing', 'CI/CD', 'Docker', 'Jenkins', 'logging and observability'] },
 ]
 </script>
 
 <template>
   <section class="section-space border-y border-line bg-[#ece8de]">
     <div class="page-shell grid gap-14 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
-      <SectionHeading eyebrow="Technology" title="From code to infrastructure." intro="Hypnoshroom works across the stack. See if any of our specialisms suit your needs." />
+      <SectionHeading eyebrow="Technology" title="Depth where it matters." intro="A focused set of technologies for Scala systems, modern software products and the testing and delivery practices that keep them maintainable." />
       <div class="grid gap-x-10 gap-y-8 sm:grid-cols-2">
         <div v-for="group in groups" :key="group.title" class="border-t border-ink/15 pt-4">
           <h3 class="text-xs font-semibold uppercase tracking-[0.16em] text-moss">{{ group.title }}</h3>

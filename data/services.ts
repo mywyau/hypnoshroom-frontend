@@ -110,7 +110,7 @@ export const services: Service[] = [
     format: 'Delivered as a time-bound addition to an existing team. Responsibilities, working pattern and availability are agreed for each three-month increment.',
     boundary: 'The working pattern and responsibilities are agreed in advance. Each extension is a separate three-month commitment and the total engagement is capped at 12 months. This is not unlimited availability, team management or an on-call service.',
     steps: [
-      { title: 'Agree the role', description: 'Define the backlog area, expected decisions, weekly allocation and people responsible for product context.' },
+      { title: 'Agree the role', description: 'Define the backlog area, expected decisions, working pattern and people responsible for product context.' },
       { title: 'Join the workflow', description: 'Work through the team’s existing repository, review, testing and delivery practices.' },
       { title: 'Deliver and share', description: 'Complete agreed engineering work while documenting decisions and sharing system knowledge.' },
       { title: 'Review or conclude', description: 'Before the increment ends, agree another three months or close and transfer active work cleanly. Total engagement length is capped at 12 months.' },

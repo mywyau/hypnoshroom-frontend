@@ -105,7 +105,7 @@ usePageSeo({
       <div class="page-shell grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
         <div>
           <p class="eyebrow">Outputs</p>
-          <h2 class="font-display text-4xl leading-tight sm:text-5xl">What you will recieve.</h2>
+          <h2 class="font-display text-4xl leading-tight sm:text-5xl">What you will receive.</h2>
         </div>
         <ul class="grid gap-5 sm:grid-cols-2">
           <li v-for="item in service.deliverables" :key="item" class="rounded-2xl border border-line bg-white/35 p-6 text-sm leading-6 text-ink/65"><span aria-hidden="true" class="mr-3 text-moss">✓</span>{{ item }}</li>

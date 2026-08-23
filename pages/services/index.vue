@@ -30,7 +30,7 @@ usePageSeo({
     <section class="section-space">
       <div class="page-shell">
         <div class="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
-          <SectionHeading eyebrow="Packages" title="Our services." intro="Start with a coversation and a technical review, once we get a better understanding we can properly advise on your next steps. The could result in delivery, clean up and maintainence or possible modernisation work." />
+          <SectionHeading eyebrow="Packages" title="Our services." intro="Choose the package closest to the problem: investigate a difficult system, assess a test suite or add engineering capacity to an established team." />
           <p class="max-w-sm text-sm leading-6 text-ink/50">Not sure where to start? The fixed-scope Technical Review is designed to turn an unclear system problem into an informed next decision.</p>
         </div>
 

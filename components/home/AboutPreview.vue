@@ -17,7 +17,7 @@ const principles = [
         <p class="font-display text-5xl leading-tight text-moss sm:text-6xl">Outcomes first.</p>
       </div>
       <div>
-        <h2 class="font-display text-3xl leading-tight sm:text-4xl">Hypnoshroom is an independent consultancy led by outcomes. We focus on delivery, engineering quality and a genuine passion for software.</h2>
+        <h2 class="font-display text-3xl leading-tight sm:text-4xl">An independent consultancy bringing specialist Scala, backend and product engineering directly into focused engagements.</h2>
         <div class="mt-8 grid gap-x-8 gap-y-7 sm:grid-cols-2">
           <div v-for="principle in principles" :key="principle.title" class="flex gap-4 border-t border-line pt-5">
             <span class="flex size-10 shrink-0 items-center justify-center rounded-xl border border-moss/20 bg-paper text-moss shadow-sm" aria-hidden="true">
