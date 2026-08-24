@@ -2,23 +2,23 @@
 const principles = [
   {
     number: '01',
-    title: 'Outcomes before activity',
-    text: 'An engagement should change something that matters: a safer upgrade, a service that is easier to change, a release that no longer feels risky. Progress is measured by that result, not by meetings held or documents produced.',
+    title: 'Reproduce before diagnosing',
+    text: 'Run the build, exercise the relevant tests and inspect the available runtime evidence before deciding what is wrong. A credible recommendation starts with behaviour that can be observed.',
   },
   {
     number: '02',
-    title: 'Engineering first',
-    text: 'Decisions should stand up technically. That means understanding the system before prescribing a solution, making trade-offs explicit and choosing the simplest approach that solves the real problem.',
+    title: 'Trace the real boundary',
+    text: 'Follow behaviour through validation, application logic, APIs and persistence. Difficult failures often sit where two otherwise-correct parts of the system meet.',
   },
   {
     number: '03',
-    title: 'Quality throughout',
-    text: 'Quality is more than clean code. It includes thoughtful tests, sensical decisions, safe releases and a system the next engineer can understand without archaeology.',
+    title: 'Separate the changes',
+    text: 'Keep behaviour changes, refactoring and dependency upgrades distinct where possible. Smaller changes are easier to review, explain, test and reverse.',
   },
   {
     number: '04',
-    title: 'Passion with purpose',
-    text: 'Good work comes from caring about the details: asking the right questions, following an awkward failure to its source and leaving things in better shape than they were found.',
+    title: 'Verify beyond compilation',
+    text: 'A successful build is only one signal. Relevant unit, integration and acceptance checks should support the release path and the behaviour seen in production.',
   },
 ]
 
@@ -84,7 +84,7 @@ usePageSeo({
 
     <section class="section-space border-y border-line bg-[#ece8de]">
       <div class="page-shell">
-        <SectionHeading eyebrow="What leads the work" title="Outcomes first. Engineering throughout." intro="Quality and passion matter most when they produce a result the client can see, use and continue building on." />
+        <SectionHeading eyebrow="Technical approach" title="How careful engineering shows up in the work." intro="The method is practical: establish the evidence, follow the system across its boundaries, keep changes understandable and verify the result in context." />
         <ol class="mt-14 grid overflow-hidden rounded-2xl border border-line bg-paper sm:grid-cols-2 lg:grid-cols-4">
           <li v-for="principle in principles" :key="principle.number" class="border-b border-line p-7 last:border-b-0 sm:min-h-80 sm:[&:nth-child(odd)]:border-r lg:border-b-0 lg:border-r lg:p-8 lg:last:border-r-0">
             <span class="font-mono text-xs text-clay">{{ principle.number }}</span>

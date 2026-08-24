@@ -35,7 +35,7 @@ const testingPackage = (language: string, details: { examples: string; tools: st
   slug: 'testing-suite-review',
   commercial: 'Fixed scope · fixed fee',
   title: `${language} Testing Suite Review`,
-  price: 'From £3,500',
+  price: 'From £4,000',
   intro: `Review the unit and integration testing approach around one ${language} service and identify where the suite helps, misleads or slows the team down.`,
   goodFor: ['Tests pass but releases still feel risky', 'The suite is slow, brittle or expensive to maintain', 'Unit and integration responsibilities are unclear', 'Mocks, fixtures or test setup obscure the behaviour being protected'],
   work: [`Review representative ${details.examples}`, `Assess test boundaries, naming, structure and use of ${details.tools}`, 'Look for brittle assertions, excessive mocking, hidden coupling and missing integration evidence', 'Review feedback speed, repeatability and how failures are diagnosed'],
@@ -65,7 +65,7 @@ export const javaServicesPage: LanguageServicesPage = {
   packagesIntro: 'Use a Technical Review when a system question needs evidence, a Testing Suite Review when confidence in the tests is the problem, or Embedded Java Engineering when the team has work ready to deliver.',
   packages: [
     {
-      slug: 'technical-review', commercial: 'Fixed scope · fixed fee', title: 'Java Technical Review & Discovery', price: 'From £3,500',
+      slug: 'technical-review', commercial: 'Fixed scope · fixed fee', title: 'Java Technical Review & Discovery', price: 'From £5,000',
       intro: 'Investigate one Java service or technical question and provide evidence the team can use to decide what to do next.',
       goodFor: ['A Java or Spring Boot service is difficult to change', 'A JDK, framework or dependency decision needs technical evidence', 'The build, tests or production behaviour do not provide enough confidence', 'A recurring problem has no agreed cause or priority'],
       work: ['Run the service and establish the available build and test baseline', 'Inspect the code, APIs, persistence and dependencies relevant to the question', 'Review relevant testing, delivery and production evidence', 'Discuss missing domain or operational context with the client team'],
@@ -97,7 +97,7 @@ export const typeScriptServicesPage: LanguageServicesPage = {
   packagesIntro: 'Use a Technical Review when an application question needs evidence, a Testing Suite Review when confidence in the tests is the problem, or Embedded TypeScript Engineering when the team has work ready to deliver.',
   packages: [
     {
-      slug: 'technical-review', commercial: 'Fixed scope · fixed fee', title: 'TypeScript Technical Review & Discovery', price: 'From £3,500',
+      slug: 'technical-review', commercial: 'Fixed scope · fixed fee', title: 'TypeScript Technical Review & Discovery', price: 'From £5,000',
       intro: 'Investigate one TypeScript application or technical question and provide evidence the team can use to decide what to do next.',
       goodFor: ['An application is difficult to change safely', 'API, authentication or data boundaries are difficult to trace', 'The tests or deployment path do not provide enough confidence', 'A recurring runtime problem has no agreed cause or priority'],
       work: ['Run the application and establish the available build and test baseline', 'Inspect the types, runtime boundaries, APIs, persistence and dependencies relevant to the question', 'Review relevant testing, deployment and production evidence', 'Discuss missing product or operational context with the client team'],
@@ -129,7 +129,7 @@ export const pythonServicesPage: LanguageServicesPage = {
   packagesIntro: 'Use a Technical Review when a service question needs evidence, a Testing Suite Review when confidence in the tests is the problem, or Embedded Python Engineering when the team has work ready to deliver.',
   packages: [
     {
-      slug: 'technical-review', commercial: 'Fixed scope · fixed fee', title: 'Python Technical Review & Discovery', price: 'From £3,500',
+      slug: 'technical-review', commercial: 'Fixed scope · fixed fee', title: 'Python Technical Review & Discovery', price: 'From £5,000',
       intro: 'Investigate one Python service or technical question and provide evidence the team can use to decide what to do next.',
       goodFor: ['A service behaves differently between environments', 'Application boundaries, dependencies or entry points are difficult to trace', 'The tests or production behaviour do not provide enough confidence', 'A recurring problem has no agreed cause or priority'],
       work: ['Reproduce the environment and establish the available test baseline', 'Inspect application boundaries, typing, validation and dependencies relevant to the question', 'Review relevant testing, deployment and production evidence', 'Discuss missing domain or operational context with the client team'],

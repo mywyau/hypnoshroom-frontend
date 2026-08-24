@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { Eye, PackageCheck, Scale, UserRoundCheck } from '@lucide/vue'
+import { Eye, PackageCheck, UserRoundCheck, Workflow } from '@lucide/vue'
 
 const reasons = [
-  { icon: UserRoundCheck, title: 'Ownership', text: 'Technical responsibility stays with the engineer doing the work, reducing hand-offs between scoping, decisions and delivery.' },
-  { icon: Scale, title: 'Right-sized from the start', text: 'The engagement is shaped around the outcome. Extra roles, meetings and process are added only when they help the work.' },
+  { icon: UserRoundCheck, title: 'Ownership and continuity', text: 'The same engineer stays with the work from scoping through delivery, so less context is lost and less time is spent bringing another developer up to speed.' },
+  { icon: Workflow, title: 'Fits the way your team works', text: 'Work happens through your repositories, reviews and delivery practices instead of creating a separate consultancy process.' },
   { icon: Eye, title: 'Work stays visible', text: 'Decisions, code, tests and progress can be reviewed as the work develops.' },
   { icon: PackageCheck, title: 'Built to last', text: 'The aim is stronger software and a team able to own it. Not a system that depends on our permanent support.' },
 ]

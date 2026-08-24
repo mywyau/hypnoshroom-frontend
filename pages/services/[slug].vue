@@ -113,6 +113,17 @@ usePageSeo({
       </div>
     </section>
 
+    <section class="border-y border-line bg-[#ece8de] py-14 sm:py-16">
+      <div class="page-shell flex flex-col justify-between gap-7 lg:flex-row lg:items-end">
+        <div class="max-w-3xl">
+          <p class="eyebrow">Languages &amp; tools</p>
+          <h2 class="font-display text-4xl leading-tight sm:text-5xl">See where this package applies.</h2>
+          <p class="mt-5 max-w-2xl text-lg leading-8 text-ink/60">Explore the languages, frameworks, databases, testing practices and delivery tools Hypnoshroom can bring to the engagement.</p>
+        </div>
+        <AppButton to="/expertise" variant="secondary" class="shrink-0">Explore technical expertise</AppButton>
+      </div>
+    </section>
+
     <section class="border-t border-line py-16 sm:py-20">
       <div class="page-shell">
         <div class="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
