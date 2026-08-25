@@ -121,7 +121,7 @@ usePageSeo({
             <RefreshCw class="size-6" :stroke-width="1.6" />
           </span>
           <p class="mt-7 eyebrow">Continuous learning</p>
-          <h2 class="font-display text-4xl leading-tight sm:text-5xl">Stay current. Adopt deliberately.</h2>
+          <h2 class="font-display text-4xl leading-tight sm:text-5xl">Staying current. Adopt deliberately.</h2>
         </div>
         <div>
           <p class="max-w-3xl text-lg leading-8 text-ink/65">Software keeps moving. Languages, frameworks, build tools and delivery platforms change, and staying useful means keeping up with the parts of that change that affect real systems.</p>
