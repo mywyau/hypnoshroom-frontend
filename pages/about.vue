@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Handshake, Heart, MessagesSquare, Sprout } from '@lucide/vue'
+import { FlaskConical, Handshake, Heart, MessagesSquare, Share2, Sprout, Wrench } from '@lucide/vue'
 
 const culturePrinciples = [
   {
@@ -11,8 +11,8 @@ const culturePrinciples = [
   {
     icon: MessagesSquare,
     iconClass: 'text-plum',
-    title: 'Safe to speak honestly',
-    text: 'Questions, uncertainty and mistakes should be discussable without blame. Feedback can be direct while remaining thoughtful, specific and respectful of the person receiving it.',
+    title: 'Open, honest communication',
+    text: 'Engineering suffers when a culture rewards agreement and polished status over the truth. People should be able to raise risks, uncertainty, mistakes and disagreement early without blame. Feedback should be direct, specific and respectful—because hiding a problem to keep a meeting comfortable only makes it more expensive later.',
   },
   {
     icon: Handshake,
@@ -25,6 +25,24 @@ const culturePrinciples = [
     iconClass: 'text-moss',
     title: 'Room to grow',
     text: 'Learning is part of the work, not something squeezed into spare time. Knowledge should be shared generously, and people should have space to develop without being punished for not already knowing everything.',
+  },
+]
+
+const learningPrinciples = [
+  {
+    icon: Wrench,
+    title: 'Make it tangible',
+    text: 'Turn an idea into something that can run, be used or be inspected. Even a small implementation reveals constraints that remain invisible in an abstract discussion.',
+  },
+  {
+    icon: FlaskConical,
+    title: 'Experiment safely',
+    text: 'Try unfamiliar approaches at a scale where getting something wrong is useful rather than costly. The purpose is to test an assumption, not prove that the first idea was correct.',
+  },
+  {
+    icon: Share2,
+    title: 'Reflect and share',
+    text: 'Learning becomes more valuable when the result is explained. Record what worked, what did not and what should change next so knowledge does not remain with one person.',
   },
 ]
 
@@ -100,6 +118,25 @@ usePageSeo({
             <p class="mt-4 leading-7 text-ink/60">{{ principle.text }}</p>
           </li>
         </ol>
+      </div>
+    </section>
+
+    <section class="section-space border-b border-line">
+      <div class="page-shell grid gap-14 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
+        <div>
+          <p class="eyebrow">Learning by doing</p>
+          <h2 class="font-display text-4xl leading-tight sm:text-5xl">Getting your hands dirty.</h2>
+          <p class="mt-6 text-lg leading-8 text-ink/65">Documentation, discussion and theory provide a map. To truly learn and master we believe you must do! By building something, observing how it behaves and improving it turns that knowledge into practical judgement.</p>
+        </div>
+        <div class="grid gap-5 sm:grid-cols-3">
+          <article v-for="principle in learningPrinciples" :key="principle.title" class="rounded-2xl border border-line bg-white/35 p-6">
+            <span class="flex size-11 items-center justify-center rounded-xl border border-line bg-paper text-plum shadow-sm" aria-hidden="true">
+              <component :is="principle.icon" class="size-5" :stroke-width="1.7" />
+            </span>
+            <h3 class="mt-8 font-display text-2xl">{{ principle.title }}</h3>
+            <p class="mt-3 text-sm leading-6 text-ink/60">{{ principle.text }}</p>
+          </article>
+        </div>
       </div>
     </section>
 

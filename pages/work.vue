@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Boxes, GitPullRequest, MonitorUp } from '@lucide/vue'
+import { Boxes, GitPullRequest, MonitorUp, RefreshCw } from '@lucide/vue'
 
 const experienceAreas = [
   {
@@ -110,6 +110,36 @@ usePageSeo({
               </div>
             </div>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-space border-t border-line bg-[#eee9f0]">
+      <div class="page-shell grid gap-12 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20">
+        <div>
+          <span class="flex size-12 items-center justify-center rounded-2xl border border-plum/20 bg-paper text-plum shadow-sm" aria-hidden="true">
+            <RefreshCw class="size-6" :stroke-width="1.6" />
+          </span>
+          <p class="mt-7 eyebrow">Continuous learning</p>
+          <h2 class="font-display text-4xl leading-tight sm:text-5xl">Stay current. Adopt deliberately.</h2>
+        </div>
+        <div>
+          <p class="max-w-3xl text-lg leading-8 text-ink/65">Software keeps moving. Languages, frameworks, build tools and delivery platforms change, and staying useful means keeping up with the parts of that change that affect real systems.</p>
+          <p class="mt-5 max-w-3xl leading-7 text-ink/60">That does not mean replacing working technology whenever something new appears. New approaches are read about, tested and weighed against support, maintainability, migration cost and the people who will own the result.</p>
+          <dl class="mt-9 grid gap-8 sm:grid-cols-3">
+            <div class="border-t border-plum/20 pt-5">
+              <dt class="font-semibold text-ink">Follow the ecosystems</dt>
+              <dd class="mt-2 text-sm leading-6 text-ink/60">Keep track of relevant language releases, framework direction, dependency support and changing production practices.</dd>
+            </div>
+            <div class="border-t border-plum/20 pt-5">
+              <dt class="font-semibold text-ink">Learn by building</dt>
+              <dd class="mt-2 text-sm leading-6 text-ink/60">Use small experiments and independently built products to understand how a tool behaves beyond its introductory example.</dd>
+            </div>
+            <div class="border-t border-plum/20 pt-5">
+              <dt class="font-semibold text-ink">Modernise with a reason</dt>
+              <dd class="mt-2 text-sm leading-6 text-ink/60">Adopt newer technology when it improves support, delivery, reliability or ownership—not simply because it is fashionable.</dd>
+            </div>
+          </dl>
         </div>
       </div>
     </section>
