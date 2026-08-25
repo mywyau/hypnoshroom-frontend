@@ -10,8 +10,8 @@ if (!article) {
 }
 
 usePageSeo({
-  title: `${article.title} | Hypnoshroom`,
-  description: article.summary,
+  title: `${article.seoTitle || article.title} | Hypnoshroom`,
+  description: article.seoDescription || article.summary,
   path: `/insights/${article.slug}`,
   type: 'article',
   breadcrumbs: [
@@ -23,12 +23,17 @@ usePageSeo({
     '@context': 'https://schema.org',
     '@type': 'TechArticle',
     headline: article.title,
-    description: article.summary,
+    description: article.seoDescription || article.summary,
     url: `https://hypnoshroom.com/insights/${article.slug}`,
     mainEntityOfPage: `https://hypnoshroom.com/insights/${article.slug}`,
     author: { '@id': 'https://hypnoshroom.com/#organization' },
     publisher: { '@id': 'https://hypnoshroom.com/#organization' },
-    about: article.topic,
+    articleSection: article.category,
+    keywords: [article.topic, ...(article.topics || [])].join(', '),
+    about: [article.topic, ...(article.topics || [])].map(name => ({
+      '@type': 'Thing',
+      name,
+    })),
     inLanguage: 'en-GB',
   },
 })
