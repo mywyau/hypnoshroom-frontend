@@ -4,7 +4,7 @@ import type { LanguageServicesPage } from '~/data/languageServices'
 defineProps<{ page: LanguageServicesPage }>()
 
 const engagementSteps = [
-  { icon: 'choose', title: 'Choose the engagement', text: 'Use a technical review when the problem is unclear, a testing review when the suite needs scrutiny, or embedded engineering when work is ready to deliver.' },
+  { icon: 'choose', title: 'Choose the engagement', text: 'Use a technical review when the problem needs investigation, or embedded engineering when the team has work ready to deliver.' },
   { icon: 'boundary', title: 'Agree the boundary', text: 'Confirm the repository, access, review question and outputs, or the embedded responsibilities and first three-month increment.' },
   { icon: 'commit', title: 'Start with that commitment', text: 'Complete the review or current three-month increment, then make a separate decision about any follow-on work.' },
 ] as const
@@ -25,7 +25,7 @@ const engagementSteps = [
 
     <section class="section-space">
       <div class="page-shell">
-        <SectionHeading eyebrow="Ways to work together" :title="`Three clear ${page.language} engagements.`" :intro="page.packagesIntro" />
+        <SectionHeading eyebrow="Ways to work together" :title="`Two clear ${page.language} engagements.`" :intro="page.packagesIntro" />
         <div class="mt-14">
           <article v-for="item in page.packages" :id="`package-${item.slug}`" :key="item.slug" class="scroll-mt-28 border-t border-line py-12 first:border-t-0 first:pt-0 lg:py-16">
             <div class="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:gap-16">

@@ -12,9 +12,7 @@ if (!service) {
 const relatedServices = services.filter(item => item.slug !== service.slug).slice(0, 3)
 const fitTitle = service.slug === 'embedded-engineering-support'
   ? 'Experienced engineering support for an existing delivery team.'
-  : service.slug === 'testing-suite-review'
-    ? 'A focused assessment of how the test suite supports delivery.'
-    : 'A focused review of one system or technical question.'
+  : 'A focused review of one system or technical question.'
 
 usePageSeo({
   title: `${service.title} | Hypnoshroom`,

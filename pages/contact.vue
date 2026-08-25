@@ -1,7 +1,7 @@
 <script setup lang="ts">
 usePageSeo({
   title: 'Contact Hypnoshroom | Discuss an Engineering Problem',
-  description: 'Discuss a technical review, testing assessment, Scala service, software product or embedded engineering requirement with Hypnoshroom.',
+  description: 'Discuss a technical review, Scala service, software product or embedded engineering requirement with Hypnoshroom.',
   path: '/contact',
 })
 </script>

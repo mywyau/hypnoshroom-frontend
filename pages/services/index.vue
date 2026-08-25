@@ -2,21 +2,21 @@
 import { services } from '~/data/services'
 
 const packagePrinciples = [
-  ['A clear purchase unit', 'Choose a fixed-scope technical or testing review, or a time-bound embedded engagement.'],
+  ['A clear purchase unit', 'Choose a fixed-scope technical review or a time-bound embedded engagement.'],
   ['Direct engineering delivery', 'Technical responsibility remains clear from initial scope through to handover.'],
   ['A defined endpoint', 'Every package ends with tangible outputs, documented decisions and a clean handover.'],
 ]
 
 usePageSeo({
   title: 'Technical Review & Engineering Services | Hypnoshroom',
-  description: 'Choose a fixed-scope technical review, testing suite assessment or embedded engineering engagement across Scala, Java, TypeScript and Python.',
+  description: 'Choose a scoped technical review or embedded engineering engagement across Scala, Java, TypeScript and Python.',
   path: '/services',
 })
 </script>
 
 <template>
   <div>
-    <PageHero eyebrow="Service packages" title="What we offer." intro="Three bounded engagement packages with an explicit purchase unit, working format and endpoint. Start with the package that matches what is known today." gradient="plum" />
+    <PageHero eyebrow="Service packages" title="What we offer." intro="Two bounded ways to work together, each with an explicit purchase unit, working format and endpoint. Start with the option that matches what is known today." gradient="plum" />
 
     <section class="border-b border-line bg-[#ece8de] py-10">
       <div class="page-shell grid gap-6 md:grid-cols-3">
@@ -30,7 +30,7 @@ usePageSeo({
     <section class="section-space">
       <div class="page-shell">
         <div class="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
-          <SectionHeading eyebrow="Packages" title="Our services." intro="Choose the package closest to the problem: investigate a difficult system, assess a test suite or add engineering capacity to an established team." />
+          <SectionHeading eyebrow="Packages" title="Our services." intro="Investigate a difficult system through a focused technical review, or add engineering capacity to an established team." />
           <p class="max-w-sm text-sm leading-6 text-ink/50">Not sure where to start? The fixed-scope Technical Review is designed to turn an unclear system problem into an informed next decision.</p>
         </div>
 

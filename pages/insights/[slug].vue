@@ -49,8 +49,14 @@ usePageSeo({
         <section v-for="section in article.sections" :key="section.heading">
           <h2>{{ section.heading }}</h2>
           <p v-for="paragraph in section.paragraphs" :key="paragraph">{{ paragraph }}</p>
+          <ArticleCategoryTheoryDiagram v-if="section.diagram === 'category-composition'" />
           <ul v-if="section.bullets">
             <li v-for="bullet in section.bullets" :key="bullet">{{ bullet }}</li>
+          </ul>
+          <ul v-if="section.links" class="article-references">
+            <li v-for="link in section.links" :key="link.href">
+              <a :href="link.href" target="_blank" rel="noopener noreferrer">{{ link.label }} <span aria-hidden="true">↗</span></a>
+            </li>
           </ul>
           <ArticleCodeBlock v-if="section.code" :code="section.code" />
         </section>
