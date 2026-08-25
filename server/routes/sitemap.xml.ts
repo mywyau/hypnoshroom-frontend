@@ -2,7 +2,7 @@ import { articles } from '../../data/articles'
 import { services } from '../../data/services'
 
 const siteUrl = 'https://hypnoshroom.com'
-const staticRoutes = ['/', '/about', '/contact', '/expertise', '/services', '/insights', '/scala', '/java', '/typescript', '/python']
+const staticRoutes = ['/', '/about', '/contact', '/expertise', '/work', '/services', '/insights', '/scala', '/java', '/typescript', '/python']
 
 const escapeXml = (value: string) => value
   .replaceAll('&', '&amp;')

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const groups = [
-  { title: 'Specialist Scala engineering', items: ['Scala 2.13', 'Play Framework', 'Cats', 'Cats Effect', 'sbt', 'MongoDB'] },
+  { title: 'Specialist Scala engineering', items: ['Scala 2 & 3', 'Play Framework', 'Cats', 'Cats Effect', 'sbt', 'MongoDB'] },
   { title: 'Modern product development', items: ['TypeScript', 'Nuxt 3', 'Vue', 'Auth0', 'Supabase', 'PostgreSQL', 'Vercel'] },
   { title: 'Backend engineering', items: ['Java', 'Spring Boot', 'REST APIs', 'Maven', 'database integration'] },
   { title: 'Testing & production', items: ['Unit and integration testing', 'CI/CD', 'Docker', 'Jenkins', 'logging and observability'] },

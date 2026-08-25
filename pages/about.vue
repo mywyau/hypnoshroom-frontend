@@ -1,24 +1,30 @@
 <script setup lang="ts">
-const principles = [
+import { Handshake, Heart, MessagesSquare, Sprout } from '@lucide/vue'
+
+const culturePrinciples = [
   {
-    number: '01',
-    title: 'Reproduce before diagnosing',
-    text: 'Run the build, exercise the relevant tests and inspect the available runtime evidence before deciding what is wrong. A credible recommendation starts with behaviour that can be observed.',
+    icon: Heart,
+    iconClass: 'text-[#b4493f]',
+    title: 'People before pressure',
+    text: 'Good work should not depend on routine late nights or permanent urgency. Workloads, deadlines and expectations should leave room for people to do their job well and still have a life outside it.',
   },
   {
-    number: '02',
-    title: 'Trace the real boundary',
-    text: 'Follow behaviour through validation, application logic, APIs and persistence. Difficult failures often sit where two otherwise-correct parts of the system meet.',
+    icon: MessagesSquare,
+    iconClass: 'text-plum',
+    title: 'Safe to speak honestly',
+    text: 'Questions, uncertainty and mistakes should be discussable without blame. Feedback can be direct while remaining thoughtful, specific and respectful of the person receiving it.',
   },
   {
-    number: '03',
-    title: 'Separate the changes',
-    text: 'Keep behaviour changes, refactoring and dependency upgrades distinct where possible. Smaller changes are easier to review, explain, test and reverse.',
+    icon: Handshake,
+    iconClass: 'text-[#42677c]',
+    title: 'Trust over supervision',
+    text: 'Give people the context and autonomy to make good decisions. Support should be easy to reach, but nobody should have to perform busyness or sit through unnecessary process to demonstrate their value.',
   },
   {
-    number: '04',
-    title: 'Verify beyond compilation',
-    text: 'A successful build is only one signal. Relevant unit, integration and acceptance checks should support the release path and the behaviour seen in production.',
+    icon: Sprout,
+    iconClass: 'text-moss',
+    title: 'Room to grow',
+    text: 'Learning is part of the work, not something squeezed into spare time. Knowledge should be shared generously, and people should have space to develop without being punished for not already knowing everything.',
   },
 ]
 
@@ -49,7 +55,7 @@ usePageSeo({
             </div>
             <div class="py-5">
               <dt class="font-semibold text-ink">Direct collaboration</dt>
-              <dd class="mt-2 leading-7 text-ink/60">Work with the engineer responsible for the technical decisions, code and progress updates from the first conversation onwards.</dd>
+              <dd class="mt-2 leading-7 text-ink/60">Work directly with the engineer responsible for the technical decisions, code and progress updates from the first conversation onwards. Cutting out layers of comms, noise and miscommunication.</dd>
             </div>
             <div class="py-5">
               <dt class="font-semibold text-ink">Built for your team to own</dt>
@@ -82,13 +88,15 @@ usePageSeo({
       </div>
     </section>
 
-    <section class="section-space border-y border-line bg-[#ece8de]">
+    <section class="section-space border-y border-line bg-[#eee9f0]">
       <div class="page-shell">
-        <SectionHeading eyebrow="Technical approach" title="How careful engineering shows up in the work." intro="The method is practical: establish the evidence, follow the system across its boundaries, keep changes understandable and verify the result in context." />
+        <SectionHeading eyebrow="People &amp; culture" title="Individuals before anything else." intro="Hypnoshroom believes we as individuals create and add value to our world. This means supporting those who create change, drive innovation or build to improve our society." />
         <ol class="mt-14 grid overflow-hidden rounded-2xl border border-line bg-paper sm:grid-cols-2 lg:grid-cols-4">
-          <li v-for="principle in principles" :key="principle.number" class="border-b border-line p-7 last:border-b-0 sm:min-h-80 sm:[&:nth-child(odd)]:border-r lg:border-b-0 lg:border-r lg:p-8 lg:last:border-r-0">
-            <span class="font-mono text-xs text-clay">{{ principle.number }}</span>
-            <h2 class="mt-14 font-display text-3xl">{{ principle.title }}</h2>
+          <li v-for="principle in culturePrinciples" :key="principle.title" class="border-b border-line p-7 last:border-b-0 sm:min-h-80 sm:[&:nth-child(odd)]:border-r lg:border-b-0 lg:border-r lg:p-8 lg:last:border-r-0">
+            <span class="flex size-11 items-center justify-center rounded-xl border border-line bg-paper shadow-sm" :class="principle.iconClass" aria-hidden="true">
+              <component :is="principle.icon" class="size-5" :stroke-width="1.7" />
+            </span>
+            <h2 class="mt-12 font-display text-3xl">{{ principle.title }}</h2>
             <p class="mt-4 leading-7 text-ink/60">{{ principle.text }}</p>
           </li>
         </ol>

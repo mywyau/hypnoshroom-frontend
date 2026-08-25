@@ -21,7 +21,7 @@ const languages = [
   {
     name: 'TypeScript',
     label: 'Frontend and Modern applications',
-    description: 'TypeScript brings stronger tooling and compile-time feedback to modern web products. We use it with Nuxt and Vue for SaaS applications, server-side rendering, APIs and full-stack features.',
+    description: 'TypeScript brings stronger tooling and compile-time feedback to modern web products. We use it with Nuxt and Vue for SaaS applications, server-side or client-side rendering, APIs and full-stack features.',
     details: ['Node.js', 'Nuxt', 'Fullstack development', 'Playwright Automated testing', 'Unit testing', 'Integration testing'],
     logo: '/languages/typescript.svg',
     link: '/typescript',
@@ -94,7 +94,7 @@ usePageSeo({
 
 <template>
   <div>
-    <PageHero eyebrow="Expertise" title="Our Expertise." intro="Language matters, but so do boundaries, data, tests, deployments and production behaviour. See where Hypnoshroom can help across the stack." gradient="forest" />
+    <PageHero eyebrow="Expertise" title="Our Expertise." intro="Languages do matter, but so does everything else. Boundaries, data, tests, deployments and production behaviour. See where Hypnoshroom can help across the stack." gradient="forest" />
 
     <section class="section-space">
       <div class="page-shell">
@@ -119,7 +119,7 @@ usePageSeo({
 
     <section id="databases" class="section-space scroll-mt-28 border-t border-line">
       <div class="page-shell">
-        <SectionHeading eyebrow="Databases" title="Data models that fit the application." intro="Database design and application design belong together. Schemas, documents, queries, indexes and persistence code are considered as one working boundary." />
+        <SectionHeading eyebrow="Databases" title="Application Persistence." intro="Database design and application design belong together. Schemas, documents, queries, indexes and persistence code are considered as one working boundary." />
         <div class="mt-12 grid gap-6 md:grid-cols-2">
           <article v-for="database in databases" :key="database.name" class="rounded-2xl border border-line bg-white/35 p-7">
             <p class="text-xs font-semibold uppercase tracking-[0.16em] text-moss">{{ database.technologies }}</p>
