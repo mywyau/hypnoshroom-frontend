@@ -9,6 +9,16 @@ export default defineNuxtConfig({
   modules: ['@nuxtjs/tailwindcss'],
   components: [{ path: '~/components', pathPrefix: false }],
   tailwindcss: { cssPath: '~/assets/css/main.css' },
+  runtimeConfig: {
+    resendApiKey: '',
+    contactToEmail: '',
+    contactFromEmail: '',
+    turnstileSecretKey: '',
+    public: {
+      contactEmail: '',
+      turnstileSiteKey: '',
+    },
+  },
   app: {
     head: {
       htmlAttrs: { lang: 'en-GB' },

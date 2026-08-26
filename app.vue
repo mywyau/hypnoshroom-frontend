@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Analytics } from '@vercel/analytics/vue'
+
 useHead({
   script: [{
     type: 'application/ld+json',
@@ -34,5 +36,6 @@ useHead({
       <NuxtPage />
     </main>
     <SiteFooter />
+    <Analytics />
   </div>
 </template>
