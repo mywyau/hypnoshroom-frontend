@@ -48,7 +48,7 @@ export const services: Service[] = [
     slug: 'technical-review',
     number: '02',
     title: 'Technical Review & Discovery',
-    shortDescription: 'An independent review of one system or technical question, with evidence, prioritised findings and practical recommendations.',
+    shortDescription: 'An independent review of one codebase or technical question, with evidence, prioritised findings and practical recommendations.',
     seoDescription: 'A fixed-scope technical review of one repository, service or technical question, with evidence-backed findings, recommendations and a team walkthrough.',
     packageType: 'Fixed-scope package',
     commercialModel: 'From £5,000',

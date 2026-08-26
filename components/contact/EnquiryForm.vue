@@ -116,7 +116,7 @@ const submitEnquiry = async (event: SubmitEvent) => {
         </select>
       </div>
       <div class="sm:col-span-2">
-        <label for="project" class="mb-2 block text-sm font-semibold">What are you working on?</label>
+        <label for="project" class="mb-2 block text-sm font-semibold">What on mind?</label>
         <textarea id="project" v-model="form.project" name="project" rows="6" required :maxlength="limits.project" aria-describedby="project-limit" class="w-full resize-y rounded-xl border border-line bg-paper px-4 py-3 text-base transition hover:border-ink/30 focus:border-moss" placeholder="What’s the system, what’s making life difficult, and when are you hoping to start?" />
         <p id="project-limit" class="mt-2 text-right text-xs text-ink/45" aria-live="polite">{{ form.project.length.toLocaleString() }} / {{ limits.project.toLocaleString() }} characters</p>
       </div>

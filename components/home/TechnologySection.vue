@@ -10,7 +10,7 @@ const groups = [
 <template>
   <section class="section-space border-y border-line bg-[#ece8de]">
     <div class="page-shell grid gap-14 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
-      <SectionHeading eyebrow="Technology" title="Depth where it matters." intro="A focused set of technologies for Scala systems, modern software products and the testing and delivery practices that keep them maintainable." />
+      <SectionHeading eyebrow="Technology" title="Depth where it matters." intro="Scala systems, modern products and the engineering practices that keep both reliable." />
       <div class="grid gap-x-10 gap-y-8 sm:grid-cols-2">
         <div v-for="group in groups" :key="group.title" class="border-t border-ink/15 pt-4">
           <h3 class="text-xs font-semibold uppercase tracking-[0.16em] text-moss">{{ group.title }}</h3>
