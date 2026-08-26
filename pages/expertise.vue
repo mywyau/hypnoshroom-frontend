@@ -94,7 +94,7 @@ usePageSeo({
 
 <template>
   <div>
-    <PageHero eyebrow="Expertise" title="Our Expertise." intro="Languages do matter, but so does everything else. Boundaries, data, tests, deployments and production behaviour. See where Hypnoshroom can help across the stack." gradient="forest" />
+    <PageHero eyebrow="Expertise" title="Our expertise." intro="Languages do matter, but so does everything else. Boundaries, data, tests, deployments and production behaviour. See where Hypnoshroom can help across the stack." gradient="forest" />
 
     <section class="section-space">
       <div class="page-shell">

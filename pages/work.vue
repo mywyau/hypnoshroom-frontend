@@ -21,7 +21,7 @@ const experienceAreas = [
   {
     icon: MonitorUp,
     eyebrow: 'Modern product development',
-    title: 'Taking a web product from idea to production',
+    title: 'From idea to live product',
     context: 'Independent product engineering',
     intro: 'Hands-on experience designing, building and deploying SaaS-style applications as a solo developer, including the product decisions and operational details around the code.',
     work: [
@@ -37,25 +37,25 @@ const experienceAreas = [
   {
     icon: GitPullRequest,
     eyebrow: 'Quality & production delivery',
-    title: 'Keeping changes reviewable and operable',
-    context: 'Applied across backend and product work',
-    intro: 'Testing, delivery and production support are treated as part of engineering rather than activities added after implementation is complete.',
+    title: 'Testing from code to production',
+    context: 'Functional, performance and production confidence',
+    intro: 'Testing is used to answer practical questions: does the code behave correctly, does the complete journey work, and will it remain reliable under realistic load?',
     work: [
-      'Using ScalaTest, JUnit, Mockito, Cucumber and Selenium where appropriate',
-      'Balancing focused unit tests with integration and acceptance evidence',
+      'Building focused unit, integration and acceptance suites with ScalaTest, JUnit, Mockito and Cucumber',
+      'Automating end-to-end browser journeys with Playwright and Selenium',
+      'Performance testing with Gatling and k6 across load, latency, throughput and failure behaviour',
+      'Using Grafana to interpret test results alongside application and infrastructure signals',
       'Working with Git, GitHub, Jenkins, CI/CD pipelines and Docker',
       'Debugging live behaviour using Grafana, Kibana, Splunk and CloudWatch',
-      'Improving code through bounded refactoring and dependency cleanup',
-      'Recording decisions and leaving work understandable for the team taking it forward',
     ],
-    perspective: 'The aim is pragmatic confidence: feedback that helps engineers make decisions, releases that can be understood and software that does not depend on one person retaining all of the context.',
+    perspective: 'The goal is useful evidence rather than a larger test count: fast feedback during development, confidence across real application boundaries and performance results that can support a release decision.',
   },
 ]
 
 const engagementValue = [
-  ['Established systems are familiar territory', 'The work can begin with an existing codebase, incomplete documentation and constraints that cannot simply be redesigned away.'],
-  ['Decisions are followed across boundaries', 'Types, application logic, APIs, persistence, tests and production behaviour are considered together when the problem crosses them.'],
-  ['Advice stays close to implementation', 'Recommendations are grounded in buildable, testable software and the realities of how a team will deliver and own the next change.'],
+  ['Establish the baseline', 'Get the code building, run the relevant tests and inspect available production evidence before deciding what needs to change.'],
+  ['Trace the complete path', 'Follow behaviour through types, application logic, APIs, persistence and tests so a local fix does not create a problem elsewhere.'],
+  ['Make the next step usable', 'Tie findings to the code, explain the trade-offs and leave prioritised actions the team can estimate, test and deliver.'],
 ]
 
 usePageSeo({
@@ -71,7 +71,7 @@ usePageSeo({
 
 <template>
   <div>
-    <PageHero eyebrow="Selected experience" title="Work grounded in real systems." intro="The experience behind Hypnoshroom spans long-lived Scala services, independently built web products and the testing and production work needed to keep software useful." gradient="heather" />
+    <PageHero eyebrow="Selected experience" title="Our experience." intro="The experience behind Hypnoshroom spans long-lived Scala services, independently built web products and the testing and production work needed to keep software useful." gradient="heather" />
 
     <section class="border-b border-line bg-[#ece8de] py-12 sm:py-16">
       <div class="page-shell grid gap-6 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20">
@@ -124,20 +124,20 @@ usePageSeo({
           <h2 class="font-display text-4xl leading-tight sm:text-5xl">Staying current. Adopt deliberately.</h2>
         </div>
         <div>
-          <p class="max-w-3xl text-lg leading-8 text-ink/65">Software keeps moving. Languages, frameworks, build tools and delivery platforms change, and staying useful means keeping up with the parts of that change that affect real systems.</p>
-          <p class="mt-5 max-w-3xl leading-7 text-ink/60">That does not mean replacing working technology whenever something new appears. New approaches are read about, tested and weighed against support, maintainability, migration cost and the people who will own the result.</p>
+          <p class="max-w-3xl text-lg leading-8 text-ink/65">Software keeps moving. Hypnoshroom keeps pace with the language, framework, tooling and delivery changes that matter to real systems.</p>
+          <p class="mt-5 max-w-3xl leading-7 text-ink/60">That does not mean replacing working technology whenever something new appears. New approaches are explored through research and hands-on testing, then weighed against support, maintainability, migration cost and the needs of the team that will own the result.</p>
           <dl class="mt-9 grid gap-8 sm:grid-cols-3">
             <div class="border-t border-plum/20 pt-5">
               <dt class="font-semibold text-ink">Follow the ecosystems</dt>
-              <dd class="mt-2 text-sm leading-6 text-ink/60">Keep track of relevant language releases, framework direction, dependency support and changing production practices.</dd>
+              <dd class="mt-2 text-sm leading-6 text-ink/60">Hypnoshroom follows relevant language releases, framework direction, dependency support and changing production practices.</dd>
             </div>
             <div class="border-t border-plum/20 pt-5">
               <dt class="font-semibold text-ink">Learn by building</dt>
-              <dd class="mt-2 text-sm leading-6 text-ink/60">Use small experiments and independently built products to understand how a tool behaves beyond its introductory example.</dd>
+              <dd class="mt-2 text-sm leading-6 text-ink/60">Small experiments and independently built products reveal how a tool behaves beyond its introductory example.</dd>
             </div>
             <div class="border-t border-plum/20 pt-5">
               <dt class="font-semibold text-ink">Modernise with a reason</dt>
-              <dd class="mt-2 text-sm leading-6 text-ink/60">Adopt newer technology when it improves support, delivery, reliability or ownership—not simply because it is fashionable.</dd>
+              <dd class="mt-2 text-sm leading-6 text-ink/60">Newer technology is adopted when it improves support, delivery, reliability or ownership—not simply because it is fashionable.</dd>
             </div>
           </dl>
         </div>
@@ -146,7 +146,7 @@ usePageSeo({
 
     <section class="section-space border-y border-line bg-[#ece8de]">
       <div class="page-shell">
-        <SectionHeading eyebrow="In an engagement" title="Experience that shortens the path to useful work." intro="Previous experience does not remove the need to understand a new system. It helps identify the right questions, recognise familiar risks and avoid treating every problem as if it starts from a blank page." />
+        <SectionHeading eyebrow="What clients can expect" title="From unfamiliar code to a clear next step." intro="Hypnoshroom starts with the codebase as it is, establishes what can be observed and turns that evidence into focused technical work." />
         <dl class="mt-12 grid gap-8 md:grid-cols-3">
           <div v-for="item in engagementValue" :key="item[0]" class="border-t border-ink/20 pt-5">
             <dt class="font-display text-2xl">{{ item[0] }}</dt>

@@ -156,7 +156,7 @@ export const articles: Article[] = [
     ],
   },
   {
-    slug: 'implicits-and-context-bounds-in-scala', title: 'Implicits and context bounds in Scala', category: 'Scala type system', topic: 'Scala', readTime: '14 min read',
+    slug: 'implicits-and-context-bounds-in-scala', title: 'Implicits in Scala: parameters, scope and context bounds', category: 'Scala type system', topic: 'Scala', readTime: '14 min read',
     summary: 'How implicit parameters, implicit scope and context bounds work in Scala 2.13, how Scala 3 expresses the same ideas, and where invisible dependencies become a maintenance problem.',
     sections: [
       { heading: 'An implicit parameter is still a parameter', paragraphs: ['Scala 2.13 can fill an implicit parameter when the caller omits it and exactly one suitable value can be found. The dependency remains part of the method signature; the compiler is performing argument resolution rather than creating a global value.', 'This is useful for stable contextual capabilities such as an Ordering, ExecutionContext or typeclass instance. It becomes harder to reason about when large services, request-specific state or behaviour with surprising side effects arrive implicitly.', 'A caller can always pass the argument explicitly. Doing so is useful while debugging resolution and at boundaries where the chosen instance deserves to be visible.'], code: { label: 'Make the inferred argument visible', language: 'scala 2.13', source: 'final case class TraceId(value: String)\n\ndef audit(message: String)(implicit traceId: TraceId): String =\n  s"[${traceId.value}] $message"\n\nimplicit val currentTrace: TraceId = TraceId("trace-17")\n\naudit("account loaded")\naudit("account loaded")(currentTrace)' } },
