@@ -41,7 +41,7 @@ usePageSeo({
             class="group relative rounded-3xl border bg-white/35"
             :class="service.featured ? 'border-moss shadow-soft' : 'border-line'"
           >
-            <summary class="cursor-pointer list-none rounded-3xl p-7 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-moss [&::-webkit-details-marker]:hidden sm:p-9 lg:flex lg:h-[40rem] lg:flex-col">
+            <summary class="cursor-pointer list-none rounded-3xl p-7 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-moss [&::-webkit-details-marker]:hidden sm:p-9 lg:flex lg:h-[41rem] lg:flex-col">
               <span v-if="service.featured" class="absolute right-6 top-0 -translate-y-1/2 rounded-full bg-moss px-4 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-white">Best place to start</span>
               <div class="flex items-start justify-between gap-5 lg:min-h-36">
                 <div>
@@ -53,15 +53,15 @@ usePageSeo({
 
               <p class="mt-5 max-w-xl leading-7 text-ink/60 lg:min-h-[5.25rem]">{{ service.shortDescription }}</p>
 
-              <div class="mt-8 border-t border-line pt-6 lg:flex lg:min-h-48 lg:flex-col">
+              <div class="mt-8 border-t border-line pb-8 pt-6 lg:flex lg:min-h-48 lg:flex-col">
                 <p class="font-display text-3xl">{{ service.commercialModel }}</p>
                 <p class="mt-2 text-sm leading-6 text-ink/55">{{ service.commercialDetail }}</p>
-                <div class="mt-7 lg:mt-auto lg:pt-5">
+                <div class="mt-7 lg:mt-auto lg:pt-4">
                   <p class="inline-flex rounded-full border border-line bg-paper px-3 py-1.5 text-xs font-semibold text-ink/65">{{ service.timeline }}</p>
                 </div>
               </div>
 
-              <div class="mt-6 flex items-center justify-between gap-4 border-t border-line pt-6 text-sm font-semibold text-moss lg:mt-auto">
+              <div class="mt-6 flex items-center justify-between gap-4 border-t border-line pt-8 text-sm font-semibold text-moss lg:mt-auto">
                 <span class="group-open:hidden">Show package details</span>
                 <span class="hidden group-open:inline">Hide package details</span>
                 <span aria-hidden="true" class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-moss/30 transition-transform duration-200 group-open:rotate-45">

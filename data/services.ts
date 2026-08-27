@@ -83,7 +83,7 @@ export const services: Service[] = [
     seoDescription: 'Embedded engineering support for established teams, available in three-month increments across Scala, Java, TypeScript and Python systems.',
     packageType: 'Embedded engagement',
     commercialModel: 'Indicative £600/day',
-    commercialDetail: 'Engineering support is agreed in renewable three-month increments, up to a maximum engagement of 12 months. The final day rate and working pattern are confirmed before the engagement starts.',
+    commercialDetail: 'The day rate, working pattern and responsibilities are agreed for renewable three-month increments, up to 12 months.',
     timeline: '3-month increments · up to 12 months',
     whoFor: 'Teams with a temporary capacity gap, a specialist piece of work or a backlog that needs another experienced engineer to move.',
     problems: ['Hiring cannot happen quickly enough', 'A delivery milestone needs more engineering capacity', 'The team has a short-term gap in a particular technology', 'Senior engineers are stretched across too many priorities'],
