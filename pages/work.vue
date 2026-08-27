@@ -52,10 +52,10 @@ const experienceAreas = [
   },
 ]
 
-const engagementValue = [
-  ['Establish the baseline', 'Get the code building, run the relevant tests and inspect available production evidence before deciding what needs to change.'],
-  ['Trace the complete path', 'Follow behaviour through types, application logic, APIs, persistence and tests so a local fix does not create a problem elsewhere.'],
-  ['Make the next step usable', 'Tie findings to the code, explain the trade-offs and leave prioritised actions the team can estimate, test and deliver.'],
+const serviceOffers = [
+  ['Technical Review & Discovery', 'Investigate one codebase or technical question, establish the evidence and provide prioritised findings with practical recommendations.'],
+  ['Embedded Engineering Support', 'Add experienced Scala, backend or product engineering directly to an established team with its own backlog, domain knowledge and delivery process.'],
+  ['Defined Outcome Delivery', 'Agree a bounded software outcome, acceptance criteria and project price, then deliver the implementation, verification evidence and handover.'],
 ]
 
 usePageSeo({
@@ -146,9 +146,9 @@ usePageSeo({
 
     <section class="section-space border-y border-line bg-[#ece8de]">
       <div class="page-shell">
-        <SectionHeading eyebrow="What clients can expect" title="From unfamiliar code to a clear next step." intro="Hypnoshroom starts with the codebase as it is, establishes what can be observed and turns that evidence into focused technical work." />
+        <SectionHeading eyebrow="What Hypnoshroom offers" title="Choose the support the work needs." intro="Commission an independent technical review, add experienced engineering capacity to an existing team or agree a defined software outcome for Hypnoshroom to deliver." />
         <dl class="mt-12 grid gap-8 md:grid-cols-3">
-          <div v-for="item in engagementValue" :key="item[0]" class="border-t border-ink/20 pt-5">
+          <div v-for="item in serviceOffers" :key="item[0]" class="border-t border-ink/20 pt-5">
             <dt class="font-display text-2xl">{{ item[0] }}</dt>
             <dd class="mt-3 text-sm leading-6 text-ink/60">{{ item[1] }}</dd>
           </div>

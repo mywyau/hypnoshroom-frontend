@@ -88,17 +88,6 @@ usePageSeo({
       </div>
     </section>
 
-    <section class="section-space border-y border-line bg-[#ece8de]">
-      <div class="page-shell">
-        <SectionHeading eyebrow="Purchasing process" title="Scope and terms are agreed before work starts." intro="Each package defines the system or question in scope, client responsibilities, expected outputs and commercial terms. Follow-on work is scoped and approved separately." />
-        <div class="mt-12 grid gap-8 md:grid-cols-3">
-          <article class="border-t border-ink/20 pt-5"><ServiceProcessIcon icon="choose" /><h2 class="mt-8 font-display text-3xl">Choose a starting package</h2><p class="mt-4 text-sm leading-6 text-ink/60">Select the closest fit. A short qualification call confirms whether the package is appropriate.</p></article>
-          <article class="border-t border-ink/20 pt-5"><ServiceProcessIcon icon="boundary" /><h2 class="mt-8 font-display text-3xl">Confirm the boundary</h2><p class="mt-4 text-sm leading-6 text-ink/60">Agree the repository, technical question, access, client responsibilities, outputs and commercial terms.</p></article>
-          <article class="border-t border-ink/20 pt-5"><ServiceProcessIcon icon="commit" /><h2 class="mt-8 font-display text-3xl">Buy only that commitment</h2><p class="mt-4 text-sm leading-6 text-ink/60">Complete the package, review its evidence and make a separate decision about any follow-on work.</p></article>
-        </div>
-      </div>
-    </section>
-
     <ContactCta />
   </div>
 </template>
