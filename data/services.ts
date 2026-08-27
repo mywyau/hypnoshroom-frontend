@@ -16,6 +16,12 @@ export interface Service {
   format: string
   boundary: string
   steps: Array<{ title: string; description: string }>
+  developerIncentive?: {
+    title: string
+    description: string
+    comparison: Array<{ title: string; description: string }>
+    points: string[]
+  }
   featured?: boolean
 }
 
@@ -90,6 +96,45 @@ export const services: Service[] = [
       { title: 'Join the workflow', description: 'Work through the team’s existing repository, review, testing and delivery practices.' },
       { title: 'Deliver and share', description: 'Complete agreed engineering work while documenting decisions and sharing system knowledge.' },
       { title: 'Review or conclude', description: 'Before the increment ends, agree another three months or close and transfer active work cleanly. Total engagement length is capped at 12 months.' },
+    ],
+  },
+  {
+    id: 'defined-outcome-delivery',
+    slug: 'defined-outcome-delivery',
+    number: '03',
+    title: 'Defined Outcome Delivery',
+    shortDescription: 'A bounded piece of engineering work delivered against agreed scope, acceptance criteria and quality standards.',
+    seoDescription: 'Defined outcome software delivery with agreed scope, acceptance criteria, responsibilities, project price and quality standards.',
+    packageType: 'Outcome-based engagement',
+    commercialModel: 'Fixed Fee',
+    commercialDetail: 'We will determine and outcome, technical boundary, responsibilities, acceptance criteria and project price before implementation begins.',
+    timeline: 'Delivery milestones agreed upfront',
+    whoFor: 'Teams that know the result they need, can provide product and domain decisions, and want Hypnoshroom to take responsibility for a bounded piece of engineering delivery.',
+    problems: ['A defined backend capability needs to be delivered', 'A bounded service or integration change needs clear ownership', 'A known migration or upgrade is ready to move beyond investigation', 'A specific delivery problem needs implementation rather than another recommendation'],
+    work: ['Confirm the outcome, assumptions, dependencies and acceptance criteria', 'Establish the relevant build, test and operational baseline', 'Implement the agreed change in reviewable increments', 'Test and verify the result against the agreed acceptance criteria', 'Document the change and hand ownership back to the client team'],
+    deliverables: ['The agreed working software outcome', 'Automated tests and verification evidence', 'Relevant technical and operational documentation', 'A walkthrough and clean handover to the client team'],
+    format: 'A scoped engineering project with an agreed outcome, price, delivery boundary and definition of done. Progress and delivery risks remain visible throughout the work.',
+    boundary: 'One bounded technical outcome at a time. The client remains responsible for timely product and domain decisions, access, dependencies and final acceptance. Material changes to scope or assumptions are assessed and agreed separately rather than absorbed into the original commitment.',
+    developerIncentive: {
+      title: 'Align the commercial model with better delivery.',
+      description: 'In a traditional consultancy often the interests of the consultancy do not align with the client. Supplier revenue increases when delivery takes more days or requires more people. You the client often want the opposite: a reliable outcome delivered sooner, with minimal rework, lower delivery risk and higher levels of quality.',
+      comparison: [
+        { title: 'Smaller scoped engagements', description: 'We build sustainably by agreeing to and delivering smaller scoped pieces of work. This way we can demonstrate and ensure quality before building on top.' },
+        { title: 'Developer & Consultant Bonuses', description: 'We reward our developers and consultants with team based incentives to meeting acceptance criteria, high level of quality and finishing work within given time-frames. We ensure the people doing the work value correctness, speed, collaboration and are aligned with delivering value to the customer.' },
+      ],
+      points: [
+        // 'Part of any additional margin created through sound engineering is allocated to the developers responsible for the delivery.',
+        // 'The complete outcome and acceptance criteria must be met before a bonus is considered.',
+        // 'Testing, reliability, security, maintainability and documentation remain quality gates.',
+        // 'The incentive rewards useful automation, good decisions and avoided rework—not rushed delivery or reduced scope.',
+      ],
+    },
+    steps: [
+      { title: 'Technical review', description: 'Inspect the relevant code, tests, dependencies and delivery setup to validate assumptions and identify material risks.' },
+      { title: 'Define the outcome', description: 'Agree the required behaviour, technical boundary, dependencies, client responsibilities and evidence needed for acceptance.' },
+      { title: 'Strike a deal', description: 'Set the delivery milestones, project price, assumptions and change process before implementation begins.' },
+      { title: 'Deliver visibly', description: 'Build the outcome in reviewable increments while keeping progress, decisions and emerging risks clear.' },
+      { title: 'Verify and hand over', description: 'Meet the agreed quality and acceptance criteria, walk through the result and transfer ownership cleanly.' },
     ],
   },
   // {

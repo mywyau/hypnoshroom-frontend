@@ -4,7 +4,7 @@ const isOpen = ref(false)
 const links = [
   { label: 'Services', to: '/services' },
   { label: 'Expertise', to: '/expertise' },
-  { label: 'Work', to: '/work' },
+  { label: 'Experience', to: '/work' },
   { label: 'Insights', to: '/insights' },
   { label: 'About', to: '/about' },
 ]

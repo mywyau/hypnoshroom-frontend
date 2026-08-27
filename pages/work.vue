@@ -64,7 +64,7 @@ usePageSeo({
   path: '/work',
   breadcrumbs: [
     { name: 'Home', path: '/' },
-    { name: 'Work', path: '/work' },
+    { name: 'Experience', path: '/work' },
   ],
 })
 </script>

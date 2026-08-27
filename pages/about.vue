@@ -59,29 +59,29 @@ usePageSeo({
     <section class="section-space">
       <div class="page-shell grid gap-14 lg:grid-cols-[1fr_0.85fr] lg:gap-24">
         <div>
-          <p class="eyebrow">Why work with an independent consultancy</p>
-          <h2 class="font-display text-4xl leading-tight sm:text-5xl">Experienced engineering, without the layers.</h2>
-          <p class="mt-7 text-lg leading-8 text-ink/65">Hypnoshroom combines specialist technical experience with the focus and accountability of an independent consultancy.</p>
+          <p class="eyebrow">Why choose Hypnoshroom</p>
+          <h2 class="font-display text-4xl leading-tight sm:text-5xl">Specialist attention, without the consultancy layers.</h2>
+          <p class="mt-7 text-lg leading-8 text-ink/65">Large consultancies are built to assemble teams and coordinate programmes. Hypnoshroom is built for focused technical work that benefits from experienced, hands-on attention.</p>
           <dl class="mt-9 divide-y divide-line border-y border-line">
             <div class="py-5">
-              <dt class="font-semibold text-ink">Independent judgment</dt>
-              <dd class="mt-2 leading-7 text-ink/60">Recommendations are shaped by the evidence and the outcome—not by a platform, delivery team or larger programme to sell.</dd>
+              <dt class="font-semibold text-ink">Experience goes into the work</dt>
+              <dd class="mt-2 leading-7 text-ink/60">The engineer assessing the problem is also responsible for the technical decisions, implementation and progress.</dd>
             </div>
             <div class="py-5">
-              <dt class="font-semibold text-ink">Experience applied directly</dt>
-              <dd class="mt-2 leading-7 text-ink/60">Hands-on experience across long-lived backend systems, modern software products, testing and production support goes directly into the work.</dd>
+              <dt class="font-semibold text-ink">Less context lost in hand-offs</dt>
+              <dd class="mt-2 leading-7 text-ink/60">There is no account layer or rotating delivery team between the first conversation and the code. Decisions stay with the person doing the work.</dd>
             </div>
             <div class="py-5">
-              <dt class="font-semibold text-ink">Direct collaboration</dt>
-              <dd class="mt-2 leading-7 text-ink/60">Work directly with the engineer responsible for the technical decisions, code and progress updates from the first conversation onwards. Cutting out layers of comms, noise and miscommunication.</dd>
+              <dt class="font-semibold text-ink">Independent technical judgment</dt>
+              <dd class="mt-2 leading-7 text-ink/60">Recommendations follow the evidence and the problem—not a preferred platform, a headcount target or a larger programme to sell.</dd>
             </div>
             <div class="py-5">
-              <dt class="font-semibold text-ink">Built for your team to own</dt>
-              <dd class="mt-2 leading-7 text-ink/60">Findings, decisions and technical context stay visible throughout the work. The aim is stronger software and a team that can move forward without permanent consultancy support.</dd>
+              <dt class="font-semibold text-ink">Your team keeps ownership</dt>
+              <dd class="mt-2 leading-7 text-ink/60">Code, findings and decisions remain visible and understandable. The engagement should leave the team more capable, not dependent on permanent consultancy support.</dd>
             </div>
           </dl>
-          <p class="mt-7 leading-7 text-ink/60">A good fit for teams that need an experienced engineer to understand a difficult system, test an assumption or contribute directly to delivery.</p>
-          <AppButton to="/contact" class="mt-9">Discuss your system</AppButton>
+          <p class="mt-7 leading-7 text-ink/60">Choose Hypnoshroom for a focused codebase, review or delivery problem that needs direct engineering attention. Work requiring several teams, broad staffing or programme management is better suited to a larger supplier.</p>
+          <AppButton to="/contact" class="mt-9">Discuss a focused problem</AppButton>
         </div>
         <aside class="rounded-3xl border border-line bg-[#ece8de] p-7 sm:p-9">
           <p class="text-xs font-semibold uppercase tracking-[0.18em] text-moss">Engineering expertise</p>
@@ -126,7 +126,7 @@ usePageSeo({
         <div>
           <p class="eyebrow">Learning by doing</p>
           <h2 class="font-display text-4xl leading-tight sm:text-5xl">Getting your hands dirty.</h2>
-          <p class="mt-6 text-lg leading-8 text-ink/65">Documentation, discussion and theory provide a map. To truly learn and master we believe you must do! By building something, observing how it behaves and improving it turns that knowledge into practical judgement.</p>
+          <p class="mt-6 text-lg leading-8 text-ink/65">Documentation, discussion and theory provide the map. To truly learn and master we believe you must do! By building something, observing how it behaves and improving it turns that knowledge into practical function and judgement.</p>
         </div>
         <div class="grid gap-5 sm:grid-cols-3">
           <article v-for="principle in learningPrinciples" :key="principle.title" class="rounded-2xl border border-line bg-white/35 p-6">

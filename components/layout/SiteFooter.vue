@@ -10,7 +10,7 @@
         <nav aria-label="Footer navigation" class="mt-4 grid grid-cols-2 gap-3 text-sm">
           <NuxtLink to="/services" class="hover:text-moss">Services</NuxtLink>
           <NuxtLink to="/expertise" class="hover:text-moss">Expertise</NuxtLink>
-          <NuxtLink to="/work" class="hover:text-moss">Work</NuxtLink>
+          <NuxtLink to="/work" class="hover:text-moss">Experience</NuxtLink>
           <NuxtLink to="/insights" class="hover:text-moss">Insights</NuxtLink>
           <NuxtLink to="/about" class="hover:text-moss">About</NuxtLink>
           <NuxtLink to="/contact" class="hover:text-moss">Contact</NuxtLink>
