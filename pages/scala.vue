@@ -29,7 +29,7 @@ const workPackages = [
     slug: 'embedded-engineering-support',
     title: 'Embedded Scala Engineering',
     commercial: 'Day-rate engagement',
-    price: 'From £600 per day',
+    price: 'Rate agreed before engagement',
     duration: '3-month increments · up to 12 months',
     intro: 'Add experienced Scala engineering capacity to an established team with a backlog, product context and delivery process already in place.',
     goodFor: ['A team needs additional Scala or Play capacity', 'Features, maintenance or production issues need hands-on engineering', 'Planned framework, dependency or runtime changes need implementing', 'Testing, APIs, MongoDB or sbt work needs focused attention'],

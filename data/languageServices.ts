@@ -59,7 +59,7 @@ export const javaServicesPage: LanguageServicesPage = {
       outputs: ['Concise written review of the current system', 'Ranked findings supported by code or runtime evidence', 'Recommended next steps and realistic options', 'Technical walkthrough with the team'], boundary: reviewBoundary,
     },
     {
-      slug: 'embedded-engineering-support', commercial: 'Day-rate engagement', title: 'Embedded Java Engineering', price: 'From £600 per day', duration: '3-month increments · up to 12 months',
+      slug: 'embedded-engineering-support', commercial: 'Day-rate engagement', title: 'Embedded Java Engineering', price: 'Rate agreed before engagement', duration: '3-month increments · up to 12 months',
       intro: 'Add experienced Java engineering capacity to an established team with a backlog, product context and delivery process already in place.',
       goodFor: ['A team needs additional Java or Spring Boot capacity', 'Features, maintenance or production issues need hands-on engineering', 'Planned JDK, framework or dependency changes need implementing', 'Testing, APIs or database work needs focused attention'],
       work: ['Join the team’s existing backlog, reviews and delivery rhythm', 'Implement and maintain Java services, Spring Boot applications and REST APIs', 'Improve service boundaries, persistence and automated tests', 'Investigate build, dependency and production problems', 'Document decisions and share system knowledge as the work develops'],
@@ -90,7 +90,7 @@ export const typeScriptServicesPage: LanguageServicesPage = {
       outputs: ['Concise written review of the current application', 'Ranked findings supported by code or runtime evidence', 'Recommended next steps and realistic options', 'Technical walkthrough with the team'], boundary: reviewBoundary,
     },
     {
-      slug: 'embedded-engineering-support', commercial: 'Day-rate engagement', title: 'Embedded TypeScript Engineering', price: 'From £600 per day', duration: '3-month increments · up to 12 months',
+      slug: 'embedded-engineering-support', commercial: 'Day-rate engagement', title: 'Embedded TypeScript Engineering', price: 'Rate agreed before engagement', duration: '3-month increments · up to 12 months',
       intro: 'Add experienced TypeScript engineering capacity to an established team with a backlog, product context and delivery process already in place.',
       goodFor: ['A team needs additional TypeScript, Nuxt or Vue capacity', 'Product features or integrations need hands-on engineering', 'Authentication, API or database work needs focused attention', 'Build, deployment or production problems need resolving'],
       work: ['Join the team’s existing backlog, reviews and delivery rhythm', 'Implement full-stack features, REST APIs and external integrations', 'Improve runtime validation, application boundaries and automated tests', 'Work with Auth0, Supabase, PostgreSQL and Vercel where relevant', 'Document decisions and share system knowledge as the work develops'],
@@ -121,7 +121,7 @@ export const pythonServicesPage: LanguageServicesPage = {
       outputs: ['Concise written review of the current system', 'Ranked findings supported by code or runtime evidence', 'Recommended next steps and realistic options', 'Technical walkthrough with the team'], boundary: reviewBoundary,
     },
     {
-      slug: 'embedded-engineering-support', commercial: 'Day-rate engagement', title: 'Embedded Python Engineering', price: 'From £600 per day', duration: '3-month increments · up to 12 months',
+      slug: 'embedded-engineering-support', commercial: 'Day-rate engagement', title: 'Embedded Python Engineering', price: 'Rate agreed before engagement', duration: '3-month increments · up to 12 months',
       intro: 'Add Python engineering capacity to an established team with a backlog, product context and delivery process already in place.',
       goodFor: ['A team needs additional Python service capacity', 'Integrations or automation need hands-on engineering', 'Testing, APIs or database work needs focused attention', 'Environment, dependency or production issues need resolving'],
       work: ['Join the team’s existing backlog, reviews and delivery rhythm', 'Implement and maintain Python services, APIs and integrations', 'Improve application boundaries, validation and automated tests', 'Investigate environment, dependency and production problems', 'Document decisions and share system knowledge as the work develops'],
