@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { getArticle } from '~/data/articles'
+import { formatArticleDate } from '~/utils/formatArticleDate'
 
 const route = useRoute()
 const slug = Array.isArray(route.params.slug) ? route.params.slug[0] : route.params.slug
@@ -28,6 +29,7 @@ usePageSeo({
     mainEntityOfPage: `https://hypnoshroom.com/insights/${article.slug}`,
     author: { '@id': 'https://hypnoshroom.com/#organization' },
     publisher: { '@id': 'https://hypnoshroom.com/#organization' },
+    datePublished: article.publishedAt,
     articleSection: article.category,
     keywords: [article.topic, ...(article.topics || [])].join(', '),
     about: [article.topic, ...(article.topics || [])].map(name => ({
@@ -44,7 +46,7 @@ usePageSeo({
     <header class="border-b border-line py-16 sm:py-24">
       <div class="page-shell max-w-4xl">
         <NuxtLink to="/insights" class="text-sm font-semibold text-moss">← All insights</NuxtLink>
-        <div class="mt-10 flex items-center gap-3 text-xs text-ink/45"><span class="text-moss">{{ article.category }}</span><span aria-hidden="true">·</span><span>{{ article.readTime }}</span></div>
+        <div class="mt-10 flex items-center gap-3 text-xs text-ink/45"><span class="text-moss">{{ article.category }}</span><span aria-hidden="true">·</span><time :datetime="article.publishedAt">Published {{ formatArticleDate(article.publishedAt) }}</time><span aria-hidden="true">·</span><span>{{ article.readTime }}</span></div>
         <h1 class="mt-5 font-display text-5xl leading-[1.05] tracking-[-0.03em] sm:text-6xl lg:text-7xl">{{ article.title }}</h1>
         <p class="mt-7 max-w-2xl text-xl leading-8 text-ink/60">{{ article.summary }}</p>
       </div>

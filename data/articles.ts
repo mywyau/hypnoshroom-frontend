@@ -1,9 +1,68 @@
 export interface ArticleCode { label: string; language: string; source: string }
 export interface ArticleLink { label: string; href: string }
 export interface ArticleSection { heading: string; paragraphs: string[]; bullets?: string[]; code?: ArticleCode; diagram?: 'category-composition'; links?: ArticleLink[] }
-export interface Article { slug: string; title: string; seoTitle?: string; summary: string; seoDescription?: string; category: string; topic: string; topics?: string[]; readTime: string; sections: ArticleSection[] }
+export interface Article { slug: string; title: string; seoTitle?: string; summary: string; seoDescription?: string; category: string; topic: string; topics?: string[]; readTime: string; publishedAt: string; sections: ArticleSection[] }
 
-export const articles: Article[] = [
+const articlePublicationDates: Record<string, string> = {
+  'scala-2-to-scala-3': '2026-08-20',
+  'finding-your-way-around-scala-ecosystem': '2026-08-21',
+  'partial-functions-in-scala': '2026-08-22',
+  'modelling-a-play-framework-application': '2026-08-22',
+  'case-classes-as-domain-models': '2026-08-22',
+  'referential-transparency-and-immutability-scala': '2026-08-27',
+  'lazy-vals-and-laziness-in-scala': '2026-08-27',
+  'algebraic-data-types-in-scala': '2026-08-27',
+  'traits-in-scala-design': '2026-08-22',
+  'typeclasses-in-practical-scala': '2026-08-22',
+  'error-handling-as-values-in-scala': '2026-08-22',
+  'monads-in-practical-scala': '2026-08-22',
+  'streaming-in-scala-with-fs2': '2026-08-27',
+  'scala-collections-in-practice': '2026-08-24',
+  'recursion-and-tail-recursion-in-scala': '2026-08-24',
+  'map-and-flatmap-in-scala': '2026-08-22',
+  'implicits-and-context-bounds-in-scala': '2026-08-24',
+  'category-theory-in-practical-scala': '2026-08-25',
+  'tagless-final-in-scala': '2026-08-24',
+  'over-mocking-scala-tests': '2026-08-24',
+  'unit-and-integration-testing-boundaries': '2026-08-25',
+  'end-to-end-browser-testing-that-earns-its-cost': '2026-08-25',
+  'folds-in-scala': '2026-08-24',
+  'pattern-matching-in-scala': '2026-08-24',
+  'futures-in-scala-application-code-and-tests': '2026-08-24',
+  'scala-syntactic-sugar': '2026-08-24',
+  'java-records-sealed-types-domain-models': '2026-08-25',
+  'testing-spring-boot-service-boundaries': '2026-08-25',
+  'nuxt-rendering-ssr-ssg-and-client-side': '2026-08-25',
+  'nuxt-server-client-boundaries': '2026-08-25',
+  'using-codex-on-real-codebases': '2026-08-25',
+  'openai-responses-and-batch-api': '2026-08-25',
+  'deploying-nuxt-on-vercel': '2026-08-25',
+  'postgresql-schema-indexes-and-query-behaviour': '2026-08-25',
+  'database-normalisation-in-practice': '2026-08-25',
+  'github-actions-ci-cd-that-remains-understandable': '2026-08-25',
+  'handling-async-code-in-typescript': '2026-08-25',
+  'vim-controls-and-essential-commands': '2026-08-25',
+  'typed-application-boundaries-in-scala': '2026-08-22',
+  'long-lived-play-framework-applications': '2026-08-20',
+  'scala-or-java': '2026-08-20',
+  'technical-code-reviews': '2026-08-22',
+  'original-agile-principles': '2026-08-30',
+  'technical-debt-without-a-rewrite': '2026-08-20',
+  'safe-java-jdk-upgrades': '2026-08-20',
+  'maintainable-backend-services': '2026-08-20',
+  'typescript-backends-get-complicated': '2026-08-20',
+  'operable-python-services': '2026-08-20',
+  'slow-api-database-problem': '2026-08-20',
+  'choosing-nosql-data-model': '2026-08-20',
+  'backend-work-on-serverless': '2026-08-20',
+  'practical-git-aliases': '2026-08-25',
+  'architecture-patterns-and-when-to-use-them': '2026-08-30',
+  'scaling-out-from-a-monolith': '2026-08-30',
+  'performance-testing-with-k6-and-grafana': '2026-08-25',
+  'when-agile-process-replaces-interaction': '2026-08-25',
+}
+
+const articleContent: Array<Omit<Article, 'publishedAt'>> = [
   {
     slug: 'scala-2-to-scala-3', title: 'Should you migrate from Scala 2 to Scala 3?', category: 'Scala', topic: 'Scala', readTime: '15 min read',
     summary: 'A technical decision guide to compatibility, macros, dependencies, compiler migration modes, cross-building and a staged route from Scala 2.13 to Scala 3.',
@@ -738,5 +797,10 @@ export const articles: Article[] = [
     ],
   },
 ]
+
+export const articles: Article[] = articleContent.map(article => ({
+  ...article,
+  publishedAt: articlePublicationDates[article.slug],
+}))
 
 export const getArticle = (slug: string) => articles.find(article => article.slug === slug)
