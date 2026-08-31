@@ -1,11 +1,16 @@
 <script setup lang="ts">
 import { articles } from '~/data/articles'
 
-const featuredArticles = [
-  'typescript-backends-get-complicated',
-  'scala-2-to-scala-3',
-  'slow-api-database-problem',
-].map(slug => articles.find(article => article.slug === slug)).filter(article => article !== undefined)
+const featuredArticles = useState('home-featured-articles', () => {
+  const shuffled = [...articles]
+
+  for (let index = shuffled.length - 1; index > 0; index -= 1) {
+    const randomIndex = Math.floor(Math.random() * (index + 1))
+    ;[shuffled[index], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[index]]
+  }
+
+  return shuffled.slice(0, 3)
+})
 </script>
 
 <template>
