@@ -2,6 +2,8 @@
 import { Boxes, GitPullRequest, MonitorUp, RefreshCw } from '@lucide/vue'
 import { workCaseStudies } from '~/data/work'
 
+const route = useRoute()
+
 const experienceAreas = [
   {
     icon: Boxes,
@@ -59,19 +61,22 @@ const serviceOffers = [
   ['Defined Outcome Delivery', 'Agree a bounded software outcome, acceptance criteria and project price, then deliver the implementation, verification evidence and handover.'],
 ]
 
-usePageSeo({
-  title: 'Selected Engineering Experience | Hypnoshroom',
-  description: 'Selected professional experience behind Hypnoshroom across Scala and Play services, modern TypeScript products, testing and production delivery.',
-  path: '/work',
-  breadcrumbs: [
-    { name: 'Home', path: '/' },
-    { name: 'Experience', path: '/work' },
-  ],
-})
+if (!route.params.slug) {
+  usePageSeo({
+    title: 'Selected Engineering Experience | Hypnoshroom',
+    description: 'Selected professional experience behind Hypnoshroom across Scala and Play services, modern TypeScript products, testing and production delivery.',
+    path: '/work',
+    breadcrumbs: [
+      { name: 'Home', path: '/' },
+      { name: 'Experience', path: '/work' },
+    ],
+  })
+}
 </script>
 
 <template>
-  <div>
+  <NuxtPage v-if="route.params.slug" />
+  <div v-else>
     <PageHero eyebrow="Selected experience" title="Our experience." intro="The experience behind Hypnoshroom spans long-lived Scala services, independently built web products and the testing and production work needed to keep software useful." gradient="heather" />
 
     <section class="border-b border-line bg-[#ece8de] py-12 sm:py-16">
