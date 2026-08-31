@@ -1,5 +1,6 @@
 import { articles } from '../../data/articles'
 import { services } from '../../data/services'
+import { workCaseStudies } from '../../data/work'
 
 const siteUrl = 'https://hypnoshroom.com'
 const staticRoutes = ['/', '/about', '/contact', '/expertise', '/work', '/services', '/insights', '/scala', '/java', '/typescript', '/python']
@@ -15,6 +16,7 @@ export default defineEventHandler((event) => {
   const routes = [
     ...staticRoutes,
     ...services.map(service => `/services/${service.slug}`),
+    ...workCaseStudies.map(caseStudy => `/work/${caseStudy.slug}`),
     ...articles.map(article => `/insights/${article.slug}`),
   ]
 

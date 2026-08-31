@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Boxes, GitPullRequest, MonitorUp, RefreshCw } from '@lucide/vue'
+import { workCaseStudies } from '~/data/work'
 
 const experienceAreas = [
   {
@@ -109,6 +110,20 @@ usePageSeo({
                 <p class="mt-3 leading-7 text-ink/65">{{ area.perspective }}</p>
               </div>
             </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-space border-t border-line bg-[#f2f0ea]">
+      <div class="page-shell">
+        <SectionHeading eyebrow="Case studies" title="Projects and product experiments." intro="Short, carefully scoped accounts of selected professional and independent work. The professional entries describe individual experience rather than Hypnoshroom client engagements." />
+        <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <article v-for="caseStudy in workCaseStudies" :key="caseStudy.slug" class="flex flex-col rounded-2xl border border-line bg-white/45 p-6 sm:p-7">
+            <p class="text-xs font-semibold uppercase tracking-[0.16em] text-moss">{{ caseStudy.eyebrow }}</p>
+            <h2 class="mt-4 font-display text-3xl leading-tight">{{ caseStudy.title }}</h2>
+            <p class="mt-4 leading-7 text-ink/60">{{ caseStudy.summary }}</p>
+            <NuxtLink :to="`/work/${caseStudy.slug}`" class="mt-6 text-sm font-semibold text-moss underline decoration-moss/30 underline-offset-4 hover:decoration-moss">Read the experience entry →</NuxtLink>
           </article>
         </div>
       </div>
