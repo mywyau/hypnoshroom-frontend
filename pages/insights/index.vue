@@ -31,6 +31,11 @@ const requestedPage = computed(() => {
 })
 const totalPages = computed(() => Math.max(1, Math.ceil(filteredArticles.value.length / pageSize)))
 const currentPage = computed(() => Math.min(requestedPage.value, totalPages.value))
+watch(currentPage, (page, previousPage) => {
+  if (page !== previousPage && import.meta.client) {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+})
 const paginatedArticles = computed(() => {
   const start = (currentPage.value - 1) * pageSize
   return filteredArticles.value.slice(start, start + pageSize)

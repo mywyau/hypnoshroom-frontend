@@ -16,7 +16,7 @@ const experienceAreas = [
     work: [
       'Maintaining and extending Scala 2.13 and Play Framework applications',
       'Working with REST APIs, Play JSON, MongoDB and hmrc-mongo',
-      'Managing sbt and multi-project builds, dependencies and compiler configuration',
+      'Managing sbt, dependencies and compiler configuration',
       'Writing unit, integration and acceptance tests around changed behaviour',
       'Investigating live issues through logs, monitoring and production evidence',
       'Considering safe routes from long-lived Scala 2 systems towards Scala 3',
@@ -90,16 +90,6 @@ if (!route.params.slug) {
   <div v-else>
     <PageHero eyebrow="Selected experience" title="Our experience." intro="The experience behind Hypnoshroom spans long-lived Scala services, independently built web products and the testing and production work needed to keep software useful." gradient="heather" />
 
-    <section class="border-b border-line bg-[#ece8de] py-12 sm:py-16">
-      <div class="page-shell grid gap-6 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20">
-        <p class="eyebrow">A transparent starting point</p>
-        <div class="max-w-3xl">
-          <h2 class="font-display text-4xl leading-tight sm:text-5xl">Hypnoshroom maybe new. The experience behind it is not.</h2>
-          <p class="mt-6 text-lg leading-8 text-ink/65">The examples below describe professional and independently delivered engineering experience. They are not presented as Hypnoshroom client case studies, and no client result is being claimed without evidence or permission.</p>
-        </div>
-      </div>
-    </section>
-
     <section class="section-space">
       <div class="page-shell">
         <SectionHeading eyebrow="Selected work" title="Three areas of applied experience." intro="The common thread is software that already has users, constraints and consequences when a change goes wrong." />
@@ -139,7 +129,7 @@ if (!route.params.slug) {
                 </div>
               </div>
             </div>
-            <div v-if="area.caseStudyArea" class="order-1 lg:col-span-2">
+            <div v-if="area.caseStudyArea && caseStudiesFor(area.caseStudyArea).length" class="order-1 lg:col-span-2">
               <p class="text-xs font-semibold uppercase tracking-[0.16em] text-moss">Projects</p>
               <div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 <article v-for="caseStudy in caseStudiesFor(area.caseStudyArea)" :key="caseStudy.slug" class="rounded-2xl border border-line bg-white/35 p-5">
