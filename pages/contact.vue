@@ -15,9 +15,9 @@ usePageSeo({
           <h2 class="font-display text-3xl">Tell us your problems.</h2>
           <p class="mt-5 leading-7 text-ink/60">Tell us what is frustrating the team right now. It might be an awkward Scala upgrade, a service nobody feels safe changing or a product problem that needs an experienced pair of hands. A few honest details are enough to start.</p>
           <dl class="mt-9 space-y-6 border-t border-line pt-7 text-sm">
-            <div><dt class="font-semibold text-ink">Tell us what's on your mind?</dt></div>
-            <div><dt class="font-semibold text-ink">Start with what you know</dt></div>
-            <div><dt class="font-semibold text-ink">Direct from start to finish</dt></div>
+            <div><dt class="font-semibold text-ink">Tell us what's on your mind?</dt><dd class="mt-1 leading-6 text-ink/55">A risky change, hard-to-own service or product problem that needs experienced attention.</dd></div>
+            <div><dt class="font-semibold text-ink">Start with what you know</dt><dd class="mt-1 leading-6 text-ink/55">We’ll clarify the problem, the constraints and a useful next step. If it is not a good fit, we’ll say so.</dd></div>
+            <div><dt class="font-semibold text-ink">Direct from start to finish</dt><dd class="mt-1 leading-6 text-ink/55">The engineer doing the work handles the technical decisions and updates. No account-team hand-off.</dd></div>
           </dl>
         </div>
         <EnquiryForm />

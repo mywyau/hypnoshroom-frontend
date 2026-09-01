@@ -2,6 +2,7 @@
 import { articles } from '~/data/articles'
 
 const route = useRoute()
+const newestFirstArticles = [...articles].sort((first, second) => second.publishedAt.localeCompare(first.publishedAt))
 const topicGroups = [
   { label: 'Languages', topics: ['Scala', 'Java', 'TypeScript', 'Python'] },
   { label: 'Technical topics', topics: ['AI', 'Databases', 'Testing', 'Architecture', 'Serverless', 'Platform & DevOps'] },
@@ -20,8 +21,8 @@ const selectedTopic = computed(() => {
   return topic && topics.includes(topic) ? topic : 'All'
 })
 const filteredArticles = computed(() => selectedTopic.value === 'All'
-  ? articles
-  : articles.filter(article => article.topic === selectedTopic.value || article.topics?.includes(selectedTopic.value)))
+  ? newestFirstArticles
+  : newestFirstArticles.filter(article => article.topic === selectedTopic.value || article.topics?.includes(selectedTopic.value)))
 const pageSize = 9
 const requestedPage = computed(() => {
   const value = Array.isArray(route.query.page) ? route.query.page[0] : route.query.page
