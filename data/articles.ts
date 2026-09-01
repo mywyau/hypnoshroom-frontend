@@ -48,7 +48,6 @@ const articlePublicationDates: Record<string, string> = {
   'technical-code-reviews': '2026-08-22',
   'original-agile-principles': '2026-08-30',
   'technical-debt-without-a-rewrite': '2026-08-20',
-  'safe-java-jdk-upgrades': '2026-08-20',
   'maintainable-backend-services': '2026-08-20',
   'typescript-backends-get-complicated': '2026-08-20',
   'operable-python-services': '2026-08-20',
@@ -653,14 +652,6 @@ const articleContent: Array<Omit<Article, 'publishedAt'>> = [
     sections: [
       { heading: 'Say what the debt is costing you', paragraphs: ['“This code needs cleaning up” rarely wins an argument for time. “Releases take two days because nobody trusts these tests” might. Tie the debt to slow delivery, incidents, difficult onboarding or a product change you cannot safely make.'] },
       { heading: 'Make room for one safe change', paragraphs: ['Put tests around the behaviour you need to keep, then create a boundary where the new work can sit. Improve the part of the system touched by a real delivery goal instead of opening a cleanup project with no end.'], bullets: ['Measure the friction that keeps coming back', 'Protect the behaviour that matters', 'Reduce coupling at the point of change', 'Ship steps small enough for production'], code: { label: 'Characterise today’s behaviour before refactoring', language: 'java', source: "@Test\nvoid keepsLegacyRoundingBehaviour() {\n  var price = calculator.total(new BigDecimal(\"12.345\"));\n\n  assertEquals(new BigDecimal(\"12.35\"), price);\n}" } },
-    ],
-  },
-  {
-    slug: 'safe-java-jdk-upgrades', title: 'Approaching Java and JDK upgrades safely', category: 'Java', topic: 'Java', readTime: '5 min read',
-    summary: 'A JDK upgrade should be ordinary maintenance. Here’s how to stop it becoming an event.',
-    sections: [
-      { heading: 'The runtime reaches further than the code', paragraphs: ['A new JDK can uncover assumptions in libraries, build plugins, container images and production flags. A clean compile is encouraging; it is not proof that the service is ready.'] },
-      { heading: 'Build confidence one step at a time', paragraphs: ['Update the tooling, compile cleanly, run tests that represent real behaviour, then watch the service in a production-like environment. Keep unrelated refactoring out of the upgrade.'], bullets: ['Check which framework versions support the JDK', 'Look for removed flags and modules', 'Exercise startup and graceful shutdown', 'Compare memory, latency and CPU under load'], code: { label: 'Make the target JDK explicit in Maven', language: 'xml', source: "<properties>\n  <maven.compiler.release>21</maven.compiler.release>\n</properties>\n\n<plugin>\n  <artifactId>maven-enforcer-plugin</artifactId>\n  <!-- fail early when CI uses the wrong JDK -->\n</plugin>" } },
     ],
   },
   {
