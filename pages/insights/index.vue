@@ -4,14 +4,15 @@ import { articles } from '~/data/articles'
 const route = useRoute()
 const newestFirstArticles = [...articles].sort((first, second) => second.publishedAt.localeCompare(first.publishedAt))
 const topicGroups = [
-  { label: 'Languages', topics: ['Scala', 'Java', 'TypeScript', 'Python'] },
-  { label: 'Technical topics', topics: ['AI', 'Databases', 'Testing', 'Architecture', 'Serverless', 'Platform & DevOps'] },
-  { label: 'Practice & industry', topics: ['Engineering', 'Software Delivery', 'Misc'] },
+  { label: 'Languages', topics: ['Java', 'Python', 'Scala', 'TypeScript'] },
+  { label: 'Technical topics', topics: ['AI', 'Architecture', 'Databases', 'Frontend', 'Platform & DevOps', 'Serverless', 'Testing'] },
+  { label: 'Practice & industry', topics: ['Dev workflow', 'Engineering', 'Software Delivery'] },
 ]
 const primaryTopics = topicGroups.flatMap(group => group.topics)
 const articleTopics = articles.flatMap(article => [article.topic, ...(article.topics ?? [])])
 const additionalTopics = [...new Set(articleTopics)]
   .filter(topic => !primaryTopics.includes(topic))
+  .sort((first, second) => first.localeCompare(second))
 const topics = ['All', ...primaryTopics, ...additionalTopics]
 const displayedGroups = computed(() => additionalTopics.length > 0
   ? [...topicGroups, { label: 'More', topics: additionalTopics }]
