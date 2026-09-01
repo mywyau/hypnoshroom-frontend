@@ -6,6 +6,8 @@ const route = useRoute()
 
 const experienceAreas = [
   {
+    displayOrder: 2,
+    caseStudyArea: 'scala' as const,
     icon: Boxes,
     eyebrow: 'Scala & backend systems',
     title: 'Evolving long-lived Scala services',
@@ -19,9 +21,11 @@ const experienceAreas = [
       'Investigating live issues through logs, monitoring and production evidence',
       'Considering safe routes from long-lived Scala 2 systems towards Scala 3',
     ],
-    perspective: 'This experience informs a cautious approach to mature systems: understand why the code looks the way it does, protect important behaviour and separate necessary change from optional cleanup.',
+    perspective: 'This experience informs a cautious approach to mature, technical-debt-ridden systems: understand why the code looks the way it does, protect important behaviour and separate necessary change from optional cleanup. It also includes working in large delivery teams and leading, supporting and sharing knowledge with junior, graduate and contractor engineers so that difficult systems do not remain understood by only a few people.',
   },
   {
+    displayOrder: 1,
+    caseStudyArea: 'product' as const,
     icon: MonitorUp,
     eyebrow: 'Modern product development',
     title: 'From idea to live product',
@@ -38,6 +42,7 @@ const experienceAreas = [
     perspective: 'The useful experience is not only assembling a technology stack. It is making trade-offs across the interface, server, data model, authentication and deployment path while keeping the product small enough to own.',
   },
   {
+    displayOrder: 3,
     icon: GitPullRequest,
     eyebrow: 'Quality & production delivery',
     title: 'Testing from code to production',
@@ -54,6 +59,12 @@ const experienceAreas = [
     perspective: 'The goal is useful evidence rather than a larger test count: fast feedback during development, confidence across real application boundaries and performance results that can support a release decision.',
   },
 ]
+
+const caseStudiesFor = (area: 'scala' | 'product') => workCaseStudies.filter(caseStudy => caseStudy.area === area)
+const orderedExperienceAreas = [...experienceAreas].sort((first, second) => first.displayOrder - second.displayOrder)
+const productTechnologies = [...new Set(caseStudiesFor('product')
+  .flatMap(caseStudy => caseStudy.technologies)
+  .filter(technology => !['Product discovery', 'Full-stack web development'].includes(technology)))]
 
 const serviceOffers = [
   ['Technical Review & Discovery', 'Investigate one codebase or technical question, establish the evidence and provide prioritised findings with practical recommendations.'],
@@ -94,7 +105,7 @@ if (!route.params.slug) {
         <SectionHeading eyebrow="Selected work" title="Three areas of applied experience." intro="The common thread is software that already has users, constraints and consequences when a change goes wrong." />
 
         <div class="mt-14 divide-y divide-line border-y border-line">
-          <article v-for="area in experienceAreas" :key="area.title" class="grid gap-10 py-12 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20 lg:py-16">
+          <article v-for="area in orderedExperienceAreas" :key="area.title" class="grid gap-10 py-12 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20 lg:py-16">
             <div>
               <span class="flex size-12 items-center justify-center rounded-2xl border border-moss/20 bg-paper text-moss shadow-sm" aria-hidden="true">
                 <component :is="area.icon" class="size-6" :stroke-width="1.6" />
@@ -115,20 +126,30 @@ if (!route.params.slug) {
                 <p class="mt-3 leading-7 text-ink/65">{{ area.perspective }}</p>
               </div>
             </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-space border-t border-line bg-[#f2f0ea]">
-      <div class="page-shell">
-        <SectionHeading eyebrow="Case studies" title="Projects and product experiments." intro="Short, carefully scoped accounts of selected professional and independent work. The professional entries describe individual experience rather than Hypnoshroom client engagements." />
-        <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <article v-for="caseStudy in workCaseStudies" :key="caseStudy.slug" class="flex flex-col rounded-2xl border border-line bg-white/45 p-6 sm:p-7">
-            <p class="text-xs font-semibold uppercase tracking-[0.16em] text-moss">{{ caseStudy.eyebrow }}</p>
-            <h2 class="mt-4 font-display text-3xl leading-tight">{{ caseStudy.title }}</h2>
-            <p class="mt-4 leading-7 text-ink/60">{{ caseStudy.summary }}</p>
-            <NuxtLink :to="`/work/${caseStudy.slug}`" class="mt-6 text-sm font-semibold text-moss underline decoration-moss/30 underline-offset-4 hover:decoration-moss">Read the experience entry →</NuxtLink>
+            <div v-if="area.caseStudyArea === 'product'" class="order-2 lg:col-span-2">
+              <p class="text-xs font-semibold uppercase tracking-[0.16em] text-moss">Technologies</p>
+              <div class="product-tech-marquee mt-4 border-y border-line py-4">
+                <div class="product-tech-marquee__track">
+                  <div class="product-tech-marquee__group">
+                    <span v-for="technology in productTechnologies" :key="technology" class="rounded-full border border-line bg-white/50 px-4 py-2 text-sm font-medium text-ink/70">{{ technology }}</span>
+                  </div>
+                  <div aria-hidden="true" class="product-tech-marquee__group">
+                    <span v-for="technology in productTechnologies" :key="`duplicate-${technology}`" class="rounded-full border border-line bg-white/50 px-4 py-2 text-sm font-medium text-ink/70">{{ technology }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div v-if="area.caseStudyArea" class="order-1 lg:col-span-2">
+              <p class="text-xs font-semibold uppercase tracking-[0.16em] text-moss">Projects</p>
+              <div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                <article v-for="caseStudy in caseStudiesFor(area.caseStudyArea)" :key="caseStudy.slug" class="rounded-2xl border border-line bg-white/35 p-5">
+                  <p class="text-xs font-semibold uppercase tracking-[0.14em] text-moss">{{ caseStudy.eyebrow }}</p>
+                  <h3 class="mt-3 font-display text-2xl leading-tight">{{ caseStudy.title }}</h3>
+                  <p class="mt-3 text-sm leading-6 text-ink/60">{{ caseStudy.summary }}</p>
+                  <NuxtLink :to="`/work/${caseStudy.slug}`" class="mt-4 inline-flex text-sm font-semibold text-moss underline decoration-moss/30 underline-offset-4 hover:decoration-moss">Read the experience entry →</NuxtLink>
+                </article>
+              </div>
+            </div>
           </article>
         </div>
       </div>

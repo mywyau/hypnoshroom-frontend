@@ -237,6 +237,29 @@
   .article-code .hljs-deletion {
     color: #ff6b7a;
   }
+
+  .product-tech-marquee {
+    @apply relative overflow-hidden;
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  }
+
+  .product-tech-marquee__track {
+    display: flex;
+    width: max-content;
+    animation: product-tech-marquee 28s linear infinite;
+  }
+
+  .product-tech-marquee:hover .product-tech-marquee__track {
+    animation-play-state: paused;
+  }
+
+  .product-tech-marquee__group {
+    @apply flex shrink-0 items-center gap-3 pr-3;
+  }
+}
+
+@keyframes product-tech-marquee {
+  to { transform: translateX(-50%); }
 }
 
 @media (prefers-reduced-motion: reduce) {

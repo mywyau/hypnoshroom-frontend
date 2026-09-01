@@ -24,6 +24,7 @@ usePageSeo({
     name: caseStudy.title,
     description: caseStudy.summary,
     url: `https://hypnoshroom.com/work/${caseStudy.slug}`,
+    ...(caseStudy.website ? { sameAs: caseStudy.website.url } : {}),
     author: { '@id': 'https://hypnoshroom.com/#organization' },
     inLanguage: 'en-GB',
   },
@@ -38,6 +39,9 @@ usePageSeo({
         <p class="mt-10 eyebrow">{{ caseStudy.eyebrow }}</p>
         <h1 class="hero-gradient hero-gradient--heather max-w-4xl font-display text-5xl leading-[1.02] tracking-[-0.035em] sm:text-6xl lg:text-7xl">{{ caseStudy.title }}</h1>
         <p class="mt-7 max-w-3xl text-xl leading-8 text-ink/65">{{ caseStudy.summary }}</p>
+        <a v-if="caseStudy.website" :href="caseStudy.website.url" target="_blank" rel="noopener noreferrer" class="mt-7 inline-flex min-h-12 items-center justify-center rounded-full bg-ink px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-moss">
+          {{ caseStudy.website.label }} <span aria-hidden="true" class="ml-2">↗</span>
+        </a>
       </div>
     </header>
 

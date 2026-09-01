@@ -1,5 +1,6 @@
 export interface WorkCaseStudy {
   slug: string
+  area: 'scala' | 'product'
   title: string
   eyebrow: string
   summary: string
@@ -11,11 +12,13 @@ export interface WorkCaseStudy {
   contribution: string[]
   perspective: string
   technologies: string[]
+  website?: { label: string; url: string }
 }
 
 export const workCaseStudies: WorkCaseStudy[] = [
   {
     slug: 'covid-job-retention-scheme',
+    area: 'scala',
     title: 'COVID-19 Job Retention Scheme',
     eyebrow: 'Selected professional experience',
     summary: 'Contributed to Scala engineering work in the HMRC domain during delivery of the COVID-19 Job Retention Scheme.',
@@ -34,16 +37,19 @@ export const workCaseStudies: WorkCaseStudy[] = [
   },
   {
     slug: 'hmrc-customs-duty-services',
-    title: 'Customs duty services',
+    area: 'scala',
+    title: 'Live services',
     eyebrow: 'Selected professional experience',
-    summary: 'Contributed to live-service engineering work in Edinburgh relating to customs duty for tobacco and alcohol.',
-    seoTitle: 'Customs Duty Services Experience | Hypnoshroom',
+    summary: 'Contributed to live-service engineering work in Edinburgh, including Charity Registration, Tax History and Advance Tariff Ruling services.',
+    seoTitle: 'Live Services Experience | Hypnoshroom',
     seoDescription: 'Selected professional experience contributing to Scala engineering work on live customs duty services in the HMRC domain.',
     context: 'This page describes individual professional experience, not a Hypnoshroom client engagement or an official HMRC account.',
     role: 'Worked within a live-service environment as part of a wider team responsible for maintaining and evolving existing systems.',
-    challenge: 'Regulated services have long-lived behaviour, operational constraints and integrations that need to remain understandable as the code changes.',
+    challenge: 'These regulated, long-lived services had deep-rooted issues, calculation defects, operational constraints and integrations that needed to remain understandable while the code changed.',
     contribution: [
       'Contributed to the maintenance and evolution of live Scala services.',
+      'Worked on Charity Registration, Tax History and Advance Tariff Ruling services.',
+      'Investigated and resolved deep-rooted service issues and calculation bugs.',
       'Worked through established engineering workflows for review, testing and delivery.',
       'Investigated and changed behaviour with attention to service reliability and existing system boundaries.',
     ],
@@ -52,6 +58,7 @@ export const workCaseStudies: WorkCaseStudy[] = [
   },
   {
     slug: 'mtd-income-tax-view-and-change',
+    area: 'scala',
     title: 'Making Tax Digital for Income Tax: View and Change',
     eyebrow: 'Selected professional experience',
     summary: 'Contributed to Scala engineering work in the HMRC domain on Making Tax Digital for Income Tax: View and Change.',
@@ -70,6 +77,7 @@ export const workCaseStudies: WorkCaseStudy[] = [
   },
   {
     slug: 'tarotea',
+    area: 'product',
     title: 'Tarotea',
     eyebrow: 'Independent product',
     summary: 'A SaaS product for teaching Cantonese, built to help learn Cantonese using quizzes, typing exercises and audio recognition.',
@@ -85,9 +93,11 @@ export const workCaseStudies: WorkCaseStudy[] = [
     ],
     perspective: 'Tarotea is valuable evidence of the work behind a small SaaS product: balancing the user journey, the data model, authentication and deployment rather than treating them as separate concerns.',
     technologies: ['TypeScript', 'Nuxt', 'Vue', 'Supabase', 'PostgreSQL', 'Vercel'],
+    website: { label: 'Visit Tarotea', url: 'https://www.tarotea.co.uk' },
   },
   {
     slug: 'lonely-radish',
+    area: 'product',
     title: 'Lonely Radish',
     eyebrow: 'Product experiment',
     summary: 'An independent dating app used to explore product discovery, the responsibilities around a social product and remove algorithms from data apps.',
@@ -103,6 +113,28 @@ export const workCaseStudies: WorkCaseStudy[] = [
     ],
     perspective: 'The experiment was a useful reminder that a product is more than a working interface: its purpose, user expectations and responsible boundaries need attention from the first implementation.',
     technologies: ['TypeScript', 'Nuxt', 'Vue', 'Product discovery', 'Full-stack web development'],
+    website: { label: 'Visit Lonely Radish', url: 'https://www.lonelyradish.com' },
+  },
+  {
+    slug: 'hypnoshroom-website',
+    area: 'product',
+    title: 'Hypnoshroom website',
+    eyebrow: 'Independent product',
+    summary: 'The Hypnoshroom website: an independently built consultancy site for explaining specialist services, publishing technical writing and starting project conversations.',
+    seoTitle: 'Hypnoshroom Website Product Engineering | Hypnoshroom',
+    seoDescription: 'The independently built Hypnoshroom consultancy website: a Nuxt product for service information, technical writing and project enquiries.',
+    context: 'An independently built product and the website you are currently viewing.',
+    role: 'Designed, built and maintain the website as an independent product, from the service proposition and content model to implementation and deployment.',
+    challenge: 'A consultancy website needs to make a specialist offer understandable, show useful evidence of experience and provide a reliable path from a visitor question to a project conversation.',
+    contribution: [
+      'Built server-rendered pages for services, technical expertise, experience entries and articles.',
+      'Designed an editorial model that supports technical writing, topic filtering, SEO metadata and structured data.',
+      'Implemented a server-side enquiry route with validation, spam protection and email delivery configuration.',
+      'Worked through responsive design, accessible navigation, deployment and production configuration.',
+    ],
+    perspective: 'Building the site is an ongoing product exercise: the message, content and conversion path should improve from real reader and client feedback rather than remain a static brochure.',
+    technologies: ['TypeScript', 'Nuxt', 'Vue', 'Tailwind CSS', 'Vercel', 'Resend', 'Cloudflare Turnstile'],
+    website: { label: 'View Hypnoshroom home', url: 'https://hypnoshroom.com' },
   },
 ]
 
