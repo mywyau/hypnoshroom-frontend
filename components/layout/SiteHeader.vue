@@ -8,6 +8,7 @@ const links = [
   { label: 'Insights', to: '/insights' },
   { label: 'About', to: '/about' },
 ]
+const mobileLinks = links.filter(link => !['/services', '/insights'].includes(link.to))
 
 watch(() => route.path, () => { isOpen.value = false })
 </script>
@@ -35,8 +36,7 @@ watch(() => route.path, () => { isOpen.value = false })
 
     <nav v-if="isOpen" id="mobile-navigation" aria-label="Mobile navigation" class="border-t border-line bg-paper px-5 pb-6 pt-3 lg:hidden">
       <div class="page-shell flex flex-col px-0">
-        <NuxtLink v-for="link in links" :key="link.to" :to="link.to" class="border-b border-line py-4 text-lg">{{ link.label }}</NuxtLink>
-        <AppButton to="/contact" class="mt-5 self-start">Discuss a project</AppButton>
+        <NuxtLink v-for="link in mobileLinks" :key="link.to" :to="link.to" class="border-b border-line py-4 text-lg">{{ link.label }}</NuxtLink>
       </div>
     </nav>
   </header>

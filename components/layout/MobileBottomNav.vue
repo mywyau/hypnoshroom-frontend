@@ -12,7 +12,7 @@ const links = [
 </script>
 
 <template>
-  <nav aria-label="Quick navigation" class="fixed inset-x-0 bottom-0 z-50 border-t border-line/90 bg-paper/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-md lg:hidden">
+  <nav aria-label="Quick navigation" class="fixed inset-x-0 bottom-0 z-[60] border-t border-line/90 bg-paper/95 pb-[env(safe-area-inset-bottom)] shadow-[0_-8px_24px_rgba(36,38,32,0.08)] backdrop-blur-md lg:hidden">
     <div class="grid grid-cols-4">
       <NuxtLink
         v-for="link in links"
