@@ -29,13 +29,14 @@ useHead({
 </script>
 
 <template>
-  <div>
+  <div class="pb-[calc(3.5rem+env(safe-area-inset-bottom))] lg:pb-0">
     <NuxtRouteAnnouncer />
     <SiteHeader />
     <main id="main-content">
       <NuxtPage />
     </main>
     <SiteFooter />
+    <MobileBottomNav />
     <Analytics />
   </div>
 </template>
