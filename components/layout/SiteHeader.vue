@@ -25,7 +25,7 @@ watch(() => route.path, () => { isOpen.value = false })
         <AppButton to="/contact">Discuss a project</AppButton>
       </nav>
 
-      <button type="button" class="grid size-11 place-items-center rounded-full border border-line lg:hidden" :aria-expanded="isOpen" aria-controls="mobile-navigation" aria-label="Toggle navigation" @click="isOpen = !isOpen">
+      <button type="button" class="grid size-11 place-items-center lg:hidden" :aria-expanded="isOpen" aria-controls="mobile-navigation" aria-label="Toggle navigation" @click="isOpen = !isOpen">
         <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
           <path v-if="!isOpen" d="M4 7h16M4 12h16M4 17h16"/>
           <path v-else d="m6 6 12 12M18 6 6 18"/>
