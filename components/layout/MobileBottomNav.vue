@@ -8,11 +8,11 @@ const visibleCount = 4
 const links = [
   { label: 'Home', to: '/', icon: House, isActive: () => route.path === '/' },
   { label: 'Services', to: '/services', icon: BriefcaseBusiness, isActive: () => route.path.startsWith('/services') },
+  { label: 'Insights', to: '/insights', icon: BookOpen, isActive: () => route.path.startsWith('/insights') },
+  { label: 'Contact', to: '/contact', icon: Mail, isActive: () => route.path.startsWith('/contact') },
   { label: 'Expertise', to: '/expertise', icon: Workflow, isActive: () => route.path.startsWith('/expertise') },
   { label: 'Work', to: '/work', icon: PackageCheck, isActive: () => route.path.startsWith('/work') },
-  { label: 'Insights', to: '/insights', icon: BookOpen, isActive: () => route.path.startsWith('/insights') },
   { label: 'About', to: '/about', icon: UserRoundCheck, isActive: () => route.path.startsWith('/about') },
-  { label: 'Contact', to: '/contact', icon: Mail, isActive: () => route.path.startsWith('/contact') },
 ]
 
 const visibleLinks = computed(() => links.slice(visibleStart.value, visibleStart.value + visibleCount))
