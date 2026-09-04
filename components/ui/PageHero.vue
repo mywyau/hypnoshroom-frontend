@@ -6,6 +6,7 @@ withDefaults(defineProps<{
   title: string
   intro: string
   gradient?: PageHeroGradient
+  narrowMobile?: boolean
 }>(), { gradient: undefined })
 
 const gradientClasses: Record<PageHeroGradient, string> = {
@@ -25,7 +26,7 @@ const gradientClasses: Record<PageHeroGradient, string> = {
 
 <template>
   <section class="border-b border-line pt-16 sm:pt-20 lg:pt-24">
-    <div class="page-shell pb-16 sm:pb-20 lg:pb-24">
+    <div class="page-shell pb-16 sm:pb-20 lg:pb-24" :class="narrowMobile && 'page-shell--mobile-narrow'">
       <p class="eyebrow">{{ eyebrow }}</p>
       <h1 class="w-fit max-w-5xl font-display text-5xl leading-[1.02] tracking-[-0.035em] sm:text-6xl lg:text-8xl" :class="gradient ? gradientClasses[gradient] : undefined">{{ title }}</h1>
       <p class="mt-7 max-w-2xl text-lg leading-8 text-ink/65 sm:text-xl">{{ intro }}</p>

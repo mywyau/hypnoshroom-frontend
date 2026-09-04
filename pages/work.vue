@@ -88,15 +88,15 @@ if (!route.params.slug) {
 <template>
   <NuxtPage v-if="route.params.slug" />
   <div v-else>
-    <PageHero eyebrow="Selected experience" title="Our experience." intro="The experience behind Hypnoshroom spans long-lived Scala services, independently built web products and the testing and production work needed to keep software useful." gradient="heather" />
+    <PageHero eyebrow="Selected experience" title="Our experience." intro="The experience behind Hypnoshroom spans long-lived Scala services, independently built web products and the testing and production work needed to keep software useful." gradient="heather" narrow-mobile />
 
     <section class="section-space">
-      <div class="page-shell">
+      <div class="page-shell page-shell--mobile-narrow">
         <SectionHeading eyebrow="Selected work" title="Three areas of applied experience." intro="The common thread is software that already has users, constraints and consequences when a change goes wrong." />
 
         <div class="mt-14 divide-y divide-line border-y border-line">
-          <article v-for="area in orderedExperienceAreas" :key="area.title" class="grid gap-10 py-12 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20 lg:py-16">
-            <div>
+          <article v-for="area in orderedExperienceAreas" :key="area.title" class="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-10 py-12 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20 lg:py-16">
+            <div class="min-w-0">
               <span class="flex size-12 items-center justify-center rounded-2xl border border-moss/20 bg-paper text-moss shadow-sm" aria-hidden="true">
                 <component :is="area.icon" class="size-6" :stroke-width="1.6" />
               </span>
@@ -106,7 +106,7 @@ if (!route.params.slug) {
               <p class="mt-5 text-lg leading-8 text-ink/65">{{ area.intro }}</p>
             </div>
 
-            <div>
+            <div class="min-w-0">
               <p class="text-xs font-semibold uppercase tracking-[0.16em] text-moss">Representative work</p>
               <ul class="mt-5 grid gap-x-8 gap-y-4 sm:grid-cols-2">
                 <li v-for="item in area.work" :key="item" class="border-t border-line pt-4 text-sm leading-6 text-ink/65">{{ item }}</li>
@@ -116,7 +116,7 @@ if (!route.params.slug) {
                 <p class="mt-3 leading-7 text-ink/65">{{ area.perspective }}</p>
               </div>
             </div>
-            <div v-if="area.caseStudyArea === 'product'" class="order-2 lg:col-span-2">
+            <div v-if="area.caseStudyArea === 'product'" class="order-2 min-w-0 lg:col-span-2">
               <p class="text-xs font-semibold uppercase tracking-[0.16em] text-moss">Technologies</p>
               <div class="product-tech-marquee mt-4 border-y border-line py-4">
                 <div class="product-tech-marquee__track">
@@ -129,7 +129,7 @@ if (!route.params.slug) {
                 </div>
               </div>
             </div>
-            <div v-if="area.caseStudyArea && caseStudiesFor(area.caseStudyArea).length" class="order-1 lg:col-span-2">
+            <div v-if="area.caseStudyArea && caseStudiesFor(area.caseStudyArea).length" class="order-1 min-w-0 lg:col-span-2">
               <p class="text-xs font-semibold uppercase tracking-[0.16em] text-moss">Projects</p>
               <div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 <article v-for="caseStudy in caseStudiesFor(area.caseStudyArea)" :key="caseStudy.slug" class="rounded-2xl border border-line bg-white/35 p-5">
@@ -146,7 +146,7 @@ if (!route.params.slug) {
     </section>
 
     <section class="section-space border-t border-line bg-[#eee9f0]">
-      <div class="page-shell grid gap-12 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20">
+      <div class="page-shell page-shell--mobile-narrow grid gap-12 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20">
         <div>
           <span class="flex size-12 items-center justify-center rounded-2xl border border-plum/20 bg-paper text-plum shadow-sm" aria-hidden="true">
             <RefreshCw class="size-6" :stroke-width="1.6" />
@@ -176,7 +176,7 @@ if (!route.params.slug) {
     </section>
 
     <section class="section-space border-y border-line bg-[#ece8de]">
-      <div class="page-shell">
+      <div class="page-shell page-shell--mobile-narrow">
         <SectionHeading eyebrow="What Hypnoshroom offers" title="Choose the support the work needs." intro="Commission an independent technical review, add experienced engineering capacity to an existing team or agree a defined software outcome for Hypnoshroom to deliver." />
         <dl class="mt-12 grid gap-8 md:grid-cols-3">
           <div v-for="item in serviceOffers" :key="item[0]" class="border-t border-ink/20 pt-5">

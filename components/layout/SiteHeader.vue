@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const route = useRoute()
-const isOpen = ref(false)
 const links = [
   { label: 'Services', to: '/services' },
   { label: 'Expertise', to: '/expertise' },
@@ -8,9 +7,6 @@ const links = [
   { label: 'Insights', to: '/insights' },
   { label: 'About', to: '/about' },
 ]
-const mobileLinks = links.filter(link => !['/services', '/insights'].includes(link.to))
-
-watch(() => route.path, () => { isOpen.value = false })
 </script>
 
 <template>
@@ -26,18 +22,6 @@ watch(() => route.path, () => { isOpen.value = false })
         <AppButton to="/contact">Discuss a project</AppButton>
       </nav>
 
-      <button type="button" class="grid size-11 place-items-center lg:hidden" :aria-expanded="isOpen" aria-controls="mobile-navigation" aria-label="Toggle navigation" @click="isOpen = !isOpen">
-        <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-          <path v-if="!isOpen" d="M4 7h16M4 12h16M4 17h16"/>
-          <path v-else d="m6 6 12 12M18 6 6 18"/>
-        </svg>
-      </button>
     </div>
-
-    <nav v-if="isOpen" id="mobile-navigation" aria-label="Mobile navigation" class="border-t border-line bg-paper px-5 pb-6 pt-3 lg:hidden">
-      <div class="page-shell flex flex-col px-0">
-        <NuxtLink v-for="link in mobileLinks" :key="link.to" :to="link.to" class="border-b border-line py-4 text-lg">{{ link.label }}</NuxtLink>
-      </div>
-    </nav>
   </header>
 </template>
