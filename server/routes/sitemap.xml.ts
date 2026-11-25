@@ -3,7 +3,7 @@ import { services } from '../../data/services'
 import { workCaseStudies } from '../../data/work'
 
 const siteUrl = 'https://hypnoshroom.com'
-const staticRoutes = ['/', '/about', '/contact', '/expertise', '/work', '/services', '/insights', '/scala', '/java', '/typescript', '/python']
+const staticRoutes = ['/', '/contractor-intelligence', '/contractor-intelligence/permanent-vs-contract', '/contractor-intelligence/methodology', '/contractor-intelligence/outside-ir35', '/about', '/contact', '/expertise', '/work', '/services', '/insights', '/scala', '/java', '/typescript', '/python']
 
 const escapeXml = (value: string) => value
   .replaceAll('&', '&amp;')

@@ -4,6 +4,7 @@ const links = [
   { label: 'Services', to: '/services' },
   { label: 'Expertise', to: '/expertise' },
   { label: 'Experience', to: '/work' },
+  { label: 'Contractor tools', to: '/contractor-intelligence' },
   { label: 'Insights', to: '/insights' },
   { label: 'About', to: '/about' },
 ]

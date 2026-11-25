@@ -136,7 +136,7 @@ if (!route.params.slug) {
                   <p class="text-xs font-semibold uppercase tracking-[0.14em] text-moss">{{ caseStudy.eyebrow }}</p>
                   <h3 class="mt-3 font-display text-2xl leading-tight">{{ caseStudy.title }}</h3>
                   <p class="mt-3 text-sm leading-6 text-ink/60">{{ caseStudy.summary }}</p>
-                  <NuxtLink :to="`/work/${caseStudy.slug}`" class="mt-4 inline-flex text-sm font-semibold text-moss underline decoration-moss/30 underline-offset-4 hover:decoration-moss">Read the experience entry →</NuxtLink>
+                  <NuxtLink :to="`/work/${caseStudy.slug}`" class="mt-4 inline-flex text-sm font-semibold text-moss underline decoration-moss/30 underline-offset-4 hover:decoration-moss">Read entry →</NuxtLink>
                 </article>
               </div>
             </div>

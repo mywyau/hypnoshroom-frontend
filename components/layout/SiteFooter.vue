@@ -14,6 +14,7 @@
           <NuxtLink to="/insights" class="hover:text-moss">Insights</NuxtLink>
           <NuxtLink to="/about" class="hover:text-moss">About</NuxtLink>
           <NuxtLink to="/contact" class="hover:text-moss">Contact</NuxtLink>
+          <NuxtLink to="/contractor-intelligence" class="hover:text-moss">Contractor intelligence</NuxtLink>
           <NuxtLink to="/privacy" class="hover:text-moss">Privacy</NuxtLink>
         </nav>
       </div>

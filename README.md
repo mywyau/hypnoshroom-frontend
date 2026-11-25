@@ -90,7 +90,7 @@ npm run typecheck
 npm run build
 ```
 
-The repository does not currently define separate lint or automated test commands.
+Run `npm test` for contractor calculation fixtures (Node 22.18 or later) and `npm run lint` for source linting. Oxlint is a development dependency.
 
 ## Project structure
 
@@ -148,3 +148,23 @@ Do not use the fully static output from `npm run generate` for production: stati
 ### The contact endpoint is missing after deployment
 
 Confirm the deployment used `npm run build`, not `npm run generate`. A successful Vercel build should contain the Nitro server function for `/api/enquiry`.
+
+## Contractor intelligence
+
+The product brief is in [HYPNOSHROOM_CONTRACTOR_INTELLIGENCE.md](HYPNOSHROOM_CONTRACTOR_INTELLIGENCE.md). Start the existing dev server and visit `/contractor-intelligence`. The first increment delivers the landing page, the permanent versus umbrella comparison and a linked methodology. The outside-IR35 tool at `/contractor-intelligence/outside-ir35` adds a separate company ledger and annual comparison with employment. The comparison includes whole-day cash break-even, gap cases and a monthly household ledger.
+
+### Implementation and maintenance
+
+- Nuxt renders indexable explanations and the initial example. Vue handles edits locally. Inputs live only in component memory. No scenario API, persistence, URL parameters or analytics events are used.
+- `domain/contractor/payroll.ts` owns the 2026/27 rates, effective dates, verification date and official sources. `domain/contractor/comparison.ts` validates scenarios, resolves monthly umbrella funding and calculates separate pension, cash and household ledgers. Input amounts are pounds. Internal and returned money amounts are integer pence.
+- Permanent employer pension is additional to salary. Under the modelled umbrella agreement the same assignment budget funds margin, employer NI, employer pension, optional levy and gross wages. Extra days off reduce the already prorated schedule once. The monthly ledger assumes whole billed days distributed over whole active months; income tax is an annual estimate allocated proportionately.
+- Add new tax years as separate rule sets with explicit selection and independent fixtures. Recheck HMRC and devolved-government sources, verify the effective dates and reconcile against published examples before enabling each year. Keep historical scenarios tied to their original year.
+- Run `npm test`, `npm run lint`, `npm run typecheck` and `npm run build`. Check the SSR HTML, sitemap, desktop and mobile navigation, inline errors and keyboard controls when changing the UI. Full payroll software and adviser review remain outside the automated checks.
+
+### Release and handoff checklist
+
+1. Obtain independent methodology review before production release. Review tax allocation and rounding, pension and holiday-pay assumptions, and the explainer with an umbrella payroll specialist. Cover agreed hours/minimum wage and actual remittance timings with real provider illustrations before representing those cases.
+2. Extend the comparison with a standalone inside-IR35 entry point if a dedicated umbrella workflow is needed. Add verified student-loan plans and other pension relief methods with fixtures. The current tool supports registered-pension salary sacrifice and additional employer contributions only.
+3. Build the standalone runway tool with reserve floor, debt repayments, one-off expenses, gap income and zero-burn tests. Build the minimum-rate solver for cash and total-package targets with risk premium, bounded search and penny-level target tests. The comparison currently solves for whole days at a given rate.
+4. Before release, obtain accountant review of `domain/contractor/limitedCompany.ts`, especially director NI, marginal relief, dividend stacking and allowance allocation. The calculator covers one full accounting year, a sole director/shareholder, current-year dividends and no opening reserves. Add short accounting periods or other income only with new sourced rules and fixtures.
+5. Keep market intelligence in a separate future data layer. Before ingestion, review official procurement APIs and licensed vacancy feeds for redistribution, retention, attribution, privacy and rate limits, then obtain approval. Track source observations and provenance separately from deduplicated vacancies. Publish coverage, freshness, missingness and sample size with any eventual statistic.

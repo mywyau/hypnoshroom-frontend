@@ -8,6 +8,7 @@ const visibleCount = 4
 const links = [
   { label: 'Home', to: '/', icon: House, isActive: () => route.path === '/' },
   { label: 'Services', to: '/services', icon: BriefcaseBusiness, isActive: () => route.path.startsWith('/services') },
+  { label: 'Tools', to: '/contractor-intelligence', icon: Workflow, isActive: () => route.path.startsWith('/contractor-intelligence') },
   { label: 'Insights', to: '/insights', icon: BookOpen, isActive: () => route.path.startsWith('/insights') },
   { label: 'Contact', to: '/contact', icon: Mail, isActive: () => route.path.startsWith('/contact') },
   { label: 'Expertise', to: '/expertise', icon: Workflow, isActive: () => route.path.startsWith('/expertise') },
