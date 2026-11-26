@@ -1,12 +1,13 @@
 <script setup lang="ts">
-const groups = [
+const route = useRoute()
+const groups = computed(() => [
   {
-    title: 'Jobs & contractor tools',
+    title: route.name === 'contracts' ? 'Jobs' : 'Jobs & contractor tools',
     id: 'footer-jobs',
     links: [
       { label: 'Find contracts', to: '/contracts' },
       { label: 'Permanent & temporary jobs', to: '/jobs' },
-      { label: 'Contractor calculators', to: '/contractor-intelligence' },
+      ...(route.name === 'contracts' ? [] : [{ label: 'Contractor calculators', to: '/contractor-intelligence' }]),
       { label: 'For employers', to: '/employers' },
     ],
   },
@@ -21,7 +22,7 @@ const groups = [
       { label: 'Discuss a project', to: '/contact' },
     ],
   },
-]
+])
 </script>
 
 <template>

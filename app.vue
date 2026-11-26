@@ -31,6 +31,7 @@ useHead({
 <template>
   <div class="pb-[calc(3.5rem+env(safe-area-inset-bottom))] lg:pb-0">
     <NuxtRouteAnnouncer />
+    <a href="#main-content" class="fixed left-4 top-3 z-[60] -translate-y-24 rounded bg-ink px-4 py-2 text-white focus:translate-y-0">Skip to content</a>
     <SiteHeader />
     <main id="main-content">
       <NuxtPage />

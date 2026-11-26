@@ -13,11 +13,16 @@ const work = { label: 'Experience', to: '/work', icon: Users }
 const contact = { label: 'Discuss a project', short: 'Contact', to: '/contact', icon: Mail }
 const about = { label: 'About', to: '/about' }
 const insights = { label: 'Insights', to: '/insights' }
-const findWork = { ...contracts, label: 'Find work', short: 'Find work' }
+const findWork = { label: 'Find work', to: '/find-a-job', icon: Search }
+const boardLinks = [contracts, jobs]
 
 const sections = {
+  contractBoard: {
+    primary: boardLinks, action: import.meta.dev ? null : employers,
+    quick: import.meta.dev ? boardLinks : [...boardLinks, employers],
+  },
   home: {
-    primary: [findWork, employers, consultancy], action: null,
+    primary: [consultancy, calculators, employers, findWork], action: null,
     quick: [home, findWork, employers, consultancy],
   },
   jobs: {
@@ -25,7 +30,7 @@ const sections = {
     quick: [contracts, jobs, calculators, import.meta.dev ? postRole : employers],
   },
   consultancy: {
-    primary: [services, expertise, work, insights, about], action: contact,
+    primary: [about, work, expertise, insights, services], action: contact,
     quick: [services, expertise, work, contact],
   },
 }
@@ -33,8 +38,21 @@ const sections = {
 export function useSiteNavigation() {
   const route = useRoute()
   return computed(() => {
+    if (route.name === 'employers') {
+      return { primary: [], action: import.meta.dev ? { ...postRole, label: 'Post a job' } : null, quick: sections.jobs.quick }
+    }
+    if (route.name === 'contractor-intelligence') return { primary: [], action: null, quick: sections.jobs.quick }
+    if (route.name === 'contracts') return sections.contractBoard
+    if (route.name === 'jobs') return { ...sections.jobs, primary: boardLinks }
+    if (route.name === 'find-a-job') {
+      return {
+        primary: boardLinks,
+        action: import.meta.dev ? null : employers,
+        quick: import.meta.dev ? sections.jobs.primary : sections.jobs.quick,
+      }
+    }
     const root = route.path.split('/')[1]
-    if (['contracts', 'jobs', 'employers', 'contractor-intelligence'].includes(root)) return sections.jobs
+    if (['find-a-job', 'contracts', 'jobs', 'employers', 'contractor-intelligence'].includes(root)) return sections.jobs
     if (['consultancy', 'services', 'expertise', 'work', 'contact', 'insights', 'about', 'scala', 'java', 'typescript', 'python'].includes(root)) return sections.consultancy
     return sections.home
   })
