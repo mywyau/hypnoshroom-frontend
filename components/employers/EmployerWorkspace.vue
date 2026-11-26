@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { boardPath, employmentLabels, londonDate, type EmployerContract } from '~/domain/employers/contract'
 
-const client = useEmployerClient()
+const client = useAccountClient()
 const company = ref('')
 const accountReady = ref(false)
 const listings = ref<EmployerContract[]>([])

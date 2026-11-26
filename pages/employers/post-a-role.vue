@@ -17,7 +17,9 @@ usePageSeo({ title: 'Post a role | Hypnoshroom', description: 'Publish and manag
       <div class="employer-workspace mt-6 max-w-3xl">
         <EmployerPostingPreview v-if="preview" />
         <ClientOnly v-else>
-          <EmployerAccount />
+          <AccountAccess audience="employer" v-slot="{ user }">
+            <EmployerWorkspace :key="user.id" />
+          </AccountAccess>
           <template #fallback><p>Loading employer sign-in…</p></template>
         </ClientOnly>
         <NuxtLink v-if="hasAccounts" :to="preview ? '/employers/post-a-role' : '/employers/post-a-role?preview=1'" class="link mt-6 inline-block">

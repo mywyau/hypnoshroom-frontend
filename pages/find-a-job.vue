@@ -1,5 +1,7 @@
 <script setup lang="ts">
 const boardsComingSoon = !import.meta.dev
+const config = useRuntimeConfig().public
+const showAccount = import.meta.dev && Boolean(config.employerSupabaseUrl && config.employerSupabaseKey)
 const boards = [
   {
     title: 'Contract roles',
@@ -24,6 +26,7 @@ usePageSeo({
   <div>
     <PageHero eyebrow="For job seekers" title="Find a job." intro="Choose the kind of engineering work you’re looking for in the UK." gradient="forest" />
     <div class="page-shell py-10 sm:py-16">
+      <NuxtLink v-if="showAccount" to="/login" class="mb-5 inline-flex min-h-11 items-center font-semibold text-moss underline underline-offset-4">Sign in to Hypnoshroom</NuxtLink>
       <nav aria-label="Engineering job boards" class="grid gap-5 md:grid-cols-2">
         <NuxtLink v-for="board in boards" :key="board.to" :to="board.to" class="group rounded-2xl border border-moss/25 bg-white/40 p-6 transition hover:border-moss sm:p-8">
           <h2 class="font-display text-3xl group-hover:underline">{{ board.title }}</h2>

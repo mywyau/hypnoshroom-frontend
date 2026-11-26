@@ -5,6 +5,17 @@ const showLaunchStatus = !import.meta.dev
 
 const route = useRoute()
 const navigation = useSiteNavigation()
+const config = useRuntimeConfig().public
+const hasAccounts = Boolean(config.employerSupabaseUrl && config.employerSupabaseKey)
+const accountPath = computed(() => {
+  if (!import.meta.dev) return
+  if (isConsultancyPath(route.path)) return '/login'
+  if (route.path.split('/')[1] === 'contractor-intelligence') return '/login'
+  if (route.path === '/' || route.name === 'find-a-job') return '/login'
+  if (!isHiringPath(route.path)) return
+  if (['login', 'jobs-account', 'jobs-reset-password', 'employers-post-a-role'].includes(String(route.name))) return
+  return route.path.startsWith('/employers') && hasAccounts ? '/employers/post-a-role?view=listings' : '/login'
+})
 </script>
 
 <template>
@@ -21,7 +32,10 @@ const navigation = useSiteNavigation()
         </NuxtLink>
       </nav>
 
-      <AppButton v-if="navigation.action" :to="navigation.action.to" class="col-start-2 row-start-1 whitespace-nowrap max-sm:!px-3 max-sm:!text-xs max-sm:[&>span]:hidden md:col-start-3">{{ navigation.action.label }}</AppButton>
+      <div v-if="navigation.action || accountPath" class="col-start-2 row-start-1 flex items-center gap-3 sm:gap-4 md:col-start-3">
+        <HeaderAccountLink v-if="accountPath" :to="accountPath" />
+        <AppButton v-if="navigation.action" :to="navigation.action.to" class="whitespace-nowrap max-sm:!px-3 max-sm:!text-xs max-sm:[&>span]:hidden">{{ navigation.action.label }}</AppButton>
+      </div>
     </div>
   </header>
 </template>

@@ -35,6 +35,11 @@ const sections = {
   },
 }
 
+export function isConsultancyPath(path: string) {
+  const root = path.split('/')[1]
+  return ['consultancy', 'services', 'expertise', 'work', 'contact', 'insights', 'about', 'scala', 'java', 'typescript', 'python'].includes(root)
+}
+
 export function useSiteNavigation() {
   const route = useRoute()
   return computed(() => {
@@ -53,7 +58,7 @@ export function useSiteNavigation() {
     }
     const root = route.path.split('/')[1]
     if (['find-a-job', 'contracts', 'jobs', 'employers', 'contractor-intelligence'].includes(root)) return sections.jobs
-    if (['consultancy', 'services', 'expertise', 'work', 'contact', 'insights', 'about', 'scala', 'java', 'typescript', 'python'].includes(root)) return sections.consultancy
+    if (isConsultancyPath(route.path)) return sections.consultancy
     return sections.home
   })
 }
