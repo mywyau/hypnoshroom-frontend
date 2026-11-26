@@ -1,10 +1,11 @@
-import { BriefcaseBusiness, Calculator, Code, House, Mail, Plus, Search, Users } from '@lucide/vue'
+import { BriefcaseBusiness, Building2, Calculator, Code, House, Mail, Plus, Search, Users } from '@lucide/vue'
 
 const home = { label: 'Home', to: '/', icon: House }
 const contracts = { label: 'Find contracts', short: 'Contracts', to: '/contracts', icon: Search }
 const jobs = { label: 'Permanent & temporary jobs', short: 'Jobs', to: '/jobs', icon: Users }
 const calculators = { label: 'Contractor calculators', short: 'Calculators', to: '/contractor-intelligence', icon: Calculator }
-const employers = { label: 'Post a role', to: '/employers/post-a-role', icon: Plus }
+const employers = { label: 'Employers', to: '/employers', icon: Building2 }
+const postRole = { label: 'Post a role', to: '/employers/post-a-role', icon: Plus }
 const consultancy = { label: 'Consultancy', to: '/consultancy', icon: BriefcaseBusiness }
 const services = { label: 'Services', to: '/services', icon: BriefcaseBusiness }
 const expertise = { label: 'Expertise', to: '/expertise', icon: Code }
@@ -16,12 +17,12 @@ const findWork = { ...contracts, label: 'Find work', short: 'Find work' }
 
 const sections = {
   home: {
-    primary: [findWork, consultancy], action: null, more: [employers, about, contact],
-    quick: [home, findWork, consultancy],
+    primary: [findWork, employers, consultancy], action: null, more: [about, contact],
+    quick: [home, findWork, employers, consultancy],
   },
   jobs: {
-    primary: [contracts, jobs, calculators], action: employers, more: [],
-    quick: [contracts, jobs, calculators, employers],
+    primary: [contracts, jobs, calculators], action: postRole, more: [],
+    quick: [contracts, jobs, calculators, postRole],
   },
   consultancy: {
     primary: [services, expertise, work], action: contact, more: [insights, about],
