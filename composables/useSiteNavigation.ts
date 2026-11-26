@@ -2,9 +2,9 @@ import { BriefcaseBusiness, Calculator, Code, House, Mail, Plus, Search, Users }
 
 const home = { label: 'Home', to: '/', icon: House }
 const contracts = { label: 'Find contracts', short: 'Contracts', to: '/contracts', icon: Search }
-const jobs = { label: 'Full-time jobs', short: 'Jobs', to: '/jobs', icon: Users }
+const jobs = { label: 'Permanent & temporary jobs', short: 'Jobs', to: '/jobs', icon: Users }
 const calculators = { label: 'Contractor calculators', short: 'Calculators', to: '/contractor-intelligence', icon: Calculator }
-const employers = { label: 'Post a role', to: '/employers', icon: Plus }
+const employers = { label: 'Post a role', to: '/employers/post-a-role', icon: Plus }
 const consultancy = { label: 'Consultancy', to: '/consultancy', icon: BriefcaseBusiness }
 const services = { label: 'Services', to: '/services', icon: BriefcaseBusiness }
 const expertise = { label: 'Expertise', to: '/expertise', icon: Code }

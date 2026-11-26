@@ -1,1 +1,1 @@
-export default defineEventHandler(event => getListing(event, 'permanent'))
+export default defineEventHandler(event => getListing(event, 'jobs'))

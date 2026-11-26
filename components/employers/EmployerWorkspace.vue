@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { boardPath, londonDate, type EmployerContract } from '~/domain/employers/contract'
+import { boardPath, employmentLabels, londonDate, type EmployerContract } from '~/domain/employers/contract'
 
 const client = useEmployerClient()
 const company = ref('')
 const accountReady = ref(false)
 const listings = ref<EmployerContract[]>([])
-const editing = ref<EmployerContract | 'new' | null>(null)
+const route = useRoute()
+const editing = ref<EmployerContract | 'new' | null>(route.query.view === 'listings' ? null : 'new')
 const busy = ref(false)
 const loadFailed = ref(false)
 const message = ref('')
@@ -42,9 +43,15 @@ async function saveProfile() {
   }
 }
 
-async function saved(status: string) {
+async function saveListing({ id, ...payload }: EmployerContract) {
+  const initial = editing.value
+  if (!initial) throw new Error('Select a listing to save.')
+  const query = initial === 'new'
+    ? client.from('employer_contracts').insert({ ...payload, id })
+    : client.from('employer_contracts').update(payload).eq('id', id).eq('status', initial.status)
+  await query.select('id').single().throwOnError()
   editing.value = null
-  message.value = status === 'published' ? 'Listing published.' : 'Draft saved.'
+  message.value = payload.status === 'published' ? 'Listing published.' : 'Draft saved.'
   await reload()
 }
 
@@ -75,7 +82,7 @@ onMounted(reload)
       <p class="text-sm">Applicants will see this name on your listings.</p>
       <button class="action justify-self-start">Save company</button>
     </form>
-    <EmployerContractForm v-else-if="editing" :listing="editing === 'new' ? null : editing" @cancel="editing = null" @saved="saved" />
+    <EmployerContractForm v-else-if="editing" :listing="editing === 'new' ? null : editing" @cancel="editing = null" :submit-listing="saveListing" />
     <div v-else>
       <div class="flex flex-wrap items-baseline justify-between gap-4">
         <h2>{{ company }} listings</h2>
@@ -84,7 +91,7 @@ onMounted(reload)
       <p v-if="!listings.length" class="mt-6">Your first listing will appear here.</p>
       <article v-for="listing in listings" :key="listing.id" class="mt-4 border-t border-line pt-4">
         <h3 class="font-display text-xl">{{ listing.title }}</h3>
-        <p class="capitalize">{{ listing.employment_type === 'permanent' ? 'Full-time' : 'Contract' }} · {{ listing.status === 'published' && listing.closes_on < londonDate() ? 'Expired' : listing.status }}</p>
+        <p class="capitalize">{{ employmentLabels[listing.employment_type] }} · {{ listing.status === 'published' && listing.closes_on < londonDate() ? 'Expired' : listing.status }}</p>
         <div class="mt-2 flex gap-4">
           <button class="link" @click="editing = listing; message = ''">Edit brief</button>
           <NuxtLink v-if="listing.status === 'published' && listing.closes_on >= londonDate()" class="link" :to="boardPath(listing.employment_type) + '/' + listing.id">View listing</NuxtLink>

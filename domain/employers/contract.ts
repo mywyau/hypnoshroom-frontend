@@ -1,9 +1,20 @@
-export const ir35Options = ['Inside IR35', 'Outside IR35', 'Unspecified'] as const
+export const advertisedIr35Options = [
+  'Inside IR35', 'Outside IR35', 'PAYE or umbrella only', 'Small private or voluntary client – intermediary decides',
+] as const
+// Existing listings can still be found by their original advertised status.
+export const ir35Options = [...advertisedIr35Options, 'Unspecified'] as const
 export const disciplines = ['Backend', 'Web development', 'Data engineering', 'AI / ML', 'Hardware / embedded', 'Platform / DevOps', 'Other engineering']
 export const languages = ['Scala', 'Java', 'Python', 'SQL', 'TypeScript', 'JavaScript', 'Go', 'Rust', 'C', 'C++', 'C#', 'Kotlin', 'VHDL', 'Verilog']
-export type EmploymentType = 'contract' | 'permanent'
+export const languageChoices = [...languages, 'Other']
+export const employmentLabels = {
+  contract: 'Contract',
+  permanent: 'Permanent, full-time',
+  temporary: 'Temporary, fixed-term',
+} as const
+export type EmploymentType = keyof typeof employmentLabels
+export type BoardType = 'contract' | 'jobs'
 
-export function boardPath(type: EmploymentType) {
+export function boardPath(type: EmploymentType | BoardType) {
   return type === 'contract' ? '/contracts' : '/jobs'
 }
 
@@ -14,6 +25,7 @@ export interface ContractBrief {
   fully_remote: boolean
   discipline: string | null
   languages: string[]
+  other_language: string | null
   salary_gbp: number | null
   salary_max_gbp: number | null
   title: string
@@ -22,7 +34,7 @@ export interface ContractBrief {
   day_rate_gbp: number | null
   ir35: typeof ir35Options[number] | null
   description: string
-  apply_url: string
+  apply_url: string | null
   closes_on: string
 }
 
@@ -44,9 +56,9 @@ export function londonDate(date = new Date()) {
 
 export function advertisedPay(listing: ContractBrief) {
   const pounds = (value: number) => '£' + value.toLocaleString('en-GB')
-  if (listing.employment_type === 'contract') return listing.day_rate_gbp ? pounds(listing.day_rate_gbp) + '/day' : 'Rate undisclosed'
+  if (listing.employment_type === 'contract') return listing.day_rate_gbp ? pounds(listing.day_rate_gbp) + '/day' : 'Day rate unspecified'
   if (!listing.salary_gbp) return 'Salary undisclosed'
-  const range = listing.salary_max_gbp ? '–' + pounds(listing.salary_max_gbp) : ''
+  const range = listing.salary_max_gbp && listing.salary_max_gbp !== listing.salary_gbp ? '–' + pounds(listing.salary_max_gbp) : ''
   return pounds(listing.salary_gbp) + range + '/year'
 }
 

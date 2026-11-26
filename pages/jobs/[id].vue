@@ -3,5 +3,5 @@ definePageMeta({ key: route => route.path })
 </script>
 
 <template>
-  <RoleDetails type="permanent" />
+  <RoleDetails type="jobs" />
 </template>

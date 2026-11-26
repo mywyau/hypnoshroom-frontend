@@ -5,9 +5,9 @@ const groups = [
     id: 'footer-jobs',
     links: [
       { label: 'Find contracts', to: '/contracts' },
-      { label: 'Full-time jobs', to: '/jobs' },
+      { label: 'Permanent & temporary jobs', to: '/jobs' },
       { label: 'Contractor calculators', to: '/contractor-intelligence' },
-      { label: 'Employer accounts', to: '/employers' },
+      { label: 'For employers', to: '/employers' },
     ],
   },
   {

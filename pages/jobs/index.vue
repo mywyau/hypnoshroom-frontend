@@ -1,3 +1,3 @@
 <template>
-  <RoleBoard type="permanent" />
+  <RoleBoard type="jobs" />
 </template>

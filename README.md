@@ -171,14 +171,18 @@ The product brief is in [HYPNOSHROOM_CONTRACTOR_INTELLIGENCE.md](HYPNOSHROOM_CON
 
 ## Employer accounts and contract board
 
-Employers sign in at `/employers` with a Supabase email link, set their company name, and draft, publish, edit or close UK technology contracts. One email account manages its own listings. Applicants browse `/contracts` for day-rate contracts or `/jobs` for permanent, full-time jobs with annual GBP salaries. Both boards support location, fully remote, engineering discipline and language filters. Applicants apply on the employer’s site. Rates are advertised GBP day rates. The board hides closed listings immediately and expired listings after their closing date in London.
+The employer homepage is `/employers`. Employers sign in at `/employers/post-a-role` with a Supabase email link, set their company name, and draft, publish, edit or close UK engineering roles. One email account manages its own listings. Applicants browse `/contracts` for day-rate contracts or `/jobs` for permanent and temporary employee jobs. New listings require an engineering discipline. Employee jobs require an annual GBP salary range, and temporary jobs also require a duration. Contract employers can explicitly mark their day rate as unspecified. Both boards support location, fully remote, engineering discipline and language filters. Applicants apply on the employer’s site. Rates are advertised GBP day rates. The board hides closed listings immediately and expired listings after their closing date in London.
+
+### Try the posting preview
+
+Open `/employers/post-a-role?preview=1` to enter a company or agency name, create a contract, permanent or temporary role, review it and simulate submission for first-listing review. The preview keeps inputs in page memory and clears on refresh. The posting page opens the preview automatically when the public Supabase settings are absent. At `/employers/pricing`, each sample plan leads into the same preview. The proposed free tier covers one role per verified organisation in a rolling 30-day period. The first listing from each new organisation is proposed for review across all plans. Plan selection, prices and posting are simulated here. Live organisation verification, publication quotas, moderation and billing are separate work.
 
 ### Connect a Supabase environment
 
 1. Use a Supabase project with the Data API enabled for the public schema. Apply the versioned migrations using the workflow below.
 2. Set `NUXT_PUBLIC_EMPLOYER_SUPABASE_URL` to the project URL and `NUXT_PUBLIC_EMPLOYER_SUPABASE_KEY` to its **publishable** key in the Nuxt environment. A service-role or secret key must never go into public configuration.
 3. Enable the email provider, new-user signups and email confirmation. Use the standard magic-link email template with the confirmation URL. Allow the exact local callback (for example `http://localhost:3000/employers`) and the deployed HTTPS callback in Supabase Auth redirect settings. Set the Site URL for the environment and configure an SMTP sender for external employers.
-4. Restart Nuxt. Request a link at `/employers` and open it in the same browser. Create a profile and save a draft, publish it, open the listing in a signed-out window, then close it and refresh the public page. Drafts, closed briefs and sign-in emails stay out of the public view.
+4. Restart Nuxt. Request a link at `/employers/post-a-role` and open it in the same browser. Create a profile and save a draft, publish it, open the listing in a signed-out window, then close it and refresh the public page. Drafts, closed briefs and sign-in emails stay out of the public view.
 
 The local database regression test uses in-memory PostgreSQL and simulated Supabase identities. Run it with `node --test tests/employer-board.test.mjs`.
 
