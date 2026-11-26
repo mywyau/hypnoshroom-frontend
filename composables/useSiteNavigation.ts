@@ -17,15 +17,15 @@ const findWork = { ...contracts, label: 'Find work', short: 'Find work' }
 
 const sections = {
   home: {
-    primary: [findWork, employers, consultancy, about], action: null, more: [],
+    primary: [findWork, employers, consultancy], action: null,
     quick: [home, findWork, employers, consultancy],
   },
   jobs: {
-    primary: [contracts, jobs, calculators], action: import.meta.dev ? postRole : employers, more: [],
+    primary: [contracts, jobs, calculators], action: import.meta.dev ? postRole : employers,
     quick: [contracts, jobs, calculators, import.meta.dev ? postRole : employers],
   },
   consultancy: {
-    primary: [services, expertise, work], action: contact, more: [insights, about],
+    primary: [services, expertise, work, insights, about], action: contact,
     quick: [services, expertise, work, contact],
   },
 }
