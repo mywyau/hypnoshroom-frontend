@@ -1,28 +1,50 @@
+<script setup lang="ts">
+const groups = [
+  {
+    title: 'Jobs & contractor tools',
+    id: 'footer-jobs',
+    links: [
+      { label: 'Find contracts', to: '/contracts' },
+      { label: 'Full-time jobs', to: '/jobs' },
+      { label: 'Contractor calculators', to: '/contractor-intelligence' },
+      { label: 'Employer accounts', to: '/employers' },
+    ],
+  },
+  {
+    title: 'Consultancy',
+    id: 'footer-consultancy',
+    links: [
+      { label: 'Services', to: '/services' },
+      { label: 'Expertise', to: '/expertise' },
+      { label: 'Experience', to: '/work' },
+      { label: 'Insights', to: '/insights' },
+      { label: 'Discuss a project', to: '/contact' },
+    ],
+  },
+]
+</script>
+
 <template>
   <footer class="border-t border-line bg-[#ece8de]">
-    <div class="page-shell grid gap-12 py-14 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr]">
-      <div>
-        <NuxtLink to="/" class="font-display text-2xl font-semibold">Hypnoshroom</NuxtLink>
-        <p class="mt-3 max-w-sm text-sm leading-6 text-ink/60">Specialist Scala engineering, modern software products and pragmatic delivery.</p>
-      </div>
-      <div>
-        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-ink/45">Navigate</p>
-        <nav aria-label="Footer navigation" class="mt-4 grid grid-cols-2 gap-3 text-sm">
-          <NuxtLink to="/services" class="hover:text-moss">Services</NuxtLink>
-          <NuxtLink to="/expertise" class="hover:text-moss">Expertise</NuxtLink>
-          <NuxtLink to="/work" class="hover:text-moss">Experience</NuxtLink>
-          <NuxtLink to="/insights" class="hover:text-moss">Insights</NuxtLink>
-          <NuxtLink to="/about" class="hover:text-moss">About</NuxtLink>
-          <NuxtLink to="/contact" class="hover:text-moss">Contact</NuxtLink>
-          <NuxtLink to="/contractor-intelligence" class="hover:text-moss">Contractor intelligence</NuxtLink>
-          <NuxtLink to="/privacy" class="hover:text-moss">Privacy</NuxtLink>
-        </nav>
-      </div>
-      <div>
-        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-ink/45">Start a conversation</p>
-        <AppButton to="/contact" variant="text">Discuss a project</AppButton>
+    <div class="page-shell grid grid-cols-2 gap-x-5 gap-y-6 py-10 sm:gap-x-10 lg:grid-cols-[1.5fr_1fr_1fr] lg:py-12">
+      <NuxtLink to="/" class="col-span-2 w-fit self-start font-display text-2xl font-semibold lg:col-span-1">Hypnoshroom</NuxtLink>
+
+      <nav v-for="group in groups" :key="group.id" :aria-labelledby="group.id">
+        <h2 :id="group.id" class="mb-2 font-display text-lg font-semibold">{{ group.title }}</h2>
+        <ul class="text-sm text-ink/75">
+          <li v-for="link in group.links" :key="link.to">
+            <NuxtLink :to="link.to" class="inline-flex min-h-9 items-center py-1 hover:text-moss hover:underline">{{ link.label }}</NuxtLink>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="page-shell flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t border-ink/10 py-4 text-xs text-ink/65">
+      <p>© {{ new Date().getFullYear() }} Hypnoshroom. All rights reserved.</p>
+      <div class="flex gap-5">
+        <NuxtLink to="/about" class="inline-flex min-h-9 items-center hover:text-moss hover:underline">About</NuxtLink>
+        <NuxtLink to="/privacy" class="inline-flex min-h-9 items-center hover:text-moss hover:underline">Privacy</NuxtLink>
       </div>
     </div>
-    <div class="page-shell border-t border-ink/10 py-6 text-xs text-ink/50">© {{ new Date().getFullYear() }} Hypnoshroom. All rights reserved.</div>
   </footer>
 </template>

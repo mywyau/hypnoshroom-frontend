@@ -17,7 +17,7 @@ usePageSeo({
     <PageHero eyebrow="Privacy" title="Your privacy." intro="What Hypnoshroom collects when you get in touch, why it is needed and how it is handled." />
     <section class="section-space">
       <div class="page-shell prose-article max-w-3xl">
-        <p><strong>Last updated:</strong> 26 August 2026</p>
+        <p><strong>Last updated:</strong> 25 November 2026</p>
         <h2 class="flex items-center gap-3">
           <span class="flex size-10 shrink-0 items-center justify-center rounded-xl border border-plum/20 bg-white/40 text-plum" aria-hidden="true"><Shield class="size-5" :stroke-width="1.7" /></span>
           Who is responsible
@@ -30,6 +30,9 @@ usePageSeo({
           <span class="flex size-10 shrink-0 items-center justify-center rounded-xl border border-plum/20 bg-white/40 text-plum" aria-hidden="true"><Database class="size-5" :stroke-width="1.7" /></span>
           Information collected
         </h2>
+        <h3>Employer accounts and contract listings</h3>
+        <p>Supabase stores the email you use to sign in, your company name and the briefs you save. Publishing shows your company name, application link and brief on the relevant job board. Your sign-in email stays private. We may summarise advertised terms across listings. Closing or expiring a listing removes it from public browsing. Applications go to the employer’s own site.</p>
+        <p>Your browser stores your employer session so you can return to manage listings. Sign out on shared devices. Contact Hypnoshroom to request deletion of your account and its listings.</p>
         <p>When you use the enquiry form, Hypnoshroom collects your name, email address, company if supplied, the engagement type you select and the project details you write. Basic technical information such as an IP address is processed temporarily to protect the form from abuse.</p>
         <h2 class="flex items-center gap-3">
           <span class="flex size-10 shrink-0 items-center justify-center rounded-xl border border-plum/20 bg-white/40 text-plum" aria-hidden="true"><FileText class="size-5" :stroke-width="1.7" /></span>

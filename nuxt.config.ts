@@ -15,6 +15,8 @@ export default defineNuxtConfig({
     contactFromEmail: '',
     turnstileSecretKey: '',
     public: {
+      employerSupabaseUrl: '',
+      employerSupabaseKey: '',
       contactEmail: '',
       turnstileSiteKey: '',
     },

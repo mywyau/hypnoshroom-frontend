@@ -1,20 +1,10 @@
 <script setup lang="ts">
 usePageSeo({
-  title: 'Scala & Software Product Engineering | Hypnoshroom',
-  description: 'Independent UK consultancy for specialist Scala engineering, technical reviews, embedded support and modern TypeScript products.',
+  title: 'UK Engineering Jobs & Consultancy | Hypnoshroom',
+  description: 'Browse UK contract and full-time engineering jobs, compare offers with contractor calculators, or explore engineering consultancy for your team.',
 })
 </script>
 
 <template>
-  <div>
-    <HeroSection />
-    <ServicesPreview />
-    <TechnologySection />
-    <QualitySection />
-    <WhyHypnoshroom />
-    <EngagementProcess />
-    <AboutPreview />
-    <InsightsPreview />
-    <ContactCta />
-  </div>
+  <HeroSection />
 </template>

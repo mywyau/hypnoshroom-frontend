@@ -1,6 +1,6 @@
 # Hypnoshroom frontend
 
-The Nuxt 3 website for Hypnoshroom, an independent consultancy specialising in Scala engineering, modern software products and pragmatic software delivery.
+Hypnoshroom connects UK software contractors with employer-posted roles and offers independent Scala engineering consultancy. The board at `/contracts` supports shareable searches by role or skill, location and IR35 status.
 
 The application includes server-rendered pages, technical articles, service and expertise content, Vercel Web Analytics and a server-side contact form delivered through Resend.
 
@@ -167,4 +167,46 @@ The product brief is in [HYPNOSHROOM_CONTRACTOR_INTELLIGENCE.md](HYPNOSHROOM_CON
 2. Extend the comparison with a standalone inside-IR35 entry point if a dedicated umbrella workflow is needed. Add verified student-loan plans and other pension relief methods with fixtures. The current tool supports registered-pension salary sacrifice and additional employer contributions only.
 3. Build the standalone runway tool with reserve floor, debt repayments, one-off expenses, gap income and zero-burn tests. Build the minimum-rate solver for cash and total-package targets with risk premium, bounded search and penny-level target tests. The comparison currently solves for whole days at a given rate.
 4. Before release, obtain accountant review of `domain/contractor/limitedCompany.ts`, especially director NI, marginal relief, dividend stacking and allowance allocation. The calculator covers one full accounting year, a sole director/shareholder, current-year dividends and no opening reserves. Add short accounting periods or other income only with new sourced rules and fixtures.
-5. Keep market intelligence in a separate future data layer. Before ingestion, review official procurement APIs and licensed vacancy feeds for redistribution, retention, attribution, privacy and rate limits, then obtain approval. Track source observations and provenance separately from deduplicated vacancies. Publish coverage, freshness, missingness and sample size with any eventual statistic.
+5. Keep market intelligence in a separate future data layer. Before ingestion, review permitted vacancy feeds for redistribution, retention, attribution, privacy and rate limits, then obtain approval. Track source observations and provenance separately from deduplicated vacancies. Publish coverage, freshness, missingness and sample size with any eventual statistic.
+
+## Employer accounts and contract board
+
+Employers sign in at `/employers` with a Supabase email link, set their company name, and draft, publish, edit or close UK technology contracts. One email account manages its own listings. Applicants browse `/contracts` for day-rate contracts or `/jobs` for permanent, full-time jobs with annual GBP salaries. Both boards support location, fully remote, engineering discipline and language filters. Applicants apply on the employer’s site. Rates are advertised GBP day rates. The board hides closed listings immediately and expired listings after their closing date in London.
+
+### Connect a Supabase environment
+
+1. Use a Supabase project with the Data API enabled for the public schema. Apply the versioned migrations using the workflow below.
+2. Set `NUXT_PUBLIC_EMPLOYER_SUPABASE_URL` to the project URL and `NUXT_PUBLIC_EMPLOYER_SUPABASE_KEY` to its **publishable** key in the Nuxt environment. A service-role or secret key must never go into public configuration.
+3. Enable the email provider, new-user signups and email confirmation. Use the standard magic-link email template with the confirmation URL. Allow the exact local callback (for example `http://localhost:3000/employers`) and the deployed HTTPS callback in Supabase Auth redirect settings. Set the Site URL for the environment and configure an SMTP sender for external employers.
+4. Restart Nuxt. Request a link at `/employers` and open it in the same browser. Create a profile and save a draft, publish it, open the listing in a signed-out window, then close it and refresh the public page. Drafts, closed briefs and sign-in emails stay out of the public view.
+
+The local database regression test uses in-memory PostgreSQL and simulated Supabase identities. Run it with `node --test tests/employer-board.test.mjs`.
+
+### Database migrations
+
+Run the pinned Supabase CLI from the frontend repository. Link the checkout to the intended project once. Replace `YOUR_PROJECT_REF` with the project reference from the Supabase dashboard.
+
+```sh
+npm run supabase -- login
+npm run supabase -- link YOUR_PROJECT_REF
+npm run supabase -- migration list --remote
+```
+
+The Local and Remote columns compare the files in `supabase/migrations/` with the linked database's recorded versions. Each successful push records its timestamp in `supabase_migrations.schema_migrations`. Commit the SQL files to Git and use a new migration for later changes.
+
+**Adopting a database previously updated in the SQL Editor.** Check the SQL Editor history and the actual schema, including policies and grants, for each file reported as local-only. If you verified the complete old migration already ran successfully, record its matching version once with `npm run supabase -- migration repair VERSION --status applied --remote`. Repair updates history without executing the SQL. Leave pending versions for the push. Investigate partially applied changes or unfamiliar remote-only history before proceeding.
+
+| Previous SQL file | CLI version |
+|---|---|
+| `001-board.sql` | `20261125000100` |
+| `002-engineering-jobs.sql` | `20261126000100` |
+
+Preview the pending migrations, apply them, and confirm that the local and remote versions match.
+
+```sh
+npm run supabase -- db push --remote --dry-run
+npm run supabase -- db push --remote
+npm run supabase -- migration list --remote
+```
+
+For the next schema change, create a timestamped file with `npm run supabase -- migration new describe_the_change`, edit its SQL, and use the same preview and push commands. A second push skips versions already recorded. For a non-interactive deployment, supply Supabase credentials from your CI secret store and pass `--yes` to the reviewed hosted push.
