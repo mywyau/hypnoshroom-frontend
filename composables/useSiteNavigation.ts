@@ -17,7 +17,7 @@ const findWork = { ...contracts, label: 'Find work', short: 'Find work' }
 
 const sections = {
   home: {
-    primary: [findWork, employers, consultancy], action: null, more: [about, contact],
+    primary: [findWork, employers, consultancy, about], action: null, more: [],
     quick: [home, findWork, employers, consultancy],
   },
   jobs: {
