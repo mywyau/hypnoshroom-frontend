@@ -1,6 +1,10 @@
 import type { H3Event } from 'h3'
 import { disciplines, languageChoices, languages, ir35Options, type BoardType, type PublicContract } from '../../domain/employers/contract'
 
+function requireJobBoards() {
+  if (!import.meta.dev) throw createError({ statusCode: 404, statusMessage: 'Job boards coming soon' })
+}
+
 async function readListings(type: BoardType, query: Record<string, string | number>) {
   const config = useRuntimeConfig().public
   if (!config.employerSupabaseUrl || !config.employerSupabaseKey) {
@@ -18,6 +22,7 @@ async function readListings(type: BoardType, query: Record<string, string | numb
 }
 
 export async function searchListings(event: H3Event, type: BoardType) {
+  requireJobBoards()
   const query = getQuery(event)
   const page = Number(query.page ?? 1)
   if (!Number.isSafeInteger(page) || page < 1 || page > 100000) {
@@ -75,6 +80,7 @@ export async function searchListings(event: H3Event, type: BoardType) {
 }
 
 export async function getListing(event: H3Event, type: BoardType) {
+  requireJobBoards()
   const id = getRouterParam(event, 'id') ?? ''
   if (!/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(id)) {
     throw createError({ statusCode: 404, statusMessage: 'Listing unavailable' })

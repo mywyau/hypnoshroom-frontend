@@ -3,11 +3,11 @@ const paths = [
   {
     audience: 'For job seekers',
     title: 'Find your next job.',
-    description: 'Browse UK engineering contracts, permanent and temporary roles, or compare a day rate with a salary offer.',
-    action: { label: 'Browse contracts', to: '/contracts' },
+    description: import.meta.dev ? 'Browse UK engineering contracts, permanent and temporary roles, or compare a day rate with a salary offer.' : 'Our engineering job boards are coming soon. You can already compare a contract day rate with a salary offer.',
+    action: import.meta.dev ? { label: 'Browse contracts', to: '/contracts' } : { label: 'Contractor calculators', to: '/contractor-intelligence' },
     links: [
       { label: 'Permanent & temporary jobs', to: '/jobs' },
-      { label: 'Contractor calculators', to: '/contractor-intelligence' },
+      import.meta.dev ? { label: 'Contractor calculators', to: '/contractor-intelligence' } : { label: 'Contract board', to: '/contracts' },
     ],
   },
   {

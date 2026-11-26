@@ -171,6 +171,8 @@ The product brief is in [HYPNOSHROOM_CONTRACTOR_INTELLIGENCE.md](HYPNOSHROOM_CON
 
 ## Employer accounts and contract board
 
+Use `npm run dev` to access the job boards and employer pages locally. Production builds show a coming-soon page for these routes and return HTTP 404 for the listing APIs.
+
 The employer homepage is `/employers`. Employers sign in at `/employers/post-a-role` with a Supabase email link, set their company name, and draft, publish, edit or close UK engineering roles. One email account manages its own listings. Applicants browse `/contracts` for day-rate contracts or `/jobs` for permanent and temporary employee jobs. New listings require an engineering discipline. Employee jobs require an annual GBP salary range, and temporary jobs also require a duration. Contract employers can explicitly mark their day rate as unspecified. Both boards support location, fully remote, engineering discipline and language filters. Applicants apply on the employer’s site. Rates are advertised GBP day rates. The board hides closed listings immediately and expired listings after their closing date in London.
 
 ### Try the posting preview

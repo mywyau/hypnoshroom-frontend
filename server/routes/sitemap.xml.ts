@@ -3,7 +3,7 @@ import { services } from '../../data/services'
 import { workCaseStudies } from '../../data/work'
 
 const siteUrl = 'https://hypnoshroom.com'
-const staticRoutes = ['/', '/consultancy', '/contracts', '/jobs', '/employers', '/contractor-intelligence', '/contractor-intelligence/permanent-vs-contract', '/contractor-intelligence/methodology', '/contractor-intelligence/outside-ir35', '/about', '/contact', '/expertise', '/work', '/services', '/insights', '/scala', '/java', '/typescript', '/python']
+const staticRoutes = ['/', '/consultancy', '/contractor-intelligence', '/contractor-intelligence/permanent-vs-contract', '/contractor-intelligence/methodology', '/contractor-intelligence/outside-ir35', '/about', '/contact', '/expertise', '/work', '/services', '/insights', '/scala', '/java', '/typescript', '/python']
 
 const escapeXml = (value: string) => value
   .replaceAll('&', '&amp;')
@@ -15,6 +15,7 @@ const escapeXml = (value: string) => value
 export default defineEventHandler((event) => {
   const routes = [
     ...staticRoutes,
+    ...(import.meta.dev ? ['/contracts', '/jobs', '/employers'] : []),
     ...services.map(service => `/services/${service.slug}`),
     ...workCaseStudies.map(caseStudy => `/work/${caseStudy.slug}`),
     ...articles.map(article => `/insights/${article.slug}`),

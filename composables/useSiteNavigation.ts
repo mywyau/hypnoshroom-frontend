@@ -21,8 +21,8 @@ const sections = {
     quick: [home, findWork, employers, consultancy],
   },
   jobs: {
-    primary: [contracts, jobs, calculators], action: postRole, more: [],
-    quick: [contracts, jobs, calculators, postRole],
+    primary: [contracts, jobs, calculators], action: import.meta.dev ? postRole : employers, more: [],
+    quick: [contracts, jobs, calculators, import.meta.dev ? postRole : employers],
   },
   consultancy: {
     primary: [services, expertise, work], action: contact, more: [insights, about],
