@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Calculator } from '@lucide/vue'
+
 const boardsComingSoon = !import.meta.dev
 const config = useRuntimeConfig().public
 const showAccount = import.meta.dev && Boolean(config.employerSupabaseUrl && config.employerSupabaseKey)
@@ -34,7 +36,10 @@ usePageSeo({
         </NuxtLink>
       </nav>
       <section class="mt-10 border-t border-line pt-8">
-        <h2 class="font-display text-2xl">Comparing offers?</h2>
+        <h2 class="flex items-center gap-2 font-display text-2xl">
+          <Calculator class="size-6 shrink-0 text-moss" aria-hidden="true" />
+          Comparing offers?
+        </h2>
         <p class="mt-2 leading-7 text-ink/75">See how a contract day rate compares with a permanent salary.</p>
         <NuxtLink to="/contractor-intelligence" class="mt-2 inline-flex min-h-11 items-center font-semibold text-moss underline underline-offset-4">Explore contractor calculators</NuxtLink>
       </section>

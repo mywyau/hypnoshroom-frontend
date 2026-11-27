@@ -39,9 +39,11 @@ export async function searchListings(event: H3Event, type: BoardType) {
   const location = term('location')
   const ir35 = term('ir35')
   const discipline = term('discipline')
-  const language = term('language')
+  const language = query.language
+  const selectedLanguages = Array.isArray(language) ? language : language ? [language] : []
   const employment = term('employment')
   const remote = term('remote')
+  const hybrid = term('hybrid')
   const filters: Record<string, string> = {}
   if (keyword) {
     // PostgreSQL's ***= prefix matches the entire input literally, including C++ and .NET.
@@ -52,7 +54,7 @@ export async function searchListings(event: H3Event, type: BoardType) {
     if (taggedLanguage) matches.push('languages.cs.{' + taggedLanguage + '}')
     filters.or = '(' + matches.join(',') + ')'
   }
-  if ((discipline && !disciplines.includes(discipline)) || (language && !languageChoices.includes(language)) || (remote && remote !== '1')) {
+  if ((discipline && !disciplines.includes(discipline)) || selectedLanguages.some(item => !languageChoices.includes(item)) || [remote, hybrid].some(flag => flag && flag !== '1')) {
     throw createError({ statusCode: 400, statusMessage: 'Invalid role filter' })
   }
   if (employment) {
@@ -61,10 +63,17 @@ export async function searchListings(event: H3Event, type: BoardType) {
     }
     filters.employment_type = 'eq.' + employment
   }
-  if (remote) filters.fully_remote = 'is.true'
+  const groups: string[] = []
+  if (remote && hybrid) groups.push('or(fully_remote.is.true,hybrid.is.true)')
+  else if (remote) filters.fully_remote = 'is.true'
+  else if (hybrid) filters.hybrid = 'is.true'
   if (discipline) filters.discipline = 'eq.' + discipline
-  if (language === 'Other') filters.other_language = 'not.is.null'
-  else if (language) filters.languages = 'cs.{' + language + '}'
+  if (selectedLanguages.length) {
+    const matches = [...new Set(selectedLanguages)].map(item =>
+      item === 'Other' ? 'other_language.not.is.null' : 'languages.cs.{' + item + '}')
+    groups.push('or(' + matches.join(',') + ')')
+  }
+  if (groups.length) filters.and = '(' + groups.join(',') + ')'
   if (location) filters.location = 'imatch.***=' + location
   if (ir35) {
     if (type !== 'contract' || !ir35Options.some(option => option === ir35)) {
@@ -73,7 +82,7 @@ export async function searchListings(event: H3Event, type: BoardType) {
     filters.ir35 = 'eq.' + ir35
   }
   const rows = await readListings(type, {
-    ...filters, select: 'id,company_name,title,location,duration,day_rate_gbp,ir35,closes_on,employment_type,fully_remote,discipline,languages,other_language,salary_gbp,salary_max_gbp',
+    ...filters, select: 'id,company_name,title,location,duration,day_rate_gbp,ir35,closes_on,employment_type,fully_remote,hybrid,discipline,languages,other_language,salary_gbp,salary_max_gbp',
     order: 'created_at.desc,id.asc', offset: (page - 1) * 20, limit: 21,
   })
   return { listings: rows.slice(0, 20), hasNext: rows.length > 20 }

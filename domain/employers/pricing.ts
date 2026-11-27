@@ -8,10 +8,10 @@ export const postingPlans = [
   },
   {
     id: 'single',
-    name: 'Single listing',
+    name: 'Three-listing pack',
     price: '£49',
-    description: 'One additional contract or permanent role when you’ve used your free listing.',
-    allowance: '1 job listing',
+    description: 'Post three additional roles once you’ve used your free listing.',
+    allowance: '3 job listings',
   },
   {
     id: 'pack',

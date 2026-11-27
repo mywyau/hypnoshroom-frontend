@@ -31,6 +31,7 @@ usePageSeo({
           Information collected
         </h2>
         <h3>Accounts and job listings</h3>
+        <p>You can add a preferred name to your account for the signed-in header. Supabase stores it with your account, and you can edit or clear it at any time.</p>
         <p>Supabase Auth manages email sign-in, passwords and recovery for employer and job seeker accounts. If you create an employer profile, Supabase also stores your company name and the briefs you save. Publishing shows your company name, application link and brief on the relevant job board. Your sign-in email stays private. We may summarise advertised terms across listings. Closing or expiring a listing removes it from public browsing. Applications go to the employer’s own site.</p>
         <p>Your browser stores your sign-in session. You can browse and apply for roles as a guest. Sign out on shared devices. Contact Hypnoshroom to request deletion of your account and its listings.</p>
         <p>When you use the enquiry form, Hypnoshroom collects your name, email address, company if supplied, the engagement type you select and the project details you write. Basic technical information such as an IP address is processed temporarily to protect the form from abuse.</p>

@@ -9,12 +9,19 @@ const intro = isContract ? 'Find UK engineering contracts and apply directly to 
 usePageSeo({ title: boardName + ' | Hypnoshroom', description: intro, path })
 const route = useRoute()
 const page = computed(() => Math.max(1, Number(route.query.page) || 1))
-const filters = computed(() => Object.fromEntries(
-  ['q', 'location', 'ir35', 'discipline', 'language', 'remote', 'employment'].flatMap(key => {
+const selectedLanguages = computed(() => {
+  const value = route.query.language
+  return languageChoices.filter(item => Array.isArray(value) ? value.includes(item) : value === item)
+})
+const filters = computed(() => {
+  const result: Record<string, string | string[]> = {}
+  for (const key of ['q', 'location', 'ir35', 'discipline', 'remote', 'hybrid', 'employment']) {
     const value = route.query[key]
-    return typeof value === 'string' && value.trim() ? [[key, value.trim()]] : []
-  }),
-))
+    if (typeof value === 'string' && value.trim()) result[key] = value.trim()
+  }
+  if (selectedLanguages.value.length) result.language = selectedLanguages.value
+  return result
+})
 const hasFilters = computed(() => Object.keys(filters.value).length > 0)
 const query = computed(() => ({ ...filters.value, page: page.value }))
 const { data, error, status, refresh } = await useFetch<{ listings: PublicContract[]; hasNext: boolean }>('/api' + path, { query })
@@ -38,12 +45,6 @@ const { data, error, status, refresh } = await useFetch<{ listings: PublicContra
             <option v-for="item in disciplines" :key="item" :selected="filters.discipline === item">{{ item }}</option>
           </select>
         </label>
-        <label class="text-sm font-semibold">Programming language
-          <select name="language" class="inset-select mt-1 block w-full rounded border border-line py-2 pl-3">
-            <option value="" :selected="!filters.language">All languages</option>
-            <option v-for="item in languageChoices" :key="item" :selected="filters.language === item">{{ item }}</option>
-          </select>
-        </label>
         <label v-if="isContract" class="text-sm font-semibold">IR35 status
           <select name="ir35" class="inset-select mt-1 block w-full rounded border border-line py-2 pl-3">
             <option value="" :selected="!filters.ir35">Any status</option>
@@ -57,7 +58,26 @@ const { data, error, status, refresh } = await useFetch<{ listings: PublicContra
             <option value="temporary" :selected="filters.employment === 'temporary'">Temporary</option>
           </select>
         </label>
-        <label class="flex items-center gap-2 py-2 text-sm font-semibold"><input name="remote" type="checkbox" value="1" :checked="filters.remote === '1'" class="size-4 accent-moss">Fully remote only</label>
+        <fieldset>
+          <legend class="mb-1 text-sm font-semibold">Work arrangement</legend>
+          <div class="flex flex-wrap gap-2">
+            <label v-for="(label, key) in { remote: 'Fully remote', hybrid: 'Hybrid' }" :key="key" class="relative cursor-pointer">
+              <input type="checkbox" role="switch" :name="key" value="1" :checked="filters[key] === '1'" class="peer sr-only">
+              <span class="inline-flex min-h-11 items-center rounded-lg border border-line px-3 text-sm font-semibold peer-checked:border-moss peer-checked:bg-moss peer-checked:text-white peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-moss">{{ label }}</span>
+            </label>
+          </div>
+        </fieldset>
+        <fieldset class="col-span-full min-w-0">
+          <legend class="mb-2 text-sm font-semibold">Programming languages <span class="font-normal text-ink/70">(match any selected)</span></legend>
+          <div class="flex flex-wrap gap-2">
+            <label v-for="item in languageChoices" :key="item" class="relative cursor-pointer">
+              <input type="checkbox" name="language" :value="item" :checked="selectedLanguages.includes(item)" class="peer sr-only">
+              <span class="flex min-h-11 items-center gap-2 rounded-lg border border-line bg-white/60 px-3 py-2 text-sm peer-checked:border-moss peer-checked:bg-moss/25 peer-checked:font-semibold peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-moss">
+                <LanguageIcon :language="item" />{{ item }}
+              </span>
+            </label>
+          </div>
+        </fieldset>
         <AppButton>Search roles</AppButton>
       </form>
       <NuxtLink v-if="hasFilters" :to="path" class="mb-4 inline-block text-moss underline">Clear filters</NuxtLink>

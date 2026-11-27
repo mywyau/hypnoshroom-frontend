@@ -5,7 +5,8 @@ export const advertisedIr35Options = [
 export const ir35Options = [...advertisedIr35Options, 'Unspecified'] as const
 export const disciplines = ['Backend', 'Web development', 'Data engineering', 'AI / ML', 'Hardware / embedded', 'Platform / DevOps', 'Other engineering']
 export const languages = ['Scala', 'Java', 'Python', 'SQL', 'TypeScript', 'JavaScript', 'Go', 'Rust', 'C', 'C++', 'C#', 'Kotlin', 'VHDL', 'Verilog']
-export const languageChoices = [...languages, 'Other']
+// Older listings can still contain VHDL and Verilog tags for keyword searches.
+export const languageChoices = [...languages.filter(language => language !== 'VHDL' && language !== 'Verilog'), 'Other']
 export const employmentLabels = {
   contract: 'Contract',
   permanent: 'Permanent, full-time',
@@ -23,6 +24,7 @@ export type ListingStatus = 'draft' | 'pending' | 'published' | 'closed'
 export interface ContractBrief {
   employment_type: EmploymentType
   fully_remote: boolean
+  hybrid: boolean
   discipline: string | null
   languages: string[]
   other_language: string | null
@@ -68,6 +70,7 @@ export function advertisedPay(listing: ContractBrief) {
 }
 
 export function workLocation(listing: ContractBrief) {
+  if (listing.hybrid) return 'Hybrid · ' + listing.location
   if (!listing.fully_remote) return listing.location
   return /^(fully remote|100% remote|remote)$/i.test(listing.location.trim()) ? 'Fully remote' : 'Fully remote · ' + listing.location
 }

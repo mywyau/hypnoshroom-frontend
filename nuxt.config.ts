@@ -16,7 +16,7 @@ export default defineNuxtConfig({
       const placeholder = fileURLToPath(new URL('./components/boards/HiringComingSoon.vue', import.meta.url))
       nuxt.hook('pages:extend', pages => {
         for (const page of pages) {
-          if (page.path === '/admin/listings' || page.path === '/login' || (isHiringPath(page.path) && page.path !== '/jobs/account')) page.file = placeholder
+          if (['/account', '/login', '/admin/listings'].includes(page.path) || (isHiringPath(page.path) && page.path !== '/jobs/account')) page.file = placeholder
         }
       })
     },

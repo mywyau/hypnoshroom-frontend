@@ -27,12 +27,12 @@ async function signOut() {
 <template>
   <div class="flex min-w-0 flex-wrap items-center justify-end gap-x-3 sm:gap-x-4"
     :class="user ? 'col-span-full row-start-3 border-t border-line/60 py-1 lg:col-span-1 lg:col-start-3 lg:row-start-1 lg:border-0' : 'col-start-2 row-start-1 md:col-start-3'">
-    <NuxtLink v-if="!user && to" to="/login" class="inline-flex min-h-11 items-center whitespace-nowrap text-sm font-semibold text-moss hover:underline">Sign in</NuxtLink>
+    <NuxtLink v-if="!user && to" :to="to" class="inline-flex min-h-11 items-center whitespace-nowrap text-sm font-semibold text-moss hover:underline">Sign in</NuxtLink>
     <slot />
     <template v-if="user">
-      <NuxtLink :to="to || '/login'" class="min-w-0 max-w-52 flex-1 py-1 text-sm text-moss hover:underline">
+      <NuxtLink to="/account" class="min-w-0 max-w-52 flex-1 py-1 text-sm text-moss hover:underline">
         <span class="block text-xs text-ink/75">Signed in as</span>
-        <span class="break-all font-semibold">{{ user.email }}</span>
+        <span class="break-all font-semibold">{{ preferredName(user) || user.email }}</span>
       </NuxtLink>
       <button type="button" :disabled="signingOut" class="min-h-11 whitespace-nowrap text-sm font-semibold text-moss hover:underline disabled:opacity-60" @click="signOut">
         {{ signingOut ? 'Signing out…' : 'Sign out' }}

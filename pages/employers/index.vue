@@ -17,7 +17,7 @@ usePageSeo({ title: 'For employers and recruiters | Hypnoshroom', description: '
 
 <template>
   <div>
-    <PageHero eyebrow="Employers &amp; recruiters" title="Hire engineers." intro="Reach engineers looking for UK contracts, permanent jobs and fixed-term roles." gradient="forest" />
+    <PageHero eyebrow="Employers &amp; recruiters" title="Hire engineers." intro="Reach engineers looking for UK contracts, permanent jobs and fixed-term roles." gradient="forest" size="compact" />
     <section class="page-shell py-10 sm:py-16" aria-label="Employer resources">
       <div class="grid gap-5 sm:grid-cols-2">
         <article class="rounded-2xl border border-line bg-white/40 p-6 sm:p-8">

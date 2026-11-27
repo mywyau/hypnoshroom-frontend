@@ -4,7 +4,7 @@ usePageSeo({ title: 'UK Contractor Intelligence | Hypnoshroom', path: '/contract
 </script>
 <template>
   <div>
-    <PageHero eyebrow="Contractor intelligence" title="What would contracting mean for your income?" gradient="forest"
+    <PageHero eyebrow="Contractor intelligence" title="What would contracting mean for your income?" gradient="forest" size="compact"
       intro="Independent decision tools from Hypnoshroom for UK technology professionals weighing a permanent role against a contract offer." />
     <section class="page-shell grid gap-10 py-16 lg:grid-cols-2">
       <div class="rounded-2xl border border-line bg-white/60 p-6 sm:p-10">

@@ -2,6 +2,7 @@
 import { isAuthError, type User } from '@supabase/supabase-js'
 
 const props = defineProps<{ audience: 'employer' | 'general' }>()
+const emit = defineEmits<{ authenticated: [] }>()
 type Mode = 'signin' | 'signup' | 'magic' | 'forgot'
 const headings = { signin: 'Sign in', signup: 'Create an account', magic: 'Sign in by email', forgot: 'Reset your password' }
 const actions = { signin: 'Sign in', signup: 'Create account', magic: 'Email me a sign-in link', forgot: 'Send password reset link' }
@@ -21,6 +22,11 @@ const { data: { subscription } } = client.auth.onAuthStateChange((event, session
   }
 })
 onBeforeUnmount(() => subscription.unsubscribe())
+
+// Wait for any email callback to finish before leaving the sign-in page.
+watch(() => !loading.value && Boolean(user.value), signedIn => {
+  if (signedIn) emit('authenticated')
+})
 
 function emailLinkError(code?: string | null) {
   if (code === 'otp_expired' || code === 'flow_state_expired' || code === 'flow_state_not_found') {
@@ -123,7 +129,6 @@ async function submit() {
   <div>
     <p v-if="loading" role="status">Loading your account…</p>
     <template v-else-if="user">
-      <h1 v-if="audience === 'general'" class="mb-4 font-display text-3xl">Your account</h1>
       <slot :user="user" />
     </template>
     <form v-else class="max-w-md" @submit.prevent="submit">

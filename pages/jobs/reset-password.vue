@@ -16,7 +16,7 @@ usePageSeo({ title: 'Reset password | Hypnoshroom', description: 'Choose a new p
         <p v-else>Account sign-in is unavailable in this environment.</p>
       </div>
       <nav class="mt-6 flex flex-wrap gap-5 text-moss underline" aria-label="Return to account">
-        <NuxtLink to="/login">Your account</NuxtLink>
+        <NuxtLink to="/account">Your account</NuxtLink>
       </nav>
     </section>
   </div>

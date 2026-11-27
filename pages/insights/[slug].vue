@@ -53,7 +53,7 @@ usePageSeo({
         </div>
       </div>
     </header>
-    <div class="article-page-shell grid gap-10 py-12 sm:py-16 lg:grid-cols-[1fr_16rem] lg:gap-12 lg:py-24">
+    <div class="article-page-shell py-12 sm:py-16 lg:py-24">
       <div class="prose-article article-reading-measure max-w-3xl">
         <section v-for="section in article.sections" :key="section.heading">
           <h2>{{ section.heading }}</h2>
@@ -70,11 +70,6 @@ usePageSeo({
           <ArticleCodeBlock v-if="section.code" :code="section.code" />
         </section>
       </div>
-      <aside class="border-t border-line pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
-        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-moss">Dealing with something similar?</p>
-        <p class="mt-4 text-sm leading-6 text-ink/60">Share a few details about the system and where the team is stuck.</p>
-        <AppButton to="/contact" variant="text" class="mt-3">Discuss a project</AppButton>
-      </aside>
     </div>
   </article>
 </template>

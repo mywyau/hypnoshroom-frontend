@@ -11,7 +11,7 @@ const route = useRoute()
         :key="link.to"
         :to="link.to"
         class="flex min-h-14 flex-col items-center justify-center gap-1 px-1 text-[11px] font-medium text-ink/65 hover:text-moss"
-        :class="(route.path === link.to || route.path.startsWith(link.to + '/')) && 'text-moss'"
+        :class="shouldHighlightNavigationLink(route.path, link.to) && 'text-moss'"
       >
         <component :is="link.icon" class="size-[1.15rem]" :stroke-width="1.7" aria-hidden="true" />
         <span>{{ 'short' in link ? link.short : link.label }}</span>

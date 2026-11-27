@@ -12,10 +12,11 @@ const initial = props.listing
 const id = initial?.id ?? crypto.randomUUID()
 const rateUnspecified = ref(Boolean(initial?.employment_type === 'contract' && initial.day_rate_gbp == null))
 const otherSelected = ref(Boolean(initial?.other_language))
-type PostingForm = Omit<ContractBrief, 'ir35'> & { ir35: ContractBrief['ir35'] | '' }
+const arrangement = ref(initial?.fully_remote ? 'remote' : initial?.hybrid ? 'hybrid' : '')
+type PostingForm = Omit<ContractBrief, 'ir35' | 'fully_remote' | 'hybrid'> & { ir35: ContractBrief['ir35'] | '' }
 const form = reactive<PostingForm>({
   employment_type: initial?.employment_type ?? 'contract',
-  fully_remote: initial?.fully_remote ?? false, discipline: initial?.discipline ?? '',
+  discipline: initial?.discipline ?? '',
   other_language: initial?.other_language ?? null, languages: [...(initial?.languages ?? [])], salary_gbp: initial?.salary_gbp ?? null, salary_max_gbp: initial?.salary_max_gbp ?? null,
   title: initial?.title ?? '', location: initial?.fully_remote && initial.location === 'Remote' ? '' : initial?.location ?? '', duration: initial?.duration ?? '',
   day_rate_gbp: initial?.day_rate_gbp ?? null, ir35: initial?.ir35 === 'Unspecified' ? '' : initial?.ir35 ?? '',
@@ -43,6 +44,7 @@ async function goToStep(next: number) {
 
 const brief = computed(() => ({
   ...form, id, company_name: listingCompany.value.trim(), location: form.location.trim() || 'Remote',
+  fully_remote: arrangement.value === 'remote', hybrid: arrangement.value === 'hybrid',
   apply_url: form.apply_url?.trim() || null,
   duration: form.employment_type !== 'permanent' ? form.duration : null, ir35: isContract.value ? form.ir35 || null : null,
   other_language: otherSelected.value ? form.other_language?.trim() || null : null,
@@ -91,8 +93,12 @@ async function advance(event: SubmitEvent) {
         <label>Employment type<select class="inset-select" v-model="form.employment_type"><option v-for="(label, value) in employmentLabels" :key="value" :value="value">{{ label }}</option></select></label>
         <label>Role title<input v-model.trim="form.title" required maxlength="160"></label>
         <div class="grid gap-4 sm:grid-cols-2">
-          <label>Location or eligible region<input v-model.trim="form.location" :required="!form.fully_remote" maxlength="160" placeholder="e.g. Bristol or UK-wide"></label>
-          <label class="self-end py-2"><input v-model="form.fully_remote" type="checkbox"> Fully remote</label>
+          <label>Location or eligible region<input v-model.trim="form.location" :required="arrangement !== 'remote'" maxlength="160" placeholder="e.g. Bristol or UK-wide"></label>
+          <label>Work arrangement<select v-model="arrangement" class="inset-select">
+            <option value="">Use location only</option>
+            <option value="remote">Fully remote</option>
+            <option value="hybrid">Hybrid</option>
+          </select></label>
         </div>
       </template>
       <div v-else-if="step === 2" class="grid gap-4 sm:grid-cols-2">
