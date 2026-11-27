@@ -10,11 +10,7 @@ usePageSeo({ title: 'Post a role | Hypnoshroom', description: 'Publish and manag
   <div>
     <PageHero eyebrow="Engineering jobs" :title="preview ? 'Try posting a role.' : 'Post a role.'" :intro="preview ? 'Create a sample contract, permanent or temporary job and review it as an applicant would see it.' : 'Publish a UK contract, permanent or temporary role and direct applicants to your own site.'" gradient="forest" />
     <section class="page-shell py-10">
-      <nav aria-label="Employer resources" class="flex flex-wrap gap-x-5 gap-y-2 text-moss underline">
-        <NuxtLink to="/employers">Employer home</NuxtLink>
-        <NuxtLink to="/employers/pricing">Employer &amp; recruiter pricing</NuxtLink>
-      </nav>
-      <div class="employer-workspace mt-6 max-w-3xl">
+      <div class="employer-workspace max-w-3xl">
         <EmployerPostingPreview v-if="preview" />
         <ClientOnly v-else>
           <AccountAccess audience="employer" v-slot="{ user }">

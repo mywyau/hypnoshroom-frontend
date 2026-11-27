@@ -32,10 +32,9 @@ const accountPath = computed(() => {
         </NuxtLink>
       </nav>
 
-      <div v-if="navigation.action || accountPath" class="col-start-2 row-start-1 flex items-center gap-3 sm:gap-4 md:col-start-3">
-        <HeaderAccountLink v-if="accountPath" :to="accountPath" />
+      <HeaderAccountLink v-if="!showLaunchStatus || navigation.action" :to="accountPath">
         <AppButton v-if="navigation.action" :to="navigation.action.to" class="whitespace-nowrap max-sm:!px-3 max-sm:!text-xs max-sm:[&>span]:hidden">{{ navigation.action.label }}</AppButton>
-      </div>
+      </HeaderAccountLink>
     </div>
   </header>
 </template>

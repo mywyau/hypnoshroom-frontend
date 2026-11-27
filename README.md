@@ -173,20 +173,28 @@ The product brief is in [HYPNOSHROOM_CONTRACTOR_INTELLIGENCE.md](HYPNOSHROOM_CON
 
 Use `npm run dev` to access the job boards and employer pages locally. Production builds show a coming-soon page for these routes and return HTTP 404 for the listing APIs.
 
-The employer homepage is `/employers`. Employers sign in at `/employers/post-a-role` with a password or a Supabase email link, set their company name, and draft, publish, edit or close UK engineering roles. One email account manages its own listings. Applicants browse `/contracts` for day-rate contracts or `/jobs` for permanent and temporary employee jobs. New listings require an engineering discipline. Employee jobs require an annual GBP salary range, and temporary jobs also require a duration. Contract employers can explicitly mark their day rate as unspecified. Both boards support location, fully remote, engineering discipline and language filters. Applicants apply on the employer’s site. Rates are advertised GBP day rates. The board hides closed listings immediately and expired listings after their closing date in London.
+The employer homepage is `/employers`. Employers sign in at `/employers/post-a-role` with a password or a Supabase email link, set their default company name, and draft, submit, edit or close UK engineering roles. Each listing can name a different hiring company. New submissions and edits to published listings require approval. One email account manages its own listings. Applicants browse `/contracts` for day-rate contracts or `/jobs` for permanent and temporary employee jobs. New listings require an engineering discipline. Employee jobs require an annual GBP salary range, and temporary jobs also require a duration. Contract employers can explicitly mark their day rate as unspecified. Both boards support location, fully remote, engineering discipline and language filters. Applicants apply on the employer’s site. Rates are advertised GBP day rates. The board hides closed listings immediately and expired listings after their closing date in London.
 
 The shared sign-in page is `/login` for both job seekers and employers. Older `/jobs/account` links forward there, including email confirmation codes. An account is optional for browsing and applying. Employer and job seeker sessions share the existing browser storage key. Creating a job seeker account does not create a company profile.
 
 ### Try the posting preview
 
-Open `/employers/post-a-role?preview=1` to enter a company or agency name, create a contract, permanent or temporary role, review it and simulate submission for first-listing review. The preview keeps inputs in page memory and clears on refresh. The posting page opens the preview automatically when the public Supabase settings are absent. At `/employers/pricing`, each sample plan leads into the same preview. The proposed free tier covers one role per verified organisation in a rolling 30-day period. The first listing from each new organisation is proposed for review across all plans. Plan selection, prices and posting are simulated here. Live organisation verification, publication quotas, moderation and billing are separate work.
+Open `/employers/post-a-role?preview=1` to enter a company or agency name, create a contract, permanent or temporary role, review it and simulate submission for first-listing review. The preview keeps inputs in page memory and clears on refresh. The posting page opens the preview automatically when the public Supabase settings are absent. At `/employers/pricing`, each sample plan leads into the same preview. The proposed free tier covers one role per verified organisation in a rolling 30-day period. The first listing from each new organisation is proposed for review across all plans. Plan selection, prices and posting are simulated here. Live organisation verification, publication quotas and billing are separate work.
 
 ### Connect a Supabase environment
 
 1. Use a Supabase project with the Data API enabled for the public schema. Apply the versioned migrations using the workflow below.
 2. Set `NUXT_PUBLIC_EMPLOYER_SUPABASE_URL` to the project URL and `NUXT_PUBLIC_EMPLOYER_SUPABASE_KEY` to its **publishable** key in the Nuxt environment. A service-role or secret key must never go into public configuration.
 3. Enable the email provider, new-user signups and email confirmation. Use the confirmation URL in the signup, magic-link and password recovery email templates. In Supabase Auth redirect settings, allow the exact URLs for `/employers`, `/login` and `/jobs/reset-password` on each enabled origin (for example `http://localhost:3000`). Open each email link in the browser that requested it. Set the Site URL for the environment and configure an SMTP sender for account emails.
-4. Restart Nuxt. Request a link at `/employers/post-a-role` and open it in the same browser. Create a profile and save a draft, publish it, open the listing in a signed-out window, then close it and refresh the public page. Drafts, closed briefs and sign-in emails stay out of the public view.
+4. Restart Nuxt. Request a link at `/employers/post-a-role` and open it in the same browser. Create a profile, save a draft and submit it for review. Approve it from a listing administrator account, open the listing in a signed-out window, then close it and refresh the public page. Drafts, closed briefs and sign-in emails stay out of the public view.
+
+Listing administrators open **Review listings** from their account or visit `/admin/listings` in development. To designate a reviewer, use the Supabase SQL Editor as a project administrator and replace the UUID below with that reviewer's Authentication user ID. The reviewer should sign out and back in for the new claim to take effect. Remove the `listing_admin` key to revoke the claim for subsequently issued tokens.
+
+```sql
+update auth.users
+set raw_app_meta_data = coalesce(raw_app_meta_data, '{}'::jsonb) || '{"listing_admin":true}'::jsonb
+where id = '<reviewer-user-uuid>'::uuid;
+```
 
 The local database regression test uses in-memory PostgreSQL and simulated Supabase identities. Run it with `node --test tests/employer-board.test.mjs`.
 

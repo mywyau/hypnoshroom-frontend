@@ -1,10 +1,12 @@
-import { BriefcaseBusiness, Building2, Calculator, Code, House, Mail, Plus, Search, Users } from '@lucide/vue'
+import { BriefcaseBusiness, Building2, Calculator, Code, House, Mail, Plus, Search, Tag, Users } from '@lucide/vue'
 
 const home = { label: 'Home', to: '/', icon: House }
 const contracts = { label: 'Find contracts', short: 'Contracts', to: '/contracts', icon: Search }
 const jobs = { label: 'Permanent & temporary jobs', short: 'Jobs', to: '/jobs', icon: Users }
 const calculators = { label: 'Contractor calculators', short: 'Calculators', to: '/contractor-intelligence', icon: Calculator }
 const employers = { label: 'Employers', to: '/employers', icon: Building2 }
+const employerHome = { ...employers, label: 'Employer home' }
+const pricing = { label: 'Employer & recruiter pricing', short: 'Pricing', to: '/employers/pricing', icon: Tag }
 const postRole = { label: 'Post a role', to: '/employers/post-a-role', icon: Plus }
 const consultancy = { label: 'Consultancy', to: '/consultancy', icon: BriefcaseBusiness }
 const services = { label: 'Services', to: '/services', icon: BriefcaseBusiness }
@@ -43,12 +45,17 @@ export function isConsultancyPath(path: string) {
 export function useSiteNavigation() {
   const route = useRoute()
   return computed(() => {
-    if (route.name === 'employers') {
-      return { primary: [], action: import.meta.dev ? { ...postRole, label: 'Post a job' } : null, quick: sections.jobs.quick }
+    const root = route.path.split('/')[1]
+    if (root === 'employers') {
+      return {
+        primary: route.name === 'employers' ? [] : route.name === 'employers-pricing' ? [employerHome] : [employerHome, pricing],
+        action: null,
+        quick: import.meta.dev ? [employerHome, pricing, postRole] : [employerHome, pricing],
+      }
     }
     if (route.name === 'contractor-intelligence') return { primary: [], action: null, quick: sections.jobs.quick }
     if (route.name === 'contracts') return sections.contractBoard
-    if (route.name === 'jobs') return { ...sections.jobs, primary: boardLinks }
+    if (route.name === 'jobs') return { ...sections.contractBoard, quick: sections.jobs.quick }
     if (route.name === 'find-a-job') {
       return {
         primary: boardLinks,
@@ -56,8 +63,7 @@ export function useSiteNavigation() {
         quick: import.meta.dev ? sections.jobs.primary : sections.jobs.quick,
       }
     }
-    const root = route.path.split('/')[1]
-    if (['find-a-job', 'contracts', 'jobs', 'employers', 'contractor-intelligence'].includes(root)) return sections.jobs
+    if (['find-a-job', 'contracts', 'jobs', 'contractor-intelligence'].includes(root)) return sections.jobs
     if (isConsultancyPath(route.path)) return sections.consultancy
     return sections.home
   })

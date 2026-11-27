@@ -13,20 +13,39 @@ const password = ref('')
 const message = ref('')
 const loading = ref(true)
 const busy = ref(false)
-const { data: { subscription } } = client.auth.onAuthStateChange((_event, session) => {
+const { data: { subscription } } = client.auth.onAuthStateChange((event, session) => {
   user.value = session?.user ?? null
+  if (event === 'SIGNED_OUT') {
+    email.value = ''
+    selectMode('signin')
+  }
 })
 onBeforeUnmount(() => subscription.unsubscribe())
+
+function emailLinkError(code?: string | null) {
+  if (code === 'otp_expired' || code === 'flow_state_expired' || code === 'flow_state_not_found') {
+    return 'This email link has expired or has already been used. If you created an account, try signing in with your email and password. For email sign-in, request a new link.'
+  }
+  if (code === 'pkce_code_verifier_not_found' || code === 'bad_code_verifier') {
+    return 'This browser could not finish signing you in. If you created an account, try your email and password. For email sign-in, request one new link and open it in the same browser profile at the same site address.'
+  }
+  return 'Email sign-in could not be completed. Try signing in with your email and password, or request a new email link.'
+}
 
 onMounted(async () => {
   try {
     const url = new URL(window.location.href)
     const code = url.searchParams.get('code')
-    const failed = url.searchParams.has('error') || new URLSearchParams(url.hash.slice(1)).has('error')
+    const fragment = new URLSearchParams(url.hash.slice(1))
+    const errorCode = url.searchParams.get('error_code') || fragment.get('error_code')
+    const failed = errorCode || url.searchParams.has('error') || fragment.has('error')
     if (code || failed) {
       window.history.replaceState(window.history.state, '', url.pathname)
-      if (failed || (code && (await client.auth.exchangeCodeForSession(code)).error)) {
-        message.value = 'This email link could not be used. Request a fresh link and open it in this browser.'
+      if (failed) {
+        message.value = emailLinkError(errorCode)
+      } else if (code) {
+        const { error } = await client.auth.exchangeCodeForSession(code)
+        if (error) message.value = emailLinkError(error.code)
       }
     }
     const { data, error } = await client.auth.getSession()
@@ -84,6 +103,13 @@ async function submit() {
   } catch (error) {
     if (isAuthError(error) && error.code === 'weak_password') message.value = error.message
     else if (isAuthError(error) && error.code === 'email_not_confirmed') message.value = 'Confirm your email address before signing in.'
+    else if (isAuthError(error) && error.code === 'email_address_not_authorized') message.value = 'This project can only send account emails to Supabase team members. Use a team email address or configure a custom SMTP sender.'
+    else if (isAuthError(error) && error.code === 'over_email_send_rate_limit') {
+      message.value = mode.value === 'signup' ? 'Check your inbox and spam folder for a confirmation email. ' : 'Check your inbox for the previous email. '
+      message.value += error.message || 'The email sending limit has been reached. Try again later.'
+    }
+    else if (isAuthError(error) && error.status === 429) message.value = 'Too many authentication requests. Wait before trying again.'
+    else if (import.meta.dev && isAuthError(error) && error.code !== 'invalid_credentials') message.value = error.message
     else if (mode.value === 'signin') message.value = 'Unable to sign in. Check your email and password or request a password reset.'
     else message.value = 'Unable to complete this request. Please try again shortly.'
   } finally {
@@ -91,20 +117,6 @@ async function submit() {
   }
 }
 
-async function signOut() {
-  if (busy.value) return
-  busy.value = true
-  try {
-    const { error } = await client.auth.signOut({ scope: 'local' })
-    if (error) throw error
-    email.value = ''
-    selectMode('signin')
-  } catch {
-    message.value = 'Sign-out failed. Please try again.'
-  } finally {
-    busy.value = false
-  }
-}
 </script>
 
 <template>
@@ -112,10 +124,6 @@ async function signOut() {
     <p v-if="loading" role="status">Loading your account…</p>
     <template v-else-if="user">
       <h1 v-if="audience === 'general'" class="mb-4 font-display text-3xl">Your account</h1>
-      <div class="mb-8 flex flex-wrap justify-between gap-3">
-        <span>Signed in as {{ user.email }}</span>
-        <button class="link" :disabled="busy" @click="signOut">Sign out</button>
-      </div>
       <slot :user="user" />
     </template>
     <form v-else class="max-w-md" @submit.prevent="submit">

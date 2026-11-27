@@ -2,8 +2,8 @@
 definePageMeta({
   middleware: (to) => {
     // Previously issued sign-in emails and bookmarked previews use the employer homepage.
-    if (to.query.code || to.query.error || new URLSearchParams(to.hash.slice(1)).has('error')) {
-      return navigateTo({ path: '/employers/post-a-role', query: { code: to.query.code, error: to.query.error }, hash: to.hash }, { replace: true })
+    if (to.query.code || to.query.error || to.query.error_code || new URLSearchParams(to.hash.slice(1)).has('error')) {
+      return navigateTo({ path: '/employers/post-a-role', query: { code: to.query.code, error: to.query.error, error_code: to.query.error_code }, hash: to.hash }, { replace: true })
     }
     if (to.query.preview === '1') {
       return navigateTo({ path: '/employers/post-a-role', query: { preview: '1', plan: to.query.plan } }, { replace: true })
@@ -32,10 +32,10 @@ usePageSeo({ title: 'For employers and recruiters | Hypnoshroom', description: '
           <AppButton to="/employers/pricing" variant="secondary">View pricing</AppButton>
         </article>
       </div>
-      <nav aria-label="Browse the job boards" class="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-moss underline">
-        <NuxtLink to="/contracts">View contracts</NuxtLink>
-        <NuxtLink to="/jobs">View permanent and temporary jobs</NuxtLink>
-      </nav>
+      <!-- <nav aria-label="Browse the job boards" class="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-moss underline"> -->
+        <!-- <NuxtLink to="/contracts">View contracts</NuxtLink> -->
+        <!-- <NuxtLink to="/jobs">View permanent and temporary jobs</NuxtLink> -->
+      <!-- </nav> -->
     </section>
   </div>
 </template>

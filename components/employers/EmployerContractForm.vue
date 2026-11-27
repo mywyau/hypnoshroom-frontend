@@ -3,6 +3,7 @@ import { disciplines, employmentLabels, languageChoices, advertisedIr35Options, 
 
 const props = defineProps<{
   listing: EmployerContract | null
+  defaultCompany: string
   preview?: boolean
   submitListing: (listing: EmployerContract) => void | Promise<void>
 }>()
@@ -20,31 +21,52 @@ const form = reactive<PostingForm>({
   day_rate_gbp: initial?.day_rate_gbp ?? null, ir35: initial?.ir35 === 'Unspecified' ? '' : initial?.ir35 ?? '',
   description: initial?.description ?? '', apply_url: initial?.apply_url ?? '', closes_on: initial?.closes_on ?? '',
 })
+const companyOverride = ref(initial?.company_name ?? null)
+const listingCompany = computed({
+  get: () => companyOverride.value ?? props.defaultCompany,
+  set: (value: string) => { companyOverride.value = value },
+})
 const isContract = computed(() => form.employment_type === 'contract')
 const busy = ref(false)
 const message = ref('')
 
-async function save(event: SubmitEvent) {
+const steps = ['Role details', 'Pay and terms', 'Skills and applications', 'Review your listing']
+const step = ref(1)
+const stepHeading = ref<HTMLElement | null>(null)
+
+async function goToStep(next: number) {
+  step.value = next
+  message.value = ''
+  await nextTick()
+  stepHeading.value?.focus()
+}
+
+const brief = computed(() => ({
+  ...form, id, company_name: listingCompany.value.trim(), location: form.location.trim() || 'Remote',
+  apply_url: form.apply_url?.trim() || null,
+  duration: form.employment_type !== 'permanent' ? form.duration : null, ir35: isContract.value ? form.ir35 || null : null,
+  other_language: otherSelected.value ? form.other_language?.trim() || null : null,
+  day_rate_gbp: isContract.value && !rateUnspecified.value ? Number(form.day_rate_gbp) || null : null,
+  salary_gbp: isContract.value ? null : Number(form.salary_gbp) || null,
+  salary_max_gbp: isContract.value ? null : Number(form.salary_max_gbp) || null,
+}))
+
+async function advance(event: SubmitEvent) {
   if (busy.value) return
-  const publish = props.preview || (event.submitter as HTMLButtonElement | null)?.value === 'published'
-  const status: ListingStatus = publish ? 'published' : 'draft'
-  if (status === 'published' && form.closes_on < londonDate()) {
-    message.value = 'Choose a closing date of today or later to publish.'
+  if (step.value < steps.length) {
+    await goToStep(step.value + 1)
+    return
+  }
+  const status: ListingStatus = (event.submitter as HTMLButtonElement | null)?.value === 'draft' ? 'draft' : 'pending'
+  if (status === 'pending' && form.closes_on < londonDate()) {
+    await goToStep(3)
+    message.value = 'Choose a closing date of today or later to submit for review.'
     return
   }
   busy.value = true
   message.value = ''
-  const payload = {
-    ...form, id, status, location: form.location.trim() || 'Remote',
-    apply_url: form.apply_url?.trim() || null,
-    duration: form.employment_type !== 'permanent' ? form.duration : null, ir35: isContract.value ? form.ir35 || null : null,
-    other_language: otherSelected.value ? form.other_language?.trim() || null : null,
-    day_rate_gbp: isContract.value && !rateUnspecified.value ? Number(form.day_rate_gbp) || null : null,
-    salary_gbp: isContract.value ? null : Number(form.salary_gbp) || null,
-    salary_max_gbp: isContract.value ? null : Number(form.salary_max_gbp) || null,
-  }
   try {
-    await props.submitListing(payload)
+    await props.submitListing({ ...brief.value, status })
   } catch {
     message.value = 'Unable to save this brief. Check the fields, or return to your listings to see its current status.'
   } finally {
@@ -54,14 +76,26 @@ async function save(event: SubmitEvent) {
 </script>
 
 <template>
-  <form class="employer-workspace" @submit.prevent="save">
-    <h2>{{ listing ? 'Edit listing' : 'New listing' }}</h2>
+  <form class="employer-workspace" @submit.prevent="advance">
+    <div>
+      <p class="text-sm font-semibold text-moss">{{ listing ? 'Edit listing' : 'New listing' }} · Step {{ step }} of {{ steps.length }}</p>
+      <div role="progressbar" aria-label="Listing progress" :aria-valuenow="step" :aria-valuemax="steps.length"
+        :aria-valuetext="`Step ${step} of ${steps.length}`" class="mt-2 h-2 overflow-hidden rounded-full bg-moss/15">
+        <div class="h-full rounded-full bg-moss" :style="{ width: (step / steps.length) * 100 + '%' }" />
+      </div>
+      <h2 ref="stepHeading" tabindex="-1" class="mt-4 scroll-mt-40">{{ steps[step - 1] }}</h2>
+    </div>
     <fieldset :disabled="busy" class="grid gap-4">
-      <label>Employment type<select class="inset-select" v-model="form.employment_type"><option v-for="(label, value) in employmentLabels" :key="value" :value="value">{{ label }}</option></select></label>
-      <label>Role title<input v-model.trim="form.title" required maxlength="160"></label>
-      <div class="grid gap-4 sm:grid-cols-2">
-        <label>Location or eligible region<input v-model.trim="form.location" :required="!form.fully_remote" maxlength="160" placeholder="e.g. Bristol or UK-wide"></label>
-        <label class="self-end py-2"><input v-model="form.fully_remote" type="checkbox"> Fully remote</label>
+      <template v-if="step === 1">
+        <label>Company shown on this listing<input v-model.trim="listingCompany" required pattern=".*\S.*" maxlength="140"></label>
+        <label>Employment type<select class="inset-select" v-model="form.employment_type"><option v-for="(label, value) in employmentLabels" :key="value" :value="value">{{ label }}</option></select></label>
+        <label>Role title<input v-model.trim="form.title" required maxlength="160"></label>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <label>Location or eligible region<input v-model.trim="form.location" :required="!form.fully_remote" maxlength="160" placeholder="e.g. Bristol or UK-wide"></label>
+          <label class="self-end py-2"><input v-model="form.fully_remote" type="checkbox"> Fully remote</label>
+        </div>
+      </template>
+      <div v-else-if="step === 2" class="grid gap-4 sm:grid-cols-2">
         <label v-if="form.employment_type !== 'permanent'">{{ isContract ? 'Contract duration' : 'Fixed-term duration' }}<input v-model.trim="form.duration" required maxlength="100" placeholder="e.g. 6 months"></label>
         <label v-if="isContract">Day rate in GBP<input :disabled="rateUnspecified" :required="!rateUnspecified" v-model.number="form.day_rate_gbp" type="number" min="1" max="99999" step="1"></label>
         <label v-if="isContract" class="self-end py-2"><input v-model="rateUnspecified" type="checkbox"> Day rate unspecified</label>
@@ -76,29 +110,41 @@ async function save(event: SubmitEvent) {
           <label>Maximum annual salary in GBP<input v-model.number="form.salary_max_gbp" type="number" required :min="form.salary_gbp || 1" max="9999999" step="1"></label>
         </template>
       </div>
-      <label>Engineering discipline<select class="inset-select" v-model="form.discipline" required><option disabled value="">Select a discipline</option><option v-for="item in disciplines" :key="item">{{ item }}</option></select></label>
-      <fieldset>
-        <legend class="mb-2 text-sm font-semibold">Languages used in the role</legend>
-        <div class="flex flex-wrap gap-2">
-          <label v-for="item in languageChoices" :key="item" class="relative cursor-pointer">
-            <input v-if="item === 'Other'" v-model="otherSelected" type="checkbox" class="peer sr-only">
-            <input v-else v-model="form.languages" type="checkbox" :value="item" class="peer sr-only">
-            <span class="flex items-center gap-2 rounded-lg border border-line bg-white/60 px-3 py-2 peer-checked:border-moss peer-checked:bg-moss/25 peer-checked:font-bold peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-moss">
-              <LanguageIcon :language="item" />
-              {{ item }}
-            </span>
-          </label>
-        </div>
-        <label v-if="otherSelected" class="mt-3">Other language name<input v-model.trim="form.other_language" required maxlength="60" pattern=".*\S.*"></label>
-      </fieldset>
-      <label>Role brief<textarea v-model.trim="form.description" rows="6" required maxlength="5000" /></label>
-      <label>Application URL (optional)<input v-model.trim="form.apply_url" type="url" maxlength="2048" pattern="https://.+" placeholder="https://"></label>
-      <label>Applications close (UK date)<input v-model="form.closes_on" type="date" required></label>
-      <p v-if="!preview" class="text-sm">Publishing makes the brief and company name public. Hypnoshroom may include advertised terms in aggregate statistics.</p>
+      <template v-else-if="step === 3">
+        <label>Engineering discipline<select class="inset-select" v-model="form.discipline" required><option disabled value="">Select a discipline</option><option v-for="item in disciplines" :key="item">{{ item }}</option></select></label>
+        <fieldset>
+          <legend class="mb-2 text-sm font-semibold">Languages used in the role</legend>
+          <div class="flex flex-wrap gap-2">
+            <label v-for="item in languageChoices" :key="item" class="relative cursor-pointer">
+              <input v-if="item === 'Other'" v-model="otherSelected" type="checkbox" class="peer sr-only">
+              <input v-else v-model="form.languages" type="checkbox" :value="item" class="peer sr-only">
+              <span class="flex items-center gap-2 rounded-lg border border-line bg-white/60 px-3 py-2 peer-checked:border-moss peer-checked:bg-moss/25 peer-checked:font-bold peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-moss">
+                <LanguageIcon :language="item" />
+                {{ item }}
+              </span>
+            </label>
+          </div>
+          <label v-if="otherSelected" class="mt-3">Other language name<input v-model.trim="form.other_language" required maxlength="60" pattern=".*\S.*"></label>
+        </fieldset>
+        <label>Role brief<textarea v-model.trim="form.description" rows="6" required maxlength="5000" /></label>
+        <label>Application URL (optional)<input v-model.trim="form.apply_url" type="url" maxlength="2048" pattern="https://.+" placeholder="https://"></label>
+        <label>Applications close (UK date)<input v-model="form.closes_on" type="date" required></label>
+      </template>
+      <article v-else class="min-w-0 rounded-2xl border border-line bg-white/40 p-5 sm:p-8">
+        <p class="break-words text-sm text-moss">{{ brief.company_name }}</p>
+        <h3 class="mt-2 break-words font-display text-3xl">{{ brief.title }}</h3>
+        <RoleBriefDetails :listing="brief" />
+        <p v-if="brief.apply_url" class="break-all text-sm">Application URL · {{ brief.apply_url }}</p>
+      </article>
+      <p v-if="step === steps.length && !preview" class="text-sm">{{ listing?.status === 'published' ? 'Submitting changes takes this listing off the board until an administrator approves it again.' : 'An administrator reviews the brief and company name before the listing goes live.' }}</p>
       <div class="flex flex-wrap gap-4">
-        <button v-if="!preview && listing?.status !== 'published'" value="draft" class="link">Save draft</button>
-        <button value="published" class="action">{{ preview ? 'Review listing' : listing?.status === 'published' ? 'Save published changes' : 'Publish listing' }}</button>
-        <button type="button" class="link" @click="emit('cancel')">{{ preview ? 'Back to company' : 'Cancel' }}</button>
+        <button v-if="step > 1" type="button" class="link" @click="goToStep(step - 1)">Back</button>
+        <button v-if="!preview || step === 1" type="button" class="link" @click="emit('cancel')">{{ preview ? 'Back to company' : 'Cancel' }}</button>
+        <button v-if="step < steps.length" type="submit" class="action">{{ step === steps.length - 1 ? 'Review listing' : 'Continue' }}</button>
+        <template v-else>
+          <button v-if="!preview && listing?.status !== 'published'" type="submit" value="draft" class="link">Save draft</button>
+          <button type="submit" value="pending" class="action">{{ preview ? 'Submit for mock review' : 'Submit for review' }}</button>
+        </template>
       </div>
     </fieldset>
     <p role="status">{{ message }}</p>

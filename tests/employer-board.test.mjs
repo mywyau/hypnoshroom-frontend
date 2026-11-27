@@ -94,6 +94,39 @@ test('employer accounts manage their own briefs and the public board exposes onl
     assert.equal((await db.query('select * from open_employer_contracts')).rows.length, 0)
     await db.exec("update employer_contracts set closes_on = current_date + 3, status = 'closed'")
     assert.equal((await db.query('select * from open_employer_contracts')).rows.length, 0)
+    await db.exec("update employer_contracts set status = 'published' where employment_type = 'permanent'")
+    await db.exec('reset role')
+    await db.exec(await readFile(new URL('../supabase/migrations/20261126000600_listing_company_and_review.sql', import.meta.url), 'utf8'))
+    await db.exec(`create or replace function auth.jwt() returns jsonb language sql stable as
+      $$ select current_setting('request.jwt.claims')::jsonb $$;
+      set role authenticated;
+      set request.jwt.claims = '{"email":"demo@example.test","user_metadata":{"listing_admin":true}}';`)
+    assert.equal((await db.query('select company_name from open_employer_listings')).rows[0].company_name, 'Example Studio')
+    await assert.rejects(db.exec("update employer_contracts set company_name = 'Unreviewed' where status = 'published'"), /row-level security/)
+    await assert.rejects(db.exec('select * from pending_listing_reviews()'), /administrator access/)
+    await db.exec(`update employer_contracts set status = 'pending', company_name = 'Client A' where id = '${job}'`)
+    const revision = async () => (await db.query('select revision from employer_contracts where id = $1', [job])).rows[0].revision
+    const first = await revision()
+    const decide = (token, approve) => db.query('select review_listing($1,$2,$3) as changed', [job, token, approve])
+    await assert.rejects(decide(first, true), /administrator access/)
+    await assert.rejects(db.exec(`update employer_contracts set status = 'published' where id = '${job}'`), /row-level security/)
+    await db.exec(`update employer_contracts set company_name = 'Client B' where id = '${job}'`)
+    const current = await revision()
+    await db.exec(`set request.jwt.claim.sub = '${bob}'; set request.jwt.claims = '{"email":"admin@example.test","app_metadata":{"listing_admin":true}}'`)
+    assert.equal((await db.query('select * from pending_listing_reviews()')).rows[0].company_name, 'Client B')
+    assert.equal((await decide(first, true)).rows[0].changed, false)
+    assert.equal((await decide(current, true)).rows[0].changed, true)
+    assert.equal((await decide(current, true)).rows[0].changed, false)
+    assert.equal((await db.query('select count(*)::int as count from pending_listing_reviews()')).rows[0].count, 0)
+    await db.exec('reset role; set role anon')
+    assert.equal((await db.query('select company_name from open_employer_contracts')).rows[0].company_name, 'Client B')
+    await assert.rejects(db.exec('select * from pending_listing_reviews()'), /permission denied/)
+    await db.exec(`reset role; set role authenticated; set request.jwt.claim.sub = '${alice}';
+      update employer_contracts set status = 'pending', company_name = 'Client C', closes_on = current_date - 1 where id = '${job}'`)
+    assert.equal((await db.query('select * from open_employer_contracts')).rows.length, 0)
+    assert.equal((await decide(await revision(), true)).rows[0].changed, false)
+    assert.equal((await decide(await revision(), false)).rows[0].changed, true)
+    assert.equal((await db.query('select status from employer_contracts where id = $1', [job])).rows[0].status, 'draft')
   } finally {
     await db.close()
   }

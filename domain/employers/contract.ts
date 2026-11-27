@@ -18,7 +18,7 @@ export function boardPath(type: EmploymentType | BoardType) {
   return type === 'contract' ? '/contracts' : '/jobs'
 }
 
-export type ListingStatus = 'draft' | 'published' | 'closed'
+export type ListingStatus = 'draft' | 'pending' | 'published' | 'closed'
 
 export interface ContractBrief {
   employment_type: EmploymentType
@@ -41,6 +41,11 @@ export interface ContractBrief {
 export interface EmployerContract extends ContractBrief {
   id: string
   status: ListingStatus
+  company_name: string | null
+}
+
+export interface StoredEmployerContract extends EmployerContract {
+  revision: string
 }
 
 export interface PublicContract extends ContractBrief {
