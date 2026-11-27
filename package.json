@@ -4,6 +4,8 @@
   "type": "module",
   "scripts": {
     "supabase": "npx --yes supabase@3.4.0",
+    "db:migrate": "npm run supabase -- db push --remote",
+    "db:migrate:status": "npm run supabase -- migration list --remote",
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",

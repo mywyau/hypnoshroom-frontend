@@ -1,13 +1,23 @@
 # Hypnoshroom frontend
 
-Hypnoshroom connects UK software contractors with employer-posted roles and offers independent Scala engineering consultancy. The board at `/contracts` supports shareable searches by role or skill, location and IR35 status.
+Hypnoshroom is a Nuxt 3 application for UK engineering consultancy, contractor income calculators and employer-posted engineering roles. The homepage gives visitors separate paths to the consultancy and job search.
 
-The application includes server-rendered pages, technical articles, service and expertise content, Vercel Web Analytics and a server-side contact form delivered through Resend.
+| Area | Entry point | Availability |
+| --- | --- | --- |
+| Consultancy, case studies, insights and enquiries | `/consultancy` | Development and production |
+| Permanent versus contract and outside-IR35 calculators | `/contractor-intelligence` | Development and production |
+| Job search landing page | `/find-a-job` | Development and production |
+| Contract, permanent and temporary boards | `/contracts`, `/jobs` | Development with Supabase |
+| Employer workspace and listing review | `/employers`, `/admin/listings` | Development with Supabase |
+| Sign-in and account settings | `/login`, `/account` | Development with Supabase |
+
+Production builds show a coming-soon page for the boards, employer workspace, sign-in, account settings and review queue. The listing APIs return HTTP 404 in production. The [job-board roadmap](HYPNOSHROOM_ROADMAP%281%29.md) describes the pilot.
 
 ## Requirements
 
-- Node.js 20 or newer
+- Node.js 20 or newer for the app. Use Node.js 22.18 or newer to run the test suite.
 - npm
+- A Supabase project for sign-in, saved listings and review
 - A Resend account and verified sending domain to deliver contact-form enquiries
 - A Cloudflare Turnstile widget for production spam protection
 - A Vercel project for the intended production deployment
@@ -45,6 +55,8 @@ Private variables are available only to the Nuxt server. Variables prefixed with
 | `NUXT_RESEND_API_KEY` | Yes | Private Resend API key used by the enquiry endpoint. |
 | `NUXT_CONTACT_TO_EMAIL` | Yes | Private inbox that receives enquiries. It can be an existing personal or company inbox. |
 | `NUXT_CONTACT_FROM_EMAIL` | Yes | Sender using a domain verified in Resend, for example `Hypnoshroom website <enquiries@mail.hypnoshroom.com>`. |
+| `NUXT_PUBLIC_EMPLOYER_SUPABASE_URL` | No | Project URL for accounts and listings in development. |
+| `NUXT_PUBLIC_EMPLOYER_SUPABASE_KEY` | No | Publishable key for the same Supabase project. |
 | `NUXT_PUBLIC_CONTACT_EMAIL` | No | Public direct-email fallback displayed on the contact form. Leave it blank until the address can receive mail. |
 | `NUXT_PUBLIC_TURNSTILE_SITE_KEY` | Recommended | Public Cloudflare Turnstile widget key. |
 | `NUXT_TURNSTILE_SECRET_KEY` | Recommended | Private key used to validate Turnstile responses on the server. |
@@ -78,6 +90,11 @@ Turnstile supplies bot verification across serverless instances. The endpoint al
 | Command | Purpose |
 | --- | --- |
 | `npm run dev` | Start the Nuxt development server. |
+| `npm test` | Run calculator fixtures and in-memory PostgreSQL tests for listing ownership, review and account deletion. |
+| `npm run lint` | Check application and test source with Oxlint. |
+| `npm run db:migrate -- --dry-run` | Preview pending migrations for the linked Supabase project. |
+| `npm run db:migrate` | Apply pending migrations to that project. |
+| `npm run db:migrate:status` | Compare local and applied migration versions. |
 | `npm run typecheck` | Run Vue and TypeScript checks. |
 | `npm run build` | Create the production Nuxt and Nitro server build. |
 | `npm run preview` | Preview a completed production build locally. |
@@ -90,8 +107,6 @@ npm run typecheck
 npm run build
 ```
 
-Run `npm test` for contractor calculation fixtures (Node 22.18 or later) and `npm run lint` for source linting. Oxlint is a development dependency.
-
 ## Project structure
 
 ```text
@@ -103,6 +118,10 @@ data/articles.ts        Technical article content and metadata
 data/languageServices.ts
                         Language-specific service-page content
 data/services.ts        Core service-package content
+domain/contractor/      Income comparison, payroll and limited-company calculations
+domain/employers/       Listing types, advertised terms and pricing previews
+supabase/migrations/    Versioned database schema, access policies and functions
+tests/                  Calculator fixtures and database regression tests
 pages/                  File-based application routes
 public/                 Static public assets
 server/api/             Server-side API handlers
@@ -169,13 +188,21 @@ The product brief is in [HYPNOSHROOM_CONTRACTOR_INTELLIGENCE.md](HYPNOSHROOM_CON
 4. Before release, obtain accountant review of `domain/contractor/limitedCompany.ts`, especially director NI, marginal relief, dividend stacking and allowance allocation. The calculator covers one full accounting year, a sole director/shareholder, current-year dividends and no opening reserves. Add short accounting periods or other income only with new sourced rules and fixtures.
 5. Keep market intelligence in a separate future data layer. Before ingestion, review permitted vacancy feeds for redistribution, retention, attribution, privacy and rate limits, then obtain approval. Track source observations and provenance separately from deduplicated vacancies. Publish coverage, freshness, missingness and sample size with any eventual statistic.
 
-## Employer accounts and contract board
+## Job boards and employer accounts
 
-Use `npm run dev` to access the job boards and employer pages locally. Production builds show a coming-soon page for these routes and return HTTP 404 for the listing APIs.
+**Finding a role.** Visitors can browse without signing in. Both boards support shareable searches by keyword, location, engineering discipline, language and work arrangement. Selecting several language icons matches any selected language. Selecting both Fully remote and Hybrid includes either arrangement. The contract board also filters by advertised IR35 status, and the jobs board by permanent or temporary employment. A listing with an application URL links to the employer’s site.
 
-The employer homepage is `/employers`. Employers sign in at `/employers/post-a-role` with a password or a Supabase email link and enter the hiring company in step one of the listing form. The first company name becomes the default when saving a draft or submitting for review. Each listing can name a different hiring company. New submissions and edits to published listings require approval. One email account manages its own listings. Applicants browse `/contracts` for day-rate contracts or `/jobs` for permanent and temporary employee jobs. New listings require an engineering discipline. Employee jobs require an annual GBP salary range, and temporary jobs also require a duration. Contract employers can explicitly mark their day rate as unspecified. Both boards support location, fully remote, engineering discipline and language filters. Applicants apply on the employer’s site. Rates are advertised GBP day rates. The board hides closed listings immediately and expired listings after their closing date in London.
+**Posting a role.** Sign in at `/employers/post-a-role` and enter the hiring company in step one. Saving the first draft or submitting it for review sets the default company for later listings. Recruiters can change the company on each listing. Each role requires an engineering discipline. Permanent and temporary roles require a GBP salary range, and temporary roles require a duration. Contract listings show an advertised GBP day rate or explicitly mark it as unspecified.
 
-Job seekers and employers sign in at `/login` and manage their optional preferred name and company at `/account`. Older `/jobs/account` links forward there, including email confirmation codes. An account is optional for browsing and applying. Employer and job seeker sessions share the existing browser storage key. Creating a job seeker account does not create a company profile.
+**Review and publication.** Employers manage drafts and submissions at `/employers/listings`. Submitting a new role or resubmitting a published edit sends it to `/admin/listings`. A listing administrator can approve and publish it or return it to the employer’s drafts. Closing a listing removes it from public browsing immediately. Listings also leave the board after their closing date in London.
+
+### Account settings and deletion
+
+Job seekers and employers sign in at `/login`. Older `/jobs/account` links redirect to sign-in and preserve email confirmation parameters. At `/account`, users can save or clear their optional preferred name and company. The signed-in header uses the preferred name. The posting form manages the company displayed on each listing separately.
+
+To delete an account, open `/account`, select **Delete account**, enter the account email and choose **Permanently delete account**. Supabase deletes the sign-in account, its profile details, its employer profile if present, and **every listing owned by that account** in one transaction. This includes drafts, pending submissions, published, closed and expired listings, including roles posted for clients. Other users keep their listings even when they use the same company name. After deletion, the app signs out the current browser.
+
+The [account deletion migration](supabase/migrations/20261127000200_delete_own_account.sql) defines the database function. It takes the owner ID from the signed-in session and checks the confirmation email. The review functions also check that the reviewer’s account still exists.
 
 ### Try the posting preview
 
@@ -186,7 +213,7 @@ Open `/employers/post-a-role?preview=1` to enter a company or agency name, creat
 1. Use a Supabase project with the Data API enabled for the public schema. Apply the versioned migrations using the workflow below.
 2. Set `NUXT_PUBLIC_EMPLOYER_SUPABASE_URL` to the project URL and `NUXT_PUBLIC_EMPLOYER_SUPABASE_KEY` to its **publishable** key in the Nuxt environment. A service-role or secret key must never go into public configuration.
 3. Enable the email provider, new-user signups and email confirmation. Use the confirmation URL in the signup, magic-link and password recovery email templates. In Supabase Auth redirect settings, allow the exact URLs for `/employers`, `/login` and `/jobs/reset-password` on each enabled origin (for example `http://localhost:3000`). Open each email link in the browser that requested it. Set the Site URL for the environment and configure an SMTP sender for account emails.
-4. Restart Nuxt. Request a link at `/employers/post-a-role` and open it in the same browser. Create a profile, save a draft and submit it for review. Approve it from a listing administrator account, open the listing in a signed-out window, then close it and refresh the public page. Drafts, closed briefs and sign-in emails stay out of the public view.
+4. Restart Nuxt. Request a link at `/employers/post-a-role` and open it in the same browser. Enter a company on the listing, save a draft, then submit it for review. Approve it from a listing administrator account, open the listing in a signed-out window, then close it and refresh the public page. Drafts, closed briefs and sign-in emails stay out of the public view.
 
 Listing administrators open **Review listings** from their account or visit `/admin/listings` in development. To designate a reviewer, use the Supabase SQL Editor as a project administrator and replace the UUID below with that reviewer's Authentication user ID. The reviewer should sign out and back in for the new claim to take effect. Remove the `listing_admin` key to revoke the claim for subsequently issued tokens.
 
@@ -205,7 +232,7 @@ Run the pinned Supabase CLI from the frontend repository. Link the checkout to t
 ```sh
 npm run supabase -- login
 npm run supabase -- link YOUR_PROJECT_REF
-npm run supabase -- migration list --remote
+npm run db:migrate:status
 ```
 
 The Local and Remote columns compare the files in `supabase/migrations/` with the linked database's recorded versions. Each successful push records its timestamp in `supabase_migrations.schema_migrations`. Commit the SQL files to Git and use a new migration for later changes.
@@ -220,9 +247,9 @@ The Local and Remote columns compare the files in `supabase/migrations/` with th
 Preview the pending migrations, apply them, and confirm that the local and remote versions match.
 
 ```sh
-npm run supabase -- db push --remote --dry-run
-npm run supabase -- db push --remote
-npm run supabase -- migration list --remote
+npm run db:migrate -- --dry-run
+npm run db:migrate
+npm run db:migrate:status
 ```
 
 For the next schema change, create a timestamped file with `npm run supabase -- migration new describe_the_change`, edit its SQL, and use the same preview and push commands. A second push skips versions already recorded. For a non-interactive deployment, supply Supabase credentials from your CI secret store and pass `--yes` to the reviewed hosted push.
