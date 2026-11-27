@@ -1,20 +1,27 @@
 <script setup lang="ts">
+import { PostgrestError } from '@supabase/supabase-js'
 import { londonDate, type StoredEmployerContract } from '~/domain/employers/contract'
 
 const client = useAccountClient()
 const listings = ref<StoredEmployerContract[]>([])
 const busy = ref(true)
-const loadFailed = ref(false)
+const loadError = ref('')
 const message = ref('')
 
 async function load() {
   busy.value = true
-  loadFailed.value = false
+  loadError.value = ''
   try {
     const { data } = await client.rpc('pending_listing_reviews').throwOnError()
     listings.value = data ?? []
-  } catch {
-    loadFailed.value = true
+  } catch (error) {
+    if (error instanceof PostgrestError && error.code === 'PGRST202') {
+      loadError.value = 'Supabase cannot find the review queue function. Check that migration 20261126000600 is applied to the connected project and its API schema cache is up to date.'
+    } else if (error instanceof PostgrestError && error.code === '42501') {
+      loadError.value = 'Supabase denied access to the review queue. Check your listing administrator permission and sign in again.'
+    } else {
+      loadError.value = 'Unable to load pending listings. Refresh the queue to try again.'
+    }
     listings.value = []
   } finally {
     busy.value = false
@@ -43,7 +50,7 @@ onMounted(load)
   <div class="max-w-3xl">
     <button type="button" class="link" :disabled="busy" @click="message = ''; load()">Refresh queue</button>
     <p role="status" class="my-3">{{ message }}</p>
-    <p v-if="loadFailed">Unable to load pending listings. Refresh the queue to try again.</p>
+    <p v-if="loadError" role="alert">{{ loadError }}</p>
     <p v-else-if="busy">Loading review queue…</p>
     <p v-else-if="!listings.length">No listings are awaiting review.</p>
     <article v-for="listing in listings" :key="listing.id" class="mt-6 rounded-xl border border-line p-5">

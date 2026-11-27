@@ -89,7 +89,7 @@ async function advance(event: SubmitEvent) {
     </div>
     <fieldset :disabled="busy" class="grid gap-4">
       <template v-if="step === 1">
-        <label>Company shown on this listing<input v-model.trim="listingCompany" required pattern=".*\S.*" maxlength="140"></label>
+        <label>Company shown on this listing<input v-model.trim="listingCompany" required pattern=".*\S.*" maxlength="140" autocomplete="organization"></label>
         <label>Employment type<select class="inset-select" v-model="form.employment_type"><option v-for="(label, value) in employmentLabels" :key="value" :value="value">{{ label }}</option></select></label>
         <label>Role title<input v-model.trim="form.title" required maxlength="160"></label>
         <div class="grid gap-4 sm:grid-cols-2">
@@ -145,7 +145,7 @@ async function advance(event: SubmitEvent) {
       <p v-if="step === steps.length && !preview" class="text-sm">{{ listing?.status === 'published' ? 'Submitting changes takes this listing off the board until an administrator approves it again.' : 'An administrator reviews the brief and company name before the listing goes live.' }}</p>
       <div class="flex flex-wrap gap-4">
         <button v-if="step > 1" type="button" class="link" @click="goToStep(step - 1)">Back</button>
-        <button v-if="!preview || step === 1" type="button" class="link" @click="emit('cancel')">{{ preview ? 'Back to company' : 'Cancel' }}</button>
+        <button v-if="!preview" type="button" class="link" @click="emit('cancel')">Cancel</button>
         <button v-if="step < steps.length" type="submit" class="action">{{ step === steps.length - 1 ? 'Review listing' : 'Continue' }}</button>
         <template v-else>
           <button v-if="!preview && listing?.status !== 'published'" type="submit" value="draft" class="link">Save draft</button>

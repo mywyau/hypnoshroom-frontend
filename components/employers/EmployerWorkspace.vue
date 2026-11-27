@@ -5,7 +5,6 @@ import { PostgrestError } from '@supabase/supabase-js'
 const props = defineProps<{ view: 'listings' | 'post'; editId?: string }>()
 const client = useAccountClient()
 const company = ref('')
-const accountReady = ref(false)
 const listings = ref<StoredEmployerContract[]>([])
 const existingListing = computed(() => props.editId ? listings.value[0] ?? null : null)
 const busy = ref(true)
@@ -28,7 +27,6 @@ async function reload() {
           : null,
     ])
     company.value = profile.data?.company_name ?? ''
-    accountReady.value = !!profile.data
     listings.value = contracts?.data ?? []
   } catch (error) {
     loadFailed.value = true
@@ -40,22 +38,14 @@ async function reload() {
   }
 }
 
-async function saveProfile() {
-  busy.value = true
-  try {
-    await client.from('employer_profiles').insert({ company_name: company.value.trim() }).throwOnError()
-    message.value = 'Company profile saved.'
-    await reload()
-  } catch {
-    message.value = 'Could not save your company. Refresh to check your profile and try again.'
-  } finally {
-    busy.value = false
-  }
-}
-
 async function saveListing({ id, ...payload }: EmployerContract) {
   const initial = existingListing.value
   if (props.editId && !initial) throw new Error('The listing is unavailable.')
+  if (!company.value) {
+    await client.from('employer_profiles').upsert({ company_name: payload.company_name }, {
+      onConflict: 'owner_id', ignoreDuplicates: true,
+    }).throwOnError()
+  }
   const query = initial
     ? client.from('employer_contracts').update(payload).eq('id', initial.id).eq('revision', initial.revision)
     : client.from('employer_contracts').insert({ ...payload, id })
@@ -86,12 +76,6 @@ onMounted(reload)
     <p v-if="busy">Loading your workspace…</p>
     <button v-else-if="loadFailed" class="link" @click="reload">Retry</button>
     <p v-else-if="editId && !existingListing">This listing is unavailable. <NuxtLink to="/employers/listings" class="link">Go to your listings</NuxtLink></p>
-    <form v-else-if="view === 'post' && !accountReady" class="max-w-md" @submit.prevent="saveProfile">
-      <h2>Company profile</h2>
-      <label>Company name<input v-model="company" required maxlength="140" autocomplete="organization"></label>
-      <p class="text-sm">This name will be prefilled on each listing. You can change it when posting for a client.</p>
-      <button class="action justify-self-start">Save company</button>
-    </form>
     <EmployerContractForm v-else-if="view === 'post'" :default-company="company" :listing="existingListing" @cancel="navigateTo('/employers/listings')" :submit-listing="saveListing" />
     <div v-else>
       <NuxtLink to="/employers/post-a-role" class="action inline-block hover:bg-moss hover:shadow-md focus-visible:bg-moss motion-safe:transition motion-safe:hover:-translate-y-0.5">New listing</NuxtLink>
