@@ -6,7 +6,7 @@ const jobs = { label: 'Permanent & temporary jobs', short: 'Jobs', to: '/jobs', 
 const calculators = { label: 'Contractor calculators', short: 'Calculators', to: '/contractor-intelligence', icon: Calculator }
 const employers = { label: 'Employers', to: '/employers', icon: Building2 }
 const employerHome = { ...employers, label: 'Employer home' }
-const pricing = { label: 'Employer & recruiter pricing', short: 'Pricing', to: '/employers/pricing', icon: Tag }
+const pricing = { label: 'Pricing plans', short: 'Pricing', to: '/employers/pricing', icon: Tag }
 const postRole = { label: 'Post a role', to: '/employers/post-a-role', icon: Plus }
 const consultancy = { label: 'Consultancy', to: '/consultancy', icon: BriefcaseBusiness }
 const services = { label: 'Services', to: '/services', icon: BriefcaseBusiness }
@@ -54,6 +54,9 @@ export function useSiteNavigation() {
       }
     }
     if (route.name === 'contractor-intelligence') return { primary: [], action: null, quick: sections.jobs.quick }
+    if (route.name === 'contractor-intelligence-outside-ir35' || route.name === 'contractor-intelligence-permanent-vs-contract') {
+      return { primary: [calculators], action: null, quick: sections.jobs.quick }
+    }
     if (route.name === 'contracts') return sections.contractBoard
     if (route.name === 'jobs') return { ...sections.contractBoard, quick: sections.jobs.quick }
     if (route.name === 'find-a-job') {

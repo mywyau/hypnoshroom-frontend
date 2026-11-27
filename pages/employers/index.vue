@@ -27,7 +27,7 @@ usePageSeo({ title: 'For employers and recruiters | Hypnoshroom', description: '
           <NuxtLink v-if="hasAccounts" to="/employers/post-a-role?view=listings" class="ml-3 inline-block text-moss underline">Manage listings</NuxtLink>
         </article>
         <article class="rounded-2xl border border-line bg-white/40 p-6 sm:p-8">
-          <h2 class="font-display text-3xl">Posting plans</h2>
+          <h2 class="font-display text-3xl">Pricing plans</h2>
           <p class="mb-6 mt-3 text-ink/75">Explore sample pricing for a single vacancy or several openings.</p>
           <AppButton to="/employers/pricing" variant="secondary">View pricing</AppButton>
         </article>

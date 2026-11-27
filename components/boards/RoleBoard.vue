@@ -22,7 +22,7 @@ const { data, error, status, refresh } = await useFetch<{ listings: PublicContra
 
 <template>
   <div>
-    <PageHero :eyebrow="boardName" :title="isContract ? 'Find your next contract.' : 'Find your next engineering job.'" :intro="intro" gradient="forest" />
+    <PageHero :eyebrow="boardName" :title="isContract ? 'Find your next contract.' : 'Find your next engineering job.'" :intro="intro" gradient="forest" size="compact-title" />
     <section class="page-shell py-12">
       <h2 class="mb-8 font-display text-3xl">{{ isContract ? 'Open contracts' : 'Open jobs' }}</h2>
       <form :key="route.fullPath" :action="path" method="get" role="search" class="mb-8 grid items-end gap-4 rounded-xl border border-line bg-white/40 p-5 sm:grid-cols-2 lg:grid-cols-3">

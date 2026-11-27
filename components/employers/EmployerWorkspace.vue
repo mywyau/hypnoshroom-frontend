@@ -90,7 +90,7 @@ onMounted(reload)
     <div v-else>
       <div class="flex flex-wrap items-baseline justify-between gap-4">
         <h2>Your listings</h2>
-        <button class="action" @click="editing = 'new'; message = ''">New listing</button>
+        <button class="action hover:bg-moss hover:shadow-md focus-visible:bg-moss motion-safe:transition motion-safe:hover:-translate-y-0.5" @click="editing = 'new'; message = ''">New listing</button>
       </div>
       <p v-if="!listings.length" class="mt-6">Your first listing will appear here.</p>
       <article v-for="listing in listings" :key="listing.id" class="mt-4 border-t border-line pt-4">
