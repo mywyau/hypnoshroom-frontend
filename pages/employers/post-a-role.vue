@@ -8,9 +8,9 @@ usePageSeo({ title: 'Post a role | Hypnoshroom', description: 'Publish and manag
 
 <template>
   <div>
-    <PageHero eyebrow="Engineering jobs" :title="preview ? 'Try posting a role.' : 'Post a role.'" :intro="preview ? 'Create a sample contract, permanent or temporary job and review it as an applicant would see it.' : 'Publish a UK contract, permanent or temporary role and direct applicants to your own site.'" gradient="forest" />
     <section class="page-shell py-10">
-      <div class="employer-workspace max-w-3xl">
+      <h1 class="sr-only">Post a role</h1>
+      <div class="employer-workspace mx-auto max-w-3xl [&_form]:mx-auto">
         <EmployerPostingPreview v-if="preview" />
         <ClientOnly v-else>
           <AccountAccess audience="employer" v-slot="{ user }">
@@ -18,8 +18,8 @@ usePageSeo({ title: 'Post a role | Hypnoshroom', description: 'Publish and manag
           </AccountAccess>
           <template #fallback><p>Loading employer sign-in…</p></template>
         </ClientOnly>
-        <NuxtLink v-if="hasAccounts" :to="preview ? '/employers/post-a-role' : '/employers/post-a-role?preview=1'" class="link mt-6 inline-block">
-          {{ preview ? 'Go to employer account' : 'Try the posting preview without signing in' }}
+        <NuxtLink v-if="hasAccounts" :to="preview ? '/login' : '/employers/post-a-role?preview=1'" class="link mt-6 inline-block">
+          {{ preview ? 'Go to your account' : 'Preview the posting form' }}
         </NuxtLink>
       </div>
     </section>

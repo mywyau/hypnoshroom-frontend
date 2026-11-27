@@ -17,7 +17,6 @@ usePageSeo({ title: 'Reset password | Hypnoshroom', description: 'Choose a new p
       </div>
       <nav class="mt-6 flex flex-wrap gap-5 text-moss underline" aria-label="Return to account">
         <NuxtLink to="/login">Your account</NuxtLink>
-        <NuxtLink to="/employers/post-a-role">Employer account</NuxtLink>
       </nav>
     </section>
   </div>

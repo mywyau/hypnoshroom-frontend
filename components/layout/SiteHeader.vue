@@ -5,8 +5,6 @@ const showLaunchStatus = !import.meta.dev
 
 const route = useRoute()
 const navigation = useSiteNavigation()
-const config = useRuntimeConfig().public
-const hasAccounts = Boolean(config.employerSupabaseUrl && config.employerSupabaseKey)
 const accountPath = computed(() => {
   if (!import.meta.dev) return
   if (isConsultancyPath(route.path)) return '/login'
@@ -14,7 +12,7 @@ const accountPath = computed(() => {
   if (route.path === '/' || route.name === 'find-a-job') return '/login'
   if (!isHiringPath(route.path)) return
   if (['login', 'jobs-account', 'jobs-reset-password', 'employers-post-a-role'].includes(String(route.name))) return
-  return route.path.startsWith('/employers') && hasAccounts ? '/employers/post-a-role?view=listings' : '/login'
+  return '/login'
 })
 </script>
 
