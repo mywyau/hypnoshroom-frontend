@@ -12,7 +12,7 @@ usePageSeo({ title: 'Sign in | Hypnoshroom', description: 'Sign in to Hypnoshroo
           <div class="flex flex-wrap gap-4">
             <NuxtLink v-if="user.app_metadata.listing_admin === true" to="/admin/listings" class="link">Review listings</NuxtLink>
             <NuxtLink to="/find-a-job" class="link">Find a job</NuxtLink>
-            <NuxtLink to="/employers/post-a-role?view=listings" class="link">Manage listings</NuxtLink>
+            <NuxtLink to="/employers/listings" class="link">Manage listings</NuxtLink>
           </div>
         </AccountAccess>
         <template #fallback><p>Loading sign-in…</p></template>

@@ -1,4 +1,4 @@
-import { BriefcaseBusiness, Building2, Calculator, Code, House, Mail, Plus, Search, Tag, Users } from '@lucide/vue'
+import { BriefcaseBusiness, Building2, Calculator, Code, House, List, ListChecks, Mail, Plus, Search, Tag, Users } from '@lucide/vue'
 
 const home = { label: 'Home', to: '/', icon: House }
 const contracts = { label: 'Find contracts', short: 'Contracts', to: '/contracts', icon: Search }
@@ -8,6 +8,9 @@ const employers = { label: 'Employers', to: '/employers', icon: Building2 }
 const employerHome = { ...employers, label: 'Employer home' }
 const pricing = { label: 'Pricing plans', short: 'Pricing', to: '/employers/pricing', icon: Tag }
 const postRole = { label: 'Post a role', to: '/employers/post-a-role', icon: Plus }
+const yourListings = { label: 'Your listings', to: '/employers/listings', icon: List }
+const employerWorkspace = [yourListings, postRole, pricing]
+const reviewListings = { label: 'Review listings', short: 'Review', to: '/admin/listings', icon: ListChecks }
 const consultancy = { label: 'Consultancy', to: '/consultancy', icon: BriefcaseBusiness }
 const services = { label: 'Services', to: '/services', icon: BriefcaseBusiness }
 const expertise = { label: 'Expertise', to: '/expertise', icon: Code }
@@ -42,9 +45,21 @@ export function isConsultancyPath(path: string) {
   return ['consultancy', 'services', 'expertise', 'work', 'contact', 'insights', 'about', 'scala', 'java', 'typescript', 'python'].includes(root)
 }
 
-export function useSiteNavigation() {
+export function useEmployerWorkspaceLinks() {
+  const user = useAccountUser()
   const route = useRoute()
   return computed(() => {
+    if (!import.meta.dev || !user.value) return []
+    if (route.path.split('/')[1] !== 'employers' && route.name !== 'admin-listings') return []
+    return user.value.app_metadata.listing_admin === true ? [...employerWorkspace, reviewListings] : employerWorkspace
+  })
+}
+
+export function useSiteNavigation() {
+  const workspaceLinks = useEmployerWorkspaceLinks()
+  const route = useRoute()
+  return computed(() => {
+    if (workspaceLinks.value.length) return { primary: [], action: null, quick: workspaceLinks.value }
     const root = route.path.split('/')[1]
     if (root === 'employers') {
       return {

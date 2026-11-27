@@ -1,25 +1,13 @@
 <script setup lang="ts">
-import type { User } from '@supabase/supabase-js'
-
 defineProps<{ to?: string }>()
 const config = useRuntimeConfig().public
 const client = import.meta.dev && import.meta.client && config.employerSupabaseUrl && config.employerSupabaseKey
   ? useAccountClient()
   : undefined
-const user = shallowRef<User | null>(null)
+const user = useAccountUser()
 const signingOut = ref(false)
 const message = ref('')
-let unsubscribe: (() => void) | undefined
-
-onMounted(() => {
-  if (!client) return
-  const { data: { subscription } } = client.auth.onAuthStateChange((_event, session) => {
-    user.value = session?.user ?? null
-    message.value = ''
-  })
-  unsubscribe = () => subscription.unsubscribe()
-})
-onBeforeUnmount(() => unsubscribe?.())
+watch(user, () => { message.value = '' })
 
 async function signOut() {
   if (!client || signingOut.value) return

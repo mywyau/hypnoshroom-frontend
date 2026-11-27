@@ -24,7 +24,7 @@ usePageSeo({ title: 'For employers and recruiters | Hypnoshroom', description: '
           <h2 class="font-display text-3xl">Advertise a role</h2>
           <p class="mb-6 mt-3 text-ink/75">{{ hasAccounts ? 'Share the skills, pay and working arrangements candidates need to decide whether to apply.' : 'Try the posting form and see how your listing will look to candidates.' }}</p>
           <AppButton to="/employers/post-a-role">{{ hasAccounts ? 'Post a role' : 'Preview a job posting' }}</AppButton>
-          <NuxtLink v-if="hasAccounts" to="/employers/post-a-role?view=listings" class="ml-3 inline-block text-moss underline">Manage listings</NuxtLink>
+          <NuxtLink v-if="hasAccounts" to="/employers/listings" class="ml-3 inline-block text-moss underline">Manage listings</NuxtLink>
         </article>
         <article class="rounded-2xl border border-line bg-white/40 p-6 sm:p-8">
           <h2 class="font-display text-3xl">Pricing plans</h2>
