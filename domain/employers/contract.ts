@@ -37,6 +37,7 @@ export interface ContractBrief {
   ir35: typeof ir35Options[number] | null
   description: string
   apply_url: string | null
+  apply_email: string | null
   closes_on: string
 }
 

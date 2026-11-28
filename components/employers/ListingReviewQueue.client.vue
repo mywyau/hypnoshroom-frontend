@@ -58,9 +58,11 @@ onMounted(load)
       <h2>{{ listing.title }}</h2>
       <RoleBriefDetails :listing="listing" />
       <p v-if="listing.apply_url" class="mb-4 break-all">Application URL · {{ listing.apply_url }}</p>
+      <p v-if="listing.apply_email" class="mb-4 break-all">Recruitment email · {{ listing.apply_email }}</p>
+      <p v-if="!listing.apply_url && !listing.apply_email" class="mb-3">Return this listing to draft so the employer can add application details.</p>
       <p v-if="listing.closes_on < londonDate()" class="mb-3">The closing date has passed. Return this listing to draft so the employer can update it.</p>
       <div class="flex flex-wrap gap-4">
-        <button class="action" :disabled="busy || listing.closes_on < londonDate()" @click="review(listing, true)">Approve and publish</button>
+        <button class="action" :disabled="busy || listing.closes_on < londonDate() || (!listing.apply_url && !listing.apply_email)" @click="review(listing, true)">Approve and publish</button>
         <button class="link" :disabled="busy" @click="review(listing, false)">Return to draft</button>
       </div>
     </article>

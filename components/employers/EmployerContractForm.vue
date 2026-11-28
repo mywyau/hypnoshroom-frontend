@@ -20,7 +20,7 @@ const form = reactive<PostingForm>({
   other_language: initial?.other_language ?? null, languages: [...(initial?.languages ?? [])], salary_gbp: initial?.salary_gbp ?? null, salary_max_gbp: initial?.salary_max_gbp ?? null,
   title: initial?.title ?? '', location: initial?.fully_remote && initial.location === 'Remote' ? '' : initial?.location ?? '', duration: initial?.duration ?? '',
   day_rate_gbp: initial?.day_rate_gbp ?? null, ir35: initial?.ir35 === 'Unspecified' ? '' : initial?.ir35 ?? '',
-  description: initial?.description ?? '', apply_url: initial?.apply_url ?? '', closes_on: initial?.closes_on ?? '',
+  description: initial?.description ?? '', apply_url: initial?.apply_url ?? '', apply_email: initial?.apply_email ?? '', closes_on: initial?.closes_on ?? '',
 })
 const companyOverride = ref(initial?.company_name ?? null)
 const listingCompany = computed({
@@ -46,6 +46,7 @@ const brief = computed(() => ({
   ...form, id, company_name: listingCompany.value.trim(), location: form.location.trim() || 'Remote',
   fully_remote: arrangement.value === 'remote', hybrid: arrangement.value === 'hybrid',
   apply_url: form.apply_url?.trim() || null,
+  apply_email: form.apply_email?.trim() || null,
   duration: form.employment_type !== 'permanent' ? form.duration : null, ir35: isContract.value ? form.ir35 || null : null,
   other_language: otherSelected.value ? form.other_language?.trim() || null : null,
   day_rate_gbp: isContract.value && !rateUnspecified.value ? Number(form.day_rate_gbp) || null : null,
@@ -60,6 +61,11 @@ async function advance(event: SubmitEvent) {
     return
   }
   const status: ListingStatus = (event.submitter as HTMLButtonElement | null)?.value === 'draft' ? 'draft' : 'pending'
+  if (status === 'pending' && !brief.value.apply_url && !brief.value.apply_email) {
+    await goToStep(3)
+    message.value = 'Add an application URL or recruitment email before submitting for review.'
+    return
+  }
   if (status === 'pending' && form.closes_on < londonDate()) {
     await goToStep(3)
     message.value = 'Choose a closing date of today or later to submit for review.'
@@ -133,7 +139,12 @@ async function advance(event: SubmitEvent) {
           <label v-if="otherSelected" class="mt-3">Other language name<input v-model.trim="form.other_language" required maxlength="60" pattern=".*\S.*"></label>
         </fieldset>
         <label>Role brief<textarea v-model.trim="form.description" rows="6" required maxlength="5000" /></label>
-        <label>Application URL (optional)<input v-model.trim="form.apply_url" type="url" maxlength="2048" pattern="https://.+" placeholder="https://"></label>
+        <fieldset class="grid gap-3">
+          <legend class="mb-2 text-sm font-semibold">How candidates apply</legend>
+          <p class="text-sm">Provide a website or recruitment email before submitting for review. Candidates can see both if you provide both.</p>
+          <label>Application URL (optional)<input v-model.trim="form.apply_url" type="url" maxlength="2048" pattern="https://.+" placeholder="https://"></label>
+          <label>Recruitment email (optional)<input v-model.trim="form.apply_email" type="email" maxlength="254" placeholder="jobs@example.com"></label>
+        </fieldset>
         <label>Applications close (UK date)<input v-model="form.closes_on" type="date" required></label>
       </template>
       <article v-else class="min-w-0 rounded-2xl border border-line bg-white/40 p-5 sm:p-8">
@@ -141,6 +152,7 @@ async function advance(event: SubmitEvent) {
         <h3 class="mt-2 break-words font-display text-3xl">{{ brief.title }}</h3>
         <RoleBriefDetails :listing="brief" />
         <p v-if="brief.apply_url" class="break-all text-sm">Application URL · {{ brief.apply_url }}</p>
+        <p v-if="brief.apply_email" class="break-all text-sm">Recruitment email · {{ brief.apply_email }}</p>
       </article>
       <p v-if="step === steps.length && !preview" class="text-sm">{{ listing?.status === 'published' ? 'Submitting changes takes this listing off the board until an administrator approves it again.' : 'An administrator reviews the brief and company name before the listing goes live.' }}</p>
       <div class="flex flex-wrap gap-4">
