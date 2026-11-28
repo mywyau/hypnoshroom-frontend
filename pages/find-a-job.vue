@@ -3,7 +3,7 @@ import { Calculator } from '@lucide/vue'
 
 const boardsComingSoon = !import.meta.dev
 const config = useRuntimeConfig().public
-const showAccount = import.meta.dev && Boolean(config.employerSupabaseUrl && config.employerSupabaseKey)
+const showApplications = import.meta.dev && Boolean(config.employerSupabaseUrl && config.employerSupabaseKey)
 const boards = [
   {
     title: 'Contract roles',
@@ -35,6 +35,7 @@ usePageSeo({
           <p class="mt-4 max-w-lg leading-7 text-ink/75">{{ board.description }}</p>
         </NuxtLink>
       </nav>
+      <NuxtLink v-if="showApplications" to="/applications" class="mt-4 inline-flex min-h-11 items-center font-semibold text-moss underline underline-offset-4">Your applications</NuxtLink>
       <section class="mt-10 border-t border-line pt-8">
         <h2 class="flex items-center gap-2 font-display text-2xl">
           <Calculator class="size-6 shrink-0 text-moss" aria-hidden="true" />

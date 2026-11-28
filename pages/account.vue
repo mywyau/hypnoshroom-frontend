@@ -17,8 +17,9 @@ if (import.meta.client && enabled) {
       <h1 class="mb-4 font-display text-3xl">Your account</h1>
       <template v-if="enabled && user">
         <p class="mb-4 break-all text-sm">{{ user.email }}</p>
+        <NuxtLink to="/applications" class="link mb-4 inline-block">Your applications</NuxtLink>
         <AccountProfileForm :key="user.id" :user="user" />
-        <NuxtLink v-if="user.app_metadata.listing_admin === true" to="/admin/listings" class="link">Review listings</NuxtLink>
+        <!-- <NuxtLink v-if="user.app_metadata.listing_admin === true" to="/admin/listings" class="link">Review listings</NuxtLink> -->
         <DeleteAccountForm v-if="user.email" :key="user.id + '-delete'" :email="user.email" />
       </template>
       <p v-else-if="enabled" role="status">Loading your account…</p>

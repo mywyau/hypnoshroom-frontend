@@ -20,6 +20,7 @@ const form = reactive<PostingForm>({
   other_language: initial?.other_language ?? null, languages: [...(initial?.languages ?? [])], salary_gbp: initial?.salary_gbp ?? null, salary_max_gbp: initial?.salary_max_gbp ?? null,
   title: initial?.title ?? '', location: initial?.fully_remote && initial.location === 'Remote' ? '' : initial?.location ?? '', duration: initial?.duration ?? '',
   day_rate_gbp: initial?.day_rate_gbp ?? null, ir35: initial?.ir35 === 'Unspecified' ? '' : initial?.ir35 ?? '',
+  apply_onsite: initial?.apply_onsite ?? false,
   description: initial?.description ?? '', apply_url: initial?.apply_url ?? '', apply_email: initial?.apply_email ?? '', closes_on: initial?.closes_on ?? '',
 })
 const companyOverride = ref(initial?.company_name ?? null)
@@ -61,9 +62,9 @@ async function advance(event: SubmitEvent) {
     return
   }
   const status: ListingStatus = (event.submitter as HTMLButtonElement | null)?.value === 'draft' ? 'draft' : 'pending'
-  if (status === 'pending' && !brief.value.apply_url && !brief.value.apply_email) {
+  if (status === 'pending' && !brief.value.apply_onsite && !brief.value.apply_url && !brief.value.apply_email) {
     await goToStep(3)
-    message.value = 'Add an application URL or recruitment email before submitting for review.'
+    message.value = 'Choose on-site applications or add a website or recruitment email before submitting for review.'
     return
   }
   if (status === 'pending' && form.closes_on < londonDate()) {
@@ -141,7 +142,8 @@ async function advance(event: SubmitEvent) {
         <label>Role brief<textarea v-model.trim="form.description" rows="6" required maxlength="5000" /></label>
         <fieldset class="grid gap-3">
           <legend class="mb-2 text-sm font-semibold">How candidates apply</legend>
-          <p class="text-sm">Provide a website or recruitment email before submitting for review. Candidates can see both if you provide both.</p>
+          <p class="text-sm">Choose at least one application method.</p>
+          <label><input v-model="form.apply_onsite" type="checkbox"> Accept CVs on Hypnoshroom</label>
           <label>Application URL (optional)<input v-model.trim="form.apply_url" type="url" maxlength="2048" pattern="https://.+" placeholder="https://"></label>
           <label>Recruitment email (optional)<input v-model.trim="form.apply_email" type="email" maxlength="254" placeholder="jobs@example.com"></label>
         </fieldset>
@@ -151,6 +153,7 @@ async function advance(event: SubmitEvent) {
         <p class="break-words text-sm text-moss">{{ brief.company_name }}</p>
         <h3 class="mt-2 break-words font-display text-3xl">{{ brief.title }}</h3>
         <RoleBriefDetails :listing="brief" />
+        <p v-if="brief.apply_onsite">Candidates can submit their CV on Hypnoshroom.</p>
         <p v-if="brief.apply_url" class="break-all text-sm">Application URL · {{ brief.apply_url }}</p>
         <p v-if="brief.apply_email" class="break-all text-sm">Recruitment email · {{ brief.apply_email }}</p>
       </article>

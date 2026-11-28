@@ -1,0 +1,17 @@
+export default defineEventHandler(async event => {
+  const db = applicationRequest(event)
+  const identity = await applicationIdentity(event, db)
+  const id = applicationId(getRouterParam(event, 'id'))
+  if (!identity.id) throw createError({ statusCode: 403 })
+  const { data } = await db.from('role_applications').select('id,employer_contracts!inner(owner_id)')
+    .eq('id', id).eq('employer_contracts.owner_id', identity.id)
+    .not('submitted_at', 'is', null).maybeSingle().throwOnError()
+  if (!data) throw createError({ statusCode: 404, statusMessage: 'CV unavailable.' })
+
+  const { data: cv, error } = await db.storage.from(cvBucket).download(id + '.pdf')
+  if (error || !cv) throw createError({ statusCode: 503, statusMessage: 'CV download unavailable.' })
+  setHeader(event, 'Content-Type', 'application/pdf')
+  setHeader(event, 'Content-Disposition', 'attachment; filename="CV-' + id + '.pdf"')
+  setHeader(event, 'X-Content-Type-Options', 'nosniff')
+  return new Uint8Array(await cv.arrayBuffer())
+})

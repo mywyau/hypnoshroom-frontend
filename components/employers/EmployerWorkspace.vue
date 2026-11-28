@@ -7,6 +7,7 @@ const client = useAccountClient()
 const company = ref('')
 const listings = ref<StoredEmployerContract[]>([])
 const existingListing = computed(() => props.editId ? listings.value[0] ?? null : null)
+const inboxId = ref<string | null>(null)
 const busy = ref(true)
 const loadFailed = ref(false)
 const savedNotice = useState('saved-listing-notice', () => '')
@@ -67,6 +68,18 @@ async function closeListing(listing: StoredEmployerContract) {
     busy.value = false
   }
 }
+async function deleteListing(listing: StoredEmployerContract) {
+  if (busy.value || !window.confirm(`Permanently delete “${listing.title}” for ${listing.company_name ?? company.value}? This also removes all applications and CVs received for this listing.`)) return
+  busy.value = true
+  try {
+    const { data } = await client.from('employer_contracts').delete()
+      .eq('id', listing.id).eq('revision', listing.revision).select('id').maybeSingle().throwOnError()
+    message.value = data ? 'Listing deleted.' : 'The listing changed or was already removed. Check the refreshed list.'
+  } catch {
+    message.value = 'Could not confirm deletion. Check your listings before trying again.'
+  }
+  await reload()
+}
 onMounted(reload)
 </script>
 
@@ -83,11 +96,14 @@ onMounted(reload)
       <article v-for="listing in listings" :key="listing.id" class="mt-4 border-t border-line pt-4">
         <h3 class="font-display text-xl">{{ listing.title }}</h3>
         <p class="capitalize">{{ listing.company_name ?? company }} · {{ employmentLabels[listing.employment_type] }} · {{ listing.status === 'published' && listing.closes_on < londonDate() ? 'Expired' : listing.status === 'pending' ? 'Awaiting review' : listing.status }}</p>
-        <div class="mt-2 flex gap-4">
+        <div class="mt-2 flex flex-wrap gap-4">
+          <button type="button" class="link" :aria-expanded="inboxId === listing.id" @click="inboxId = inboxId === listing.id ? null : listing.id">View applications</button>
           <NuxtLink class="link" :to="{ path: '/employers/post-a-role', query: { edit: listing.id } }">Edit brief</NuxtLink>
           <NuxtLink v-if="listing.status === 'published' && listing.closes_on >= londonDate()" class="link" :to="boardPath(listing.employment_type) + '/' + listing.id">View listing</NuxtLink>
           <button v-if="listing.status === 'published'" class="link" @click="closeListing(listing)">Close listing</button>
+          <button type="button" class="text-red-800 underline" @click="deleteListing(listing)">Delete listing</button>
         </div>
+        <ApplicationInbox v-if="inboxId === listing.id" :listing-id="listing.id" />
       </article>
     </div>
   </div>

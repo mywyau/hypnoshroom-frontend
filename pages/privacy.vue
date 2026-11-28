@@ -17,7 +17,7 @@ usePageSeo({
     <PageHero eyebrow="Privacy" title="Your privacy." intro="What Hypnoshroom collects when you get in touch, why it is needed and how it is handled." />
     <section class="section-space">
       <div class="page-shell prose-article max-w-3xl">
-        <p><strong>Last updated:</strong> 25 November 2026</p>
+        <p><strong>Last updated:</strong> 28 November 2026</p>
         <h2 class="flex items-center gap-3">
           <span class="flex size-10 shrink-0 items-center justify-center rounded-xl border border-plum/20 bg-white/40 text-plum" aria-hidden="true"><Shield class="size-5" :stroke-width="1.7" /></span>
           Who is responsible
@@ -32,8 +32,11 @@ usePageSeo({
         </h2>
         <h3>Accounts and job listings</h3>
         <p>Your account can include a preferred name and company. Both are optional. Supabase stores these details with your account, and you can edit or clear them at any time. The signed-in header uses your preferred name.</p>
-        <p>Supabase Auth manages email sign-in, passwords and recovery for employer and job seeker accounts. If you create an employer profile, Supabase also stores your company name and the briefs you save. Publishing shows your company name, role brief and the application website or recruitment email you enter. Your account email is used for sign-in and is only shown on a listing if you enter it as the recruitment address. We may summarise advertised terms across listings. Closing or expiring a listing removes it from public browsing. Candidates send applications directly to the employer through its website or their email app.</p>
+        <p>Supabase Auth manages email sign-in, passwords and recovery for employer and job seeker accounts. If you create an employer profile, Supabase also stores your company name and the briefs you save. Publishing shows your company name, role brief and the application website or recruitment email you enter. Your account email is used for sign-in and is only shown on a listing if you enter it as the recruitment address. We may summarise advertised terms across listings. Closing or expiring a listing removes it from public browsing. When you choose an external application link or apply by email, the employer receives your application directly.</p>
         <p>Your browser stores your sign-in session. You can browse and apply for roles as a guest. Sign out on shared devices. In your account settings, you can permanently delete your account, employer profile and listings. You can also contact Hypnoshroom to request deletion.</p>
+        <h3>Applications on Hypnoshroom</h3>
+        <p>If you apply here, Supabase stores your name, verified email address, CV, optional message and submission date. The account that posted the role can read your application, download your CV and contact you. Guests receive a verification code through Resend. We temporarily store verification records and a hashed network address to limit repeated requests.</p>
+        <p>You can withdraw from Your applications. Guests can return using the same email address. Closing a role keeps existing applications available to its poster. Withdrawing, deleting the listing or deleting the account used to apply removes access on Hypnoshroom and queues the stored CV for deletion. An employer may already have downloaded a copy. You can contact the employer about its copy.</p>
         <p>When you use the enquiry form, Hypnoshroom collects your name, email address, company if supplied, the engagement type you select and the project details you write. Basic technical information such as an IP address is processed temporarily to protect the form from abuse.</p>
         <h2 class="flex items-center gap-3">
           <span class="flex size-10 shrink-0 items-center justify-center rounded-xl border border-plum/20 bg-white/40 text-plum" aria-hidden="true"><FileText class="size-5" :stroke-width="1.7" /></span>

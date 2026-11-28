@@ -1,4 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "framework": "nuxtjs"
+  "framework": "nuxtjs",
+  "crons": [{ "path": "/api/maintenance/application-cleanup", "schedule": "20 3 * * *" }]
 }
