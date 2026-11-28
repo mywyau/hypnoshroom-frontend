@@ -46,7 +46,7 @@ async function save() {
 </script>
 
 <template>
-  <form class="mb-6" @submit.prevent="save">
+  <form @submit.prevent="save">
     <label>Preferred name (optional)
       <input v-model="name" type="text" autocomplete="nickname" :disabled="saving" @input="message = ''">
     </label>

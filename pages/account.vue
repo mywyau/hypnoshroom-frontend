@@ -12,18 +12,25 @@ if (import.meta.client && enabled) {
 </script>
 
 <template>
-  <div class="page-shell py-12 sm:py-20">
-    <section class="employer-workspace mx-auto max-w-md rounded-2xl border border-line bg-white/50 p-6 sm:p-8">
-      <h1 class="mb-4 font-display text-3xl">Your account</h1>
+  <div class="page-shell py-10 sm:py-12">
+    <div class="employer-workspace mx-auto max-w-2xl">
+      <h1 class="mb-6 font-display text-4xl">Account settings</h1>
       <template v-if="enabled && user">
-        <p class="mb-4 break-all text-sm">{{ user.email }}</p>
-        <NuxtLink to="/applications" class="link mb-4 inline-block">Your applications</NuxtLink>
-        <AccountProfileForm :key="user.id" :user="user" />
-        <!-- <NuxtLink v-if="user.app_metadata.listing_admin === true" to="/admin/listings" class="link">Review listings</NuxtLink> -->
-        <DeleteAccountForm v-if="user.email" :key="user.id + '-delete'" :email="user.email" />
+        <section aria-labelledby="profile-title" class="rounded-2xl border border-line bg-white/50 p-5 sm:p-7">
+          <h2 id="profile-title">Profile</h2>
+          <dl v-if="user.email" class="mb-5 text-sm">
+            <dt class="font-semibold">Sign-in email</dt>
+            <dd class="mt-1 break-all">{{ user.email }}</dd>
+          </dl>
+          <AccountProfileForm :key="user.id" :user="user" />
+        </section>
+        <section v-if="user.email" aria-labelledby="deletion-title" class="mt-6 rounded-2xl border border-line p-5 sm:p-7">
+          <h2 id="deletion-title">Account deletion</h2>
+          <DeleteAccountForm :key="user.id + '-delete'" :email="user.email" />
+        </section>
       </template>
       <p v-else-if="enabled" role="status">Loading your account…</p>
       <p v-else>Account sign-in is unavailable in this environment.</p>
-    </section>
+    </div>
   </div>
 </template>

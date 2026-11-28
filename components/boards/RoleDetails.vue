@@ -18,13 +18,13 @@ const applicationEmailLink = computed(() => {
 </script>
 
 <template>
-  <article v-if="listing" class="page-shell py-8 sm:py-12">
+  <article v-if="listing" class="page-shell max-w-3xl py-8 sm:py-12">
     <NuxtLink class="text-moss underline" :to="path">{{ isContract ? 'All contracts' : 'All permanent and temporary jobs' }}</NuxtLink>
     <p class="eyebrow mt-8 break-words">{{ listing.company_name }}</p>
     <h1 class="max-w-4xl break-words font-display text-4xl sm:text-5xl">{{ listing.title }}</h1>
     <RoleBriefDetails :listing="listing" />
     <OnsiteApplication v-if="listing.apply_onsite" :key="listing.id" :listing="listing" />
-    <section aria-label="How to apply" class="flex flex-wrap items-center gap-4">
+    <section aria-label="How to apply" class="flex flex-wrap items-center justify-center gap-4 text-center">
       <a v-if="listing.apply_url" :href="listing.apply_url" rel="nofollow ugc noopener" class="rounded-full bg-ink px-6 py-3 text-white">Apply on employer’s site ↗</a>
       <div v-if="listing.apply_email">
         <a :href="applicationEmailLink"

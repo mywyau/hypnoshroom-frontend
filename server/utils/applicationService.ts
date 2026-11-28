@@ -7,10 +7,14 @@ export const maxCvBytes = 3 * 1024 * 1024
 
 export function applicationService(event?: H3Event) {
   const config = useRuntimeConfig(event)
-  if (!config.applicationServiceKey || !config.public.employerSupabaseUrl) {
-    throw createError({ statusCode: 503, statusMessage: 'Applications are temporarily unavailable.' })
+  const key = config.applicationServiceKey
+  if (!key || !config.public.employerSupabaseUrl || key.startsWith('sb_publishable_') || key === config.public.employerSupabaseKey) {
+    const setting = config.public.employerSupabaseUrl
+      ? 'Set NUXT_APPLICATION_SERVICE_KEY to the Supabase server secret in .env and restart Nuxt.'
+      : 'Set NUXT_PUBLIC_EMPLOYER_SUPABASE_URL in .env and restart Nuxt.'
+    throw createError({ statusCode: 503, statusMessage: import.meta.dev ? setting : 'Applications are temporarily unavailable.' })
   }
-  return createClient(config.public.employerSupabaseUrl, config.applicationServiceKey, {
+  return createClient(config.public.employerSupabaseUrl, key, {
     auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false },
   })
 }

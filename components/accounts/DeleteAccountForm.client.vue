@@ -39,10 +39,9 @@ function cancel() {
 </script>
 
 <template>
-  <section class="mt-6 border-t border-line pt-5">
+  <div>
     <button v-if="!confirming" type="button" class="min-h-11 font-semibold text-red-800 underline" @click="confirming = true">Delete account</button>
     <form v-else @submit.prevent="removeAccount">
-      <h2>Delete account</h2>
       <p>This permanently deletes your account, your employer profile and every listing you posted, including published roles. Your account’s applications and the applications received for your listings are also removed, including CVs.</p>
       <label>Enter your account email to confirm
         <input v-model="confirmation" type="email" required autocomplete="off" :disabled="busy || deleted">
@@ -55,5 +54,5 @@ function cancel() {
       </div>
       <p v-if="message" role="alert">{{ message }}</p>
     </form>
-  </section>
+  </div>
 </template>

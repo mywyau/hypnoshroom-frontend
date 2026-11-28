@@ -1,4 +1,4 @@
-import { BookOpen, BriefcaseBusiness, Building2, Calculator, Code, House, Info, List, ListChecks, Mail, Plus, Search, Tag, Users } from '@lucide/vue'
+import { BookOpen, BriefcaseBusiness, Building2, Calculator, Code, FileText, House, Info, List, ListChecks, Mail, Plus, Search, Tag, UserRound, Users } from '@lucide/vue'
 
 const home = { label: 'Home', to: '/', icon: House }
 const contracts = { label: 'Find contracts', short: 'Contracts', to: '/contracts', icon: Search }
@@ -23,6 +23,10 @@ const consultancyLinks = [consultancyHome, about, work, expertise, insights, ser
 const findWork = { label: 'Find work', to: '/find-a-job', icon: Search }
 const findJobHome = { ...findWork, label: 'Find a job home', short: 'Home', icon: House }
 const jobSeekerLinks = [findJobHome, contracts, jobs]
+const accountLinks = [
+  { label: 'Account settings', short: 'Settings', to: '/account', icon: UserRound },
+  { label: 'Your applications', short: 'Applications', to: '/applications', icon: FileText },
+]
 
 const sections = {
   home: {
@@ -56,6 +60,9 @@ export function useSectionSidebar() {
       return { label: 'Find a job', links: jobSeekerLinks, action: null }
     }
     if (!import.meta.dev || !user.value) return null
+    if (route.name === 'account' || route.name === 'applications') {
+      return { label: 'Your account', links: accountLinks, action: null }
+    }
     if (route.path.split('/')[1] !== 'employers' && route.name !== 'admin-listings') return null
     const links = user.value.app_metadata.listing_admin === true ? [...employerWorkspace, reviewListings] : employerWorkspace
     return { label: 'Employer workspace', links, action: null }
